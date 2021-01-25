@@ -4,7 +4,7 @@ import java.awt.*;
  * Parent class, handles all types of cars
  * Implements Movable for movement and position related issues
  */
-public class Car implements Movable {
+public abstract class Car implements Movable {
 
     protected int nrDoors; // Number of doors on the car
     protected double enginePower; // Engine power of the car
@@ -12,6 +12,26 @@ public class Car implements Movable {
     protected Color color; // Color of the car
     protected String modelName; // The car model name
 
+    protected int xPos;
+    protected int yPos;
+
+    /**
+     * Default constructor
+     * @param nrDoors       no. of doors
+     * @param enginePower   engine power
+     * @param currentSpeed  current speed
+     * @param color         color
+     * @param modelName     model name
+     */
+    public Car(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName) {
+        this.nrDoors = nrDoors;
+        this.enginePower = enginePower;
+        this.currentSpeed = currentSpeed;
+        this.color = color;
+        this.modelName = modelName;
+        this.xPos = 0;
+        this.yPos = 0;
+    }
 
     /**
      * Get number of doors
@@ -58,6 +78,7 @@ public class Car implements Movable {
      */
     protected void startEngine(){
         currentSpeed = 0.1;
+        System.out.println("Engine started.");
     }
 
     /**
@@ -65,15 +86,63 @@ public class Car implements Movable {
      */
     protected void stopEngine(){
         currentSpeed = 0;
+        System.out.println("Engine stopped.");
     }
 
+    /**
+     * Speed factor - varies depending on model
+     * @return Speed factor
+     */
+    protected abstract double speedFactor();
+
+    /**
+     * Increment speed
+     * @param amount The amount with which to increment
+     */
+    protected void incrementSpeed(double amount){
+        currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount,enginePower);
+    }
+
+    /**
+     * Decrement speed
+     * @param amount The amount with which to decrement
+     */
+    protected void decrementSpeed(double amount){
+        currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount,0);
+    }
+
+    /**
+     * Give gas
+     * Only accepts values [0,1]
+     * @param amount The amount with which to give gas
+     */
+    protected void gas(double amount){
+        if (amount >= 0 && amount <= 1) {
+            incrementSpeed(amount);
+        }
+    }
+
+    protected String getPosition(Car car) {
+        return "Current position: (" + car.xPos + ", " + car.yPos + ").";
+    }
+
+    /**
+     * Brake car
+     * Only accepts values [0,1]
+     * @param amount Amount with which to brake
+     */
+    protected void brake(double amount){
+        if (amount >= 0 && amount <= 1)
+            decrementSpeed(amount);
+    }
 
     /**
      * Move the car
      */
     @Override
     public void move() {
-
+        yPos++;
+        System.out.println("Moving. " + getPosition(this));
     }
 
     /**
@@ -81,7 +150,10 @@ public class Car implements Movable {
      */
     @Override
     public void turnLeft() {
-
+        if (currentSpeed > 0) {
+            xPos--;
+            System.out.println("Left turn. " + getPosition(this));
+        }
     }
 
     /**
@@ -89,6 +161,9 @@ public class Car implements Movable {
      */
     @Override
     public void turnRight() {
-
+        if (currentSpeed > 0) {
+            xPos++;
+            System.out.println("Right turn. " + getPosition(this));
+        }
     }
 }

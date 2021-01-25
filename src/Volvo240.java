@@ -11,10 +11,7 @@ public class Volvo240 extends Car {
      * Default constructor
      */
     public Volvo240(){
-        nrDoors = 4;
-        color = Color.black;
-        enginePower = 100;
-        modelName = "Volvo240";
+        super(4, 100, 0, Color.black, "Volvo240");
         stopEngine();
     }
 
@@ -22,41 +19,8 @@ public class Volvo240 extends Car {
      * Set speed factor depending on properties of car
      * @return speed factor (double)
      */
+    @Override
     public double speedFactor(){
         return enginePower * 0.01 * trimFactor;
-    }
-
-    /**
-     * Increment speed
-     * @param amount The amount with which to increment
-     */
-    public void incrementSpeed(double amount){
-        currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount,enginePower);
-    }
-
-    /**
-     * Decrement speed
-     * @param amount The amount with which to decrement
-     */
-    public void decrementSpeed(double amount){
-        currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount,0);
-    }
-
-    /**
-     * Give more gas
-     * @param amount The amount with which to give gas
-     */
-    // TODO fix this method according to lab pm
-    public void gas(double amount){
-        incrementSpeed(amount);
-    }
-
-    /**
-     * Brake car
-     * @param amount The amount with which to brake
-     */
-    // TODO fix this method according to lab pm
-    public void brake(double amount){
-        decrementSpeed(amount);
     }
 }

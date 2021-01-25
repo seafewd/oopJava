@@ -2,8 +2,13 @@ public class Main {
 
     public static void main(String[] args) {
         Car volvo = new Volvo240();
-        volvo.nrDoors = 4;
-
-        System.out.println(volvo.getNrDoors());
+        System.out.println("Created a " + volvo.modelName);
+        volvo.startEngine();
+        volvo.move();
+        volvo.move();
+        volvo.turnLeft();
+        volvo.move();
+        volvo.turnRight();
+        volvo.move();
     }
 }

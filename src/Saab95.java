@@ -11,11 +11,8 @@ public class Saab95 extends Car {
      * Default constructor
      */
     public Saab95(){
-        nrDoors = 2;
-        color = Color.red;
-        enginePower = 125;
+        super(2, 125, 0, Color.red, "Saab95");
 	    turboOn = false;
-        modelName = "Saab95";
         stopEngine();
     }
 
@@ -35,45 +32,11 @@ public class Saab95 extends Car {
 
     /**
      * Set speed factor
-     * @return
+     * @return speed factor
      */
     public double speedFactor(){
         double turbo = 1;
         if(turboOn) turbo = 1.3;
         return enginePower * 0.01 * turbo;
-    }
-
-    /**
-     * Increment speed
-     * @param amount The amount with which to increment
-     */
-    public void incrementSpeed(double amount){
-        currentSpeed = getCurrentSpeed() + speedFactor() * amount;
-    }
-
-    /**
-     * Decrement speed
-     * @param amount The amount with which to decrement
-     */
-    public void decrementSpeed(double amount){
-        currentSpeed = getCurrentSpeed() - speedFactor() * amount;
-    }
-
-    /**
-     * Floor it
-     * @param amount The amount with which to give gas
-     */
-    // TODO fix this method according to lab pm
-    public void gas(double amount){
-        incrementSpeed(amount);
-    }
-
-    /**
-     * Brake car
-     * @param amount Amount with which to brake
-     */
-    // TODO fix this method according to lab pm
-    public void brake(double amount){
-        decrementSpeed(amount);
     }
 }

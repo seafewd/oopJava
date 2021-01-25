@@ -1,7 +1,7 @@
 /**
  * Interface Movable
  * Implemented by Car
- * Prototypes movement and position of an object
+ * Prototypes movement of an object
  */
 public interface Movable {
 
@@ -19,5 +19,4 @@ public interface Movable {
      * Turn right
      */
     void turnRight();
-
 }
