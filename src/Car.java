@@ -6,13 +6,33 @@ import java.awt.*;
  */
 public abstract class Car implements Movable {
 
-    protected int nrDoors; // Number of doors on the car
-    protected double enginePower; // Engine power of the car
-    protected double currentSpeed; // The current speed of the car
-    protected Color color; // Color of the car
-    protected String modelName; // The car model name
-
+    /**
+     * Number of doors on the car
+     */
+    protected int nrDoors;
+    /**
+     * Engine power of the car
+     */
+    protected double enginePower;
+    /**
+     * The current speed of the car
+     */
+    protected double currentSpeed;
+    /**
+     * Color of the car
+     */
+    protected Color color;
+    /**
+     * The car model name
+     */
+    protected String modelName;
+    /**
+     * Current x-position
+     */
     protected int xPos;
+    /**
+     * Current y-position
+     */
     protected int yPos;
 
     /**
@@ -122,6 +142,11 @@ public abstract class Car implements Movable {
         }
     }
 
+    /**
+     * Gets a cars position
+     * @param car The car you want to get a position of
+     * @return Fancy string describing the exact position of the car
+     */
     protected String getPosition(Car car) {
         return "Current position: (" + car.xPos + ", " + car.yPos + ").";
     }
