@@ -37,7 +37,7 @@ public abstract class Car implements Movable {
 
     private final double GAS_LIMIT = 1;
 
-    private final double BREAK_LIMIT = 1;
+    private final double BRAKE_LIMIT = 1;
 
     /**
      * Default constructor
@@ -163,7 +163,7 @@ public abstract class Car implements Movable {
      * @param amount Amount with which to brake
      */
     protected void brake(double amount){
-        if(isInLimit(0, BREAK_LIMIT, amount) && amount > 0)
+        if(isInLimit(0, BRAKE_LIMIT, amount) && amount > 0)
             decrementSpeed(amount);
     }
 
