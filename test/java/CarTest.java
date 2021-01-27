@@ -5,18 +5,8 @@ import org.junit.jupiter.api.BeforeEach;
 
 import java.awt.*;
 
-import static org.junit.Assert.assertEquals;
-
 class CarTest {
     private final Saab95 saab = new Saab95();
-
-    @BeforeEach
-    void setUp() {
-    }
-
-    @AfterEach
-    void tearDown() {
-    }
 
     /**
      * Test method getNrDoors
@@ -85,6 +75,45 @@ class CarTest {
         saab.xPos = 6;
         saab.yPos = 4;
         Assertions.assertEquals("Current position: (4, 6)", saab.getPosition(saab));
+    }
+
+    /**
+     * Test method move
+     */
+    @Test
+    public void testMove() {
+        saab.yPos = 0;
+        saab.move();
+        Assertions.assertEquals(1, saab.yPos);
+    }
+
+    /**
+     * Test method turnLeft
+     */
+    @Test
+    public void testTurnLeft() {
+        saab.xPos = 0;
+        saab.gas(0.3);
+        Assertions.assertEquals(-1, saab.xPos);
+    }
+
+    /**
+     * Test method turnRight
+     */
+    @Test
+    public void testTurnRight() {
+        saab.xPos = 0;
+        saab.gas(0.3);
+        Assertions.assertEquals(1, saab.xPos);
+    }
+
+    /**
+     * Test method isInLimit
+     */
+    @Test
+    public void testIsInLimit() {
+        Assertions.assertFalse(saab.isInLimit(.5, 1.5, 2.0));
+        Assertions.assertTrue(saab.isInLimit(.3, .9, .6));
     }
 
 }
