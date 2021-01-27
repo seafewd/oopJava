@@ -204,7 +204,7 @@ public abstract class Car implements Movable {
      * Check if the value falls in the given range
      * @param lowerBound lower limit
      * @param upperBound upper limit
-     * @param value
+     * @param value to be checked
      * @return bool
      */
     protected boolean isInLimit(double lowerBound, double upperBound, double value){

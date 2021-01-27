@@ -1,3 +1,5 @@
+import org.junit.jupiter.api.Test;
+
 /**
  * Program entry point
  */
@@ -16,5 +18,6 @@ public class Main {
         volvo.move();
         volvo.turnRight();
         volvo.move();
+
     }
 }
