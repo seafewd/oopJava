@@ -9,7 +9,7 @@ public class SnaabTest {
 
 
     @Test
-    void testNumOfdoors(){
+    void testNumOfDoors(){
         assertEquals(2, shitCar.getNrDoors());
     }
 
