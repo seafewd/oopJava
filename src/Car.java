@@ -35,6 +35,10 @@ public abstract class Car implements Movable {
      */
     protected int yPos;
 
+    private final double GAS_LIMIT = 1;
+
+    private final double BREAK_LIMIT = 1;
+
     /**
      * Default constructor
      * @param nrDoors       no. of doors
@@ -51,6 +55,7 @@ public abstract class Car implements Movable {
         this.modelName = modelName;
         this.xPos = 0;
         this.yPos = 0;
+        stopEngine();
     }
 
     /**
@@ -119,6 +124,7 @@ public abstract class Car implements Movable {
      * Increment speed
      * @param amount The amount with which to increment
      */
+
     protected void incrementSpeed(double amount){
         currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount,enginePower);
     }
@@ -131,15 +137,15 @@ public abstract class Car implements Movable {
         currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount,0);
     }
 
+
     /**
      * Give gas
-     * Only accepts values [0,1]
+     * Only accepts positive values in [0,1]
      * @param amount The amount with which to give gas
      */
     protected void gas(double amount){
-        if (amount >= 0 && amount <= 1) {
+        if(isInLimit(0, GAS_LIMIT, amount) && amount > 0)
             incrementSpeed(amount);
-        }
     }
 
     /**
@@ -153,11 +159,11 @@ public abstract class Car implements Movable {
 
     /**
      * Brake car
-     * Only accepts values [0,1]
+     * Only accepts positive values in [0,1]
      * @param amount Amount with which to brake
      */
     protected void brake(double amount){
-        if (amount >= 0 && amount <= 1)
+        if(isInLimit(0, BREAK_LIMIT, amount) && amount > 0)
             decrementSpeed(amount);
     }
 
@@ -191,4 +197,18 @@ public abstract class Car implements Movable {
             System.out.println("Right turn. " + getPosition(this));
         }
     }
+
+    // Helper functions
+
+    /**
+     * Check if the value falls in the given range
+     * @param lowerBound lower limit
+     * @param upperBound upper limit
+     * @param value
+     * @return bool
+     */
+    protected boolean isInLimit(double lowerBound, double upperBound, double value){
+        return (value >= lowerBound && value <= upperBound);
+    }
+
 }
