@@ -1,11 +1,13 @@
 import org.junit.Test;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 
 import java.awt.*;
 
 class CarTest {
+
+    /**
+     * Set up test car
+     */
     private final Saab95 saab = new Saab95();
 
     /**
@@ -108,12 +110,71 @@ class CarTest {
     }
 
     /**
-     * Test method isInLimit
+     * Test method isInLimit (exceeding upper bound)
      */
     @Test
-    public void testIsInLimit() {
+    public void testIsInLimitUpper() {
         Assertions.assertFalse(saab.isInLimit(.5, 1.5, 2.0));
+    }
+
+    /**
+     * Test method isInLimit (not exceeding bounds)
+     */
+    @Test
+    public void testIsInLimitLower() {
         Assertions.assertTrue(saab.isInLimit(.3, .9, .6));
+    }
+
+
+    /**
+     * Test method gas
+     */
+    @Test
+    public void testGas() {
+        saab.currentSpeed = .1;
+        saab.gas(.5);
+        Assertions.assertEquals(.6, saab.getCurrentSpeed());
+    }
+
+    /**
+     * Test method brake
+     */
+    @Test
+    public void testBrake() {
+        saab.currentSpeed = .6;
+        saab.brake(.4);
+        Assertions.assertEquals(.2, saab.getCurrentSpeed());
+    }
+
+    /**
+     * Test method incrementSpeed
+     */
+    @Test
+    public void testIncrementSpeed() {
+        saab.currentSpeed = 0;
+        saab.incrementSpeed(.7);
+        Assertions.assertEquals(.7, saab.getCurrentSpeed());
+    }
+
+    /**
+     * Test method decrementSpeed (normal with fixed values, not exceeding
+     * lower bound value
+     */
+    @Test
+    public void testDecrementSpeed() {
+        saab.currentSpeed = .5;
+        saab.decrementSpeed(.3);
+        Assertions.assertEquals(.2, saab.getCurrentSpeed());
+    }
+
+    /**
+     * Test method decrementSpeed (exceeding lower bound value)
+     */
+    @Test
+    public void testDecrementSpeedExceedingBounds() {
+        saab.currentSpeed = 0;
+        saab.decrementSpeed(5);
+        Assertions.assertEquals(0, saab.getCurrentSpeed());
     }
 
 }
