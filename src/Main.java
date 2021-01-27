@@ -1,5 +1,11 @@
+/**
+ * Program entry point
+ */
 public class Main {
-
+    /**
+     * Our main method
+     * @param args None defined
+     */
     public static void main(String[] args) {
         Car volvo = new Volvo240();
         System.out.println("Created a " + volvo.modelName);
