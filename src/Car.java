@@ -35,9 +35,9 @@ public abstract class Car implements Movable {
      */
     protected int yPos;
 
-    private final double GAS_LIMIT = 1;
+    private static final double GAS_LIMIT = 1;
 
-    private final double BRAKE_LIMIT = 1;
+    private static final double BRAKE_LIMIT = 1;
 
     /**
      * Default constructor

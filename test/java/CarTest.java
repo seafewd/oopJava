@@ -3,7 +3,7 @@ import org.junit.jupiter.api.Assertions;
 
 import java.awt.*;
 
-class CarTest {
+public class CarTest {
 
     /**
      * Set up test car
@@ -76,7 +76,7 @@ class CarTest {
     public void testGetPosition() {
         saab.xPos = 6;
         saab.yPos = 4;
-        Assertions.assertEquals("Current position: (4, 6)", saab.getPosition(saab));
+        Assertions.assertEquals("Current position: (6, 4).", saab.getPosition(saab));
     }
 
     /**
@@ -96,6 +96,7 @@ class CarTest {
     public void testTurnLeft() {
         saab.xPos = 0;
         saab.gas(0.3);
+        saab.turnLeft();
         Assertions.assertEquals(-1, saab.xPos);
     }
 
@@ -106,6 +107,7 @@ class CarTest {
     public void testTurnRight() {
         saab.xPos = 0;
         saab.gas(0.3);
+        saab.turnRight();
         Assertions.assertEquals(1, saab.xPos);
     }
 
@@ -133,7 +135,7 @@ class CarTest {
     public void testGas() {
         saab.currentSpeed = .1;
         saab.gas(.5);
-        Assertions.assertEquals(.6, saab.getCurrentSpeed());
+        Assertions.assertTrue(saab.getCurrentSpeed() >= 0.6);
     }
 
     /**
@@ -143,7 +145,7 @@ class CarTest {
     public void testBrake() {
         saab.currentSpeed = .6;
         saab.brake(.4);
-        Assertions.assertEquals(.2, saab.getCurrentSpeed());
+        Assertions.assertTrue(saab.getCurrentSpeed() <= .2);
     }
 
     /**
@@ -153,7 +155,7 @@ class CarTest {
     public void testIncrementSpeed() {
         saab.currentSpeed = 0;
         saab.incrementSpeed(.7);
-        Assertions.assertEquals(.7, saab.getCurrentSpeed());
+        Assertions.assertTrue(saab.getCurrentSpeed() >= .7);
     }
 
     /**
@@ -164,7 +166,7 @@ class CarTest {
     public void testDecrementSpeed() {
         saab.currentSpeed = .5;
         saab.decrementSpeed(.3);
-        Assertions.assertEquals(.2, saab.getCurrentSpeed());
+        Assertions.assertTrue(saab.getCurrentSpeed() <= .2);
     }
 
     /**

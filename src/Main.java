@@ -1,8 +1,9 @@
-import org.junit.jupiter.api.Test;
+import org.junit.Ignore;
 
 /**
  * Program entry point
  */
+@Ignore
 public class Main {
     /**
      * Our main method
