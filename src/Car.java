@@ -6,6 +6,8 @@ import java.awt.*;
  */
 public abstract class Car implements Movable {
 
+    // todo protected -> public where it makes sense
+
     /**
      * Number of doors on the car
      */
@@ -30,6 +32,11 @@ public abstract class Car implements Movable {
      * The car model name
      */
     protected String modelName;
+
+    /**
+     * Current direction of car
+     */
+    protected Direction direction;
 
     /**
      * Current x-position
@@ -67,6 +74,7 @@ public abstract class Car implements Movable {
         this.modelName = modelName;
         this.xPos = 0;
         this.yPos = 0;
+        direction = Direction.NORTH;
         stopEngine();
     }
 
@@ -148,7 +156,6 @@ public abstract class Car implements Movable {
     protected void decrementSpeed(double amount){
         currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount,0);
     }
-
 
     /**
      * Give gas
