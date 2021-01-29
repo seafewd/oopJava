@@ -2,7 +2,7 @@ import java.awt.*;
 
 /**
  * Parent class, handles all types of cars
- * Implements Movable for movement and position related issues
+ * Implements Movable for movement related issues
  */
 public abstract class Car implements Movable {
 
@@ -10,34 +10,46 @@ public abstract class Car implements Movable {
      * Number of doors on the car
      */
     protected int nrDoors;
+
     /**
      * Engine power of the car
      */
     protected double enginePower;
+
     /**
      * The current speed of the car
      */
     protected double currentSpeed;
+
     /**
      * Color of the car
      */
     protected Color color;
+
     /**
      * The car model name
      */
     protected String modelName;
+
     /**
      * Current x-position
      */
     protected int xPos;
+
     /**
      * Current y-position
      */
     protected int yPos;
 
-    private static final double GAS_LIMIT = 1;
+    /**
+     * Upper limit for applying gas
+     */
+    protected static final double GAS_LIMIT = 1;
 
-    private static final double BRAKE_LIMIT = 1;
+    /**
+     * Upper limit for applying brakes
+     */
+    protected static final double BRAKE_LIMIT = 1;
 
     /**
      * Default constructor

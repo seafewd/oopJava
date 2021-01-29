@@ -3,6 +3,9 @@ import org.junit.jupiter.api.Assertions;
 
 import java.awt.*;
 
+/**
+ * CarTest test class
+ */
 public class CarTest {
 
     /**

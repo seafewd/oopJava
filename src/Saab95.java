@@ -5,6 +5,9 @@ import java.awt.*;
  * Extends Car which implements Movable
  */
 public class Saab95 extends Car {
+    /**
+     * Saab turbo on
+     */
     protected boolean turboOn;
 
     /**

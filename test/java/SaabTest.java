@@ -1,6 +1,9 @@
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
+/**
+ * Saab95 test class
+ */
 public class SaabTest {
     private final Saab95 saab = new Saab95();
 
