@@ -152,7 +152,7 @@ public abstract class Car implements Movable {
 
     /**
      * Give gas
-     * Only accepts positive values in [0,1]
+     * Only accepts values in [0,GAS_LIMIT]
      * @param amount The amount with which to give gas
      */
     protected void gas(double amount){

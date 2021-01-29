@@ -19,6 +19,5 @@ public class Main {
         volvo.move();
         volvo.turnRight();
         volvo.move();
-
     }
 }
