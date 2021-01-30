@@ -5,7 +5,10 @@ import java.awt.*;
  * Implements Movable for movement related issues
  */
 public abstract class Car implements Movable {
-
+    /**
+     * Where are we going next?
+     */
+    public direction currentDirection = direction.NORTH;
     /**
      * Number of doors on the car
      */
@@ -116,6 +119,16 @@ public abstract class Car implements Movable {
     protected void startEngine(){
         currentSpeed = 0.1;
         System.out.println("Engine started.");
+
+    }
+    public enum direction {
+        NORTH, EAST, SOUTH, WEST;
+        public direction turn_Right() {
+            return values()[(ordinal()+1) % values().length];
+        }
+        public direction turn_Left() {
+            return values()[(ordinal()-1) % values().length];
+        }
     }
 
     /**
@@ -193,10 +206,8 @@ public abstract class Car implements Movable {
      */
     @Override
     public void turnLeft() {
-        if (currentSpeed > 0) {
-            xPos--;
-            System.out.println("Left turn. " + getPosition(this));
-        }
+        currentDirection = currentDirection.turn_Left();
+        System.out.println("Right turn. Facing " + currentDirection);
     }
 
     /**
@@ -204,10 +215,8 @@ public abstract class Car implements Movable {
      */
     @Override
     public void turnRight() {
-        if (currentSpeed > 0) {
-            xPos++;
-            System.out.println("Right turn. " + getPosition(this));
-        }
+        currentDirection = currentDirection.turn_Right();
+        System.out.println("Right turn. Facing " + currentDirection);
     }
 
     // Helper functions
