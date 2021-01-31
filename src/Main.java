@@ -11,6 +11,7 @@ public class Main {
      */
     public static void main(String[] args) {
         Saab95 saab = new Saab95();
+        Car saab2 = new Saab95();
         System.out.println("Created a " + saab.modelName);
         saab.setTurboOff();
         saab.startEngine();

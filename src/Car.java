@@ -134,6 +134,13 @@ public abstract class Car implements Movable {
         return "Current position: (" + car.xPos + ", " + car.yPos + ").";
     }
 
+    public double getXPos() {
+        return xPos;
+    }
+
+    public double getYPos(){
+        return yPos;
+    }
 
     /**
      * Set direction
@@ -147,7 +154,7 @@ public abstract class Car implements Movable {
     /**
      * Start car engine
      */
-    public void startEngine(){
+    protected void startEngine(){
         currentSpeed = 0.1;
         System.out.println("Engine started.");
     }
