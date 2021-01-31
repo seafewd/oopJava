@@ -49,7 +49,7 @@ public abstract class Car implements Movable {
      * The direction the car is facing
      * Should be initialized with length 1 to keep it that way
      */
-    private double[] direction;
+    protected double[] direction;
 
 
     /**
@@ -78,7 +78,7 @@ public abstract class Car implements Movable {
      * Get number of doors
      * @return Number of doors
      */
-    protected int getNrDoors(){
+    public int getNrDoors(){
         return nrDoors;
     }
 
@@ -113,7 +113,7 @@ public abstract class Car implements Movable {
      * Get color of car
      * @return Color
      */
-    protected Color getColor(){
+    public Color getColor(){
         return color;
     }
 
@@ -130,7 +130,7 @@ public abstract class Car implements Movable {
      * @param car The car you want to get a position of
      * @return Fancy string describing the exact position of the car
      */
-    protected String getPosition(Car car) {
+    public String getPosition(Car car) {
         return "Current position: (" + car.xPos + ", " + car.yPos + ").";
     }
 
@@ -139,7 +139,7 @@ public abstract class Car implements Movable {
      * Set direction
      * @param direction vector to be set
      */
-    protected void setDirection(double[] direction){
+    private void setDirection(double[] direction){
         this.direction = direction;
     }
 
@@ -147,7 +147,7 @@ public abstract class Car implements Movable {
     /**
      * Start car engine
      */
-    protected void startEngine(){
+    public void startEngine(){
         currentSpeed = 0.1;
         System.out.println("Engine started.");
     }
@@ -155,7 +155,7 @@ public abstract class Car implements Movable {
     /**
      * Stop car engine
      */
-    protected void stopEngine(){
+    public void stopEngine(){
         currentSpeed = 0;
         System.out.println("Engine stopped.");
     }
@@ -188,7 +188,7 @@ public abstract class Car implements Movable {
      * Only accepts positive values in [0,1]
      * @param amount The amount with which to give gas
      */
-    protected void gas(double amount){
+    public void gas(double amount){
         if(isInLimit(0, GAS_LIMIT, amount) && amount > 0)
             incrementSpeed(amount);
     }
@@ -199,7 +199,7 @@ public abstract class Car implements Movable {
      * Only accepts positive values in [0,1]
      * @param amount Amount with which to brake
      */
-    protected void brake(double amount){
+    public void brake(double amount){
         if(isInLimit(0, BRAKE_LIMIT, amount) && amount > 0)
             decrementSpeed(amount);
     }
