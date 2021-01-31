@@ -29,15 +29,28 @@ public abstract class Car implements Movable {
     /**
      * Current x-position
      */
-    protected int xPos;
+    protected double xPos;
     /**
      * Current y-position
      */
-    protected int yPos;
+    protected double yPos;
 
+    /**
+     * Gas limit
+     */
     private static final double GAS_LIMIT = 1;
 
+    /**
+     * Brake Limit
+     */
     private static final double BRAKE_LIMIT = 1;
+
+    /**
+     * The direction the car is facing
+     * Should be initialized with length 1 to keep it that way
+     */
+    private double[] direction;
+
 
     /**
      * Default constructor
@@ -50,11 +63,14 @@ public abstract class Car implements Movable {
     public Car(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName) {
         this.nrDoors = nrDoors;
         this.enginePower = enginePower;
-        this.currentSpeed = currentSpeed;
+        this.currentSpeed = 0;
         this.color = color;
         this.modelName = modelName;
         this.xPos = 0;
         this.yPos = 0;
+
+        this.direction = new double[]{1, 0};
+
         stopEngine();
     }
 
@@ -76,10 +92,21 @@ public abstract class Car implements Movable {
 
     /**
      * Get current speed of car
+     * The speed is the magnitude of the the velocity vector
      * @return Current speed
      */
     protected double getCurrentSpeed(){
         return currentSpeed;
+    }
+
+    /**
+     * Get current normalized direction.
+     * If the speed is 0, the previous state is returned
+     * @return direction
+     */
+
+    protected double[] getDirection(){
+        return direction;
     }
 
     /**
@@ -97,6 +124,25 @@ public abstract class Car implements Movable {
     protected void setColor(Color clr){
         color = clr;
     }
+
+    /**
+     * Gets a cars position
+     * @param car The car you want to get a position of
+     * @return Fancy string describing the exact position of the car
+     */
+    protected String getPosition(Car car) {
+        return "Current position: (" + car.xPos + ", " + car.yPos + ").";
+    }
+
+
+    /**
+     * Set direction
+     * @param direction vector to be set
+     */
+    protected void setDirection(double[] direction){
+        this.direction = direction;
+    }
+
 
     /**
      * Start car engine
@@ -137,7 +183,6 @@ public abstract class Car implements Movable {
         currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount,0);
     }
 
-
     /**
      * Give gas
      * Only accepts positive values in [0,1]
@@ -148,14 +193,6 @@ public abstract class Car implements Movable {
             incrementSpeed(amount);
     }
 
-    /**
-     * Gets a cars position
-     * @param car The car you want to get a position of
-     * @return Fancy string describing the exact position of the car
-     */
-    protected String getPosition(Car car) {
-        return "Current position: (" + car.xPos + ", " + car.yPos + ").";
-    }
 
     /**
      * Brake car
@@ -169,20 +206,24 @@ public abstract class Car implements Movable {
 
     /**
      * Move the car
+     * Sets the new position
+     * Direction vector scaled by speed
      */
     @Override
     public void move() {
-        yPos++;
+        xPos += getDirection()[0] * getCurrentSpeed();
+        yPos += getDirection()[1] * getCurrentSpeed();
         System.out.println("Moving. " + getPosition(this));
     }
 
     /**
-     * Make car turn left
+     * Make car turn left. Only turns if the speed is not 0
      */
     @Override
-    public void turnLeft() {
+    public void turnLeft(double radians) {
+
         if (currentSpeed > 0) {
-            xPos--;
+            setDirection(rotateVector(getDirection(), radians));
             System.out.println("Left turn. " + getPosition(this));
         }
     }
@@ -191,14 +232,42 @@ public abstract class Car implements Movable {
      * Make car turn right
      */
     @Override
-    public void turnRight() {
+    public void turnRight(double radians) {
         if (currentSpeed > 0) {
-            xPos++;
-            System.out.println("Right turn. " + getPosition(this));
+            setDirection(rotateVector(getDirection(), -radians));
+            System.out.println("Left turn. " + getPosition(this));
         }
     }
 
-    // Helper functions
+    // -------- Set/get
+
+
+    // ---------- Helper functions
+
+
+    /**
+     * Rotate vector
+     * A*v = v', where A is the rotation matrix and v is the velocity vector
+     *
+     * The math:
+     * |cos r -sin r|  * |dx| = |dx'|
+     * |sin r  cos r|    |dy|   |dy'|
+     *
+     * @param vector to be rotated
+     * @param radians how much to rotate
+     * @return transformed vector
+     */
+
+    protected double[] rotateVector(double[] vector, double radians){
+
+        double dx = vector[0];
+        double dy = vector[1];
+        // casted to long for correct values (otherwise we get long decimals)
+        long newDx = (long)(dx * Math.cos(radians) - dy * Math.sin(radians));
+        long newDy = (long)(dx * Math.sin(radians) + dy * Math.cos(radians));
+
+        return new double[]{newDx, newDy};
+    }
 
     /**
      * Check if the value falls in the given range
@@ -209,6 +278,14 @@ public abstract class Car implements Movable {
      */
     protected boolean isInLimit(double lowerBound, double upperBound, double value){
         return (value >= lowerBound && value <= upperBound);
+    }
+
+    /**
+     * Print the current direction
+     */
+
+    protected void showDirection(){
+        System.out.println("Current direction: (" + getDirection()[0] +  ", " + getDirection()[1] + ")");
     }
 
 }

@@ -1,5 +1,6 @@
-import org.junit.Test;
+
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class VolvoTest {
     private final Volvo240 volvo = new Volvo240();

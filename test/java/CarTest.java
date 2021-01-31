@@ -1,4 +1,5 @@
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 
 import java.awt.*;
@@ -88,29 +89,32 @@ public class CarTest {
         saab.move();
         Assertions.assertEquals(1, saab.yPos);
     }
+/*
 
-    /**
+    */
+/**
      * Test method turnLeft
-     */
+     *//*
+
     @Test
     public void testTurnLeft() {
         saab.xPos = 0;
         saab.gas(0.3);
-        saab.turnLeft();
+        saab.turnLeft(90);
         Assertions.assertEquals(-1, saab.xPos);
     }
 
-    /**
-     * Test method turnRight
-     */
+    *//*
+
     @Test
     public void testTurnRight() {
         saab.xPos = 0;
         saab.gas(0.3);
-        saab.turnRight();
+        saab.turnRight(90);
         Assertions.assertEquals(1, saab.xPos);
     }
 
+*/
     /**
      * Test method isInLimit (exceeding upper bound)
      */
@@ -177,6 +181,12 @@ public class CarTest {
         saab.currentSpeed = 0;
         saab.decrementSpeed(5);
         Assertions.assertEquals(0, saab.getCurrentSpeed());
+    }
+    @Test
+    public void testRotateVector(){
+
+        saab.rotateVector(new double[]{0,0}, Math.PI/2);
+
     }
 
 }
