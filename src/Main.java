@@ -11,16 +11,17 @@ public class Main {
      */
     public static void main(String[] args) {
         Saab95 saab = new Saab95();
-        Car saab2 = new Saab95();
+        Vehicle saab2 = new Saab95();
         System.out.println("Created a " + saab.modelName);
         saab.setTurboOff();
         saab.startEngine();
         saab.showDirection();
         saab.move();
-        saab.turnLeft(Math.PI/2);
+        saab.turnLeft();
         saab.move();
         saab.showDirection();
 
+        LoadingTruck truck = new Scania();
         /*
         volvo.move();
         volvo.move();

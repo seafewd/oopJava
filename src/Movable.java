@@ -13,10 +13,10 @@ public interface Movable {
     /**
      * Turn left
      */
-    void turnLeft(double radians);
+    void turnLeft();
 
     /**
      * Turn right
      */
-    void turnRight(double radians);
+    void turnRight();
 }

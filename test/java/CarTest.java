@@ -9,7 +9,7 @@ public class CarTest {
     /**
      * Set up test car
      */
-    private final Car saab = new Saab95();
+    private final Vehicle saab = new Saab95();
 
     /**
      * Test method getNrDoors
@@ -77,7 +77,7 @@ public class CarTest {
     public void testGetPosition() {
         saab.xPos = 6;
         saab.yPos = 4;
-        Assertions.assertEquals("Current position: (6, 4).", saab.getPosition(saab));
+        Assertions.assertEquals("Current position: (6, 4).", saab.showPosition(saab));
     }
 
     /**
@@ -130,7 +130,7 @@ public class CarTest {
         Assertions.assertEquals(0, saab.yPos);
 
 
-        saab.turnLeft(Math.PI/2);
+        saab.turnLeft();
 
         // Should be same position
         Assertions.assertEquals(0.1, saab.xPos);
@@ -161,7 +161,7 @@ public class CarTest {
         Assertions.assertEquals(0, saab.yPos);
 
 
-        saab.turnRight(Math.PI/2);
+        saab.turnRight();
 
         // Should be same position
         Assertions.assertEquals(0.1, saab.xPos);

@@ -4,7 +4,7 @@ import java.awt.*;
  * Parent class, handles all types of cars
  * Implements Movable for movement and position related issues
  */
-public abstract class Car implements Movable {
+public abstract class Vehicle implements Movable {
 
     /**
      * Number of doors on the car
@@ -60,7 +60,7 @@ public abstract class Car implements Movable {
      * @param color         color
      * @param modelName     model name
      */
-    public Car(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName) {
+    public Vehicle(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName) {
         this.nrDoors = nrDoors;
         this.enginePower = enginePower;
         this.currentSpeed = 0;
@@ -127,11 +127,11 @@ public abstract class Car implements Movable {
 
     /**
      * Gets a cars position
-     * @param car The car you want to get a position of
+     * @param vehicle The car you want to get a position of
      * @return Fancy string describing the exact position of the car
      */
-    public String getPosition(Car car) {
-        return "Current position: (" + car.xPos + ", " + car.yPos + ").";
+    public String showPosition(Vehicle vehicle) {
+        return "Current position: (" + vehicle.xPos + ", " + vehicle.yPos + ").";
     }
 
     public double getXPos() {
@@ -220,18 +220,18 @@ public abstract class Car implements Movable {
     public void move() {
         xPos += getDirection()[0] * getCurrentSpeed();
         yPos += getDirection()[1] * getCurrentSpeed();
-        System.out.println("Moving. " + getPosition(this));
+        System.out.println("Moving. " + showPosition(this));
     }
 
     /**
      * Make car turn left. Only turns if the speed is not 0
      */
     @Override
-    public void turnLeft(double radians) {
+    public void turnLeft() {
 
         if (currentSpeed > 0) {
-            setDirection(rotateVector(getDirection(), radians));
-            System.out.println("Left turn. " + getPosition(this));
+            setDirection(rotateVector(getDirection(), Math.PI/2));
+            System.out.println("Left turn. " + showPosition(this));
         }
     }
 
@@ -239,10 +239,10 @@ public abstract class Car implements Movable {
      * Make car turn right
      */
     @Override
-    public void turnRight(double radians) {
+    public void turnRight() {
         if (currentSpeed > 0) {
-            setDirection(rotateVector(getDirection(), -radians));
-            System.out.println("Left turn. " + getPosition(this));
+            setDirection(rotateVector(getDirection(), -Math.PI/2));
+            System.out.println("Left turn. " + showPosition(this));
         }
     }
 
