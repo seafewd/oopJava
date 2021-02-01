@@ -21,7 +21,8 @@ public class Main {
         saab.move();
         saab.showDirection();
 
-        LoadingTruck truck = new Scania();
+        LoadingTruck scania = new Scania();
+        LoadingTruck volvoTruck = new VolvoTruck();
         /*
         volvo.move();
         volvo.move();

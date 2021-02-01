@@ -1,13 +1,12 @@
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Stack;
 
 public abstract class LoadingTruck extends Vehicle {
     private static int MIN_ANGLE = 0;
     private static int MAX_ANGLE = 70;
     private static double LOADING_DISTANCE = 20;
-    private Stack<Vehicle> carLoad = new Stack<>(); // TODO change to collection, que or whatever
+    private Stack<Vehicle> load = new Stack<>(); // TODO change to collection, que or whatever
+    //private boolean isTruck = LoadingTruck.class.isAss
 
     public LoadingTruck(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName) {
         super(nrDoors, enginePower, currentSpeed, color, modelName);
@@ -32,7 +31,7 @@ public abstract class LoadingTruck extends Vehicle {
 
     /**
      * Get current angle of platform
-     * @return
+     * @return angle
      */
     public int getAngle() {
         return platformAngle;
@@ -60,15 +59,31 @@ public abstract class LoadingTruck extends Vehicle {
         return enginePower * 0.01;
     }
     /**
-     * Loads the given car if the car is close enough. Distance is set by LOADING_DISTANCE
+     * Loads the given car if the car is close enough, the platform is lowered and if its not a truck.
+     * Distance is set by LOADING_DISTANCE
      * @param car car to be loaded
      */
     public void loadCar(Vehicle car){
+        // TODO make it more general... with object as parameter? (Same for moveLoad)
+        // TODO limit of load?
         boolean isCloseX = this.xPos < car.getXPos() + LOADING_DISTANCE && this.xPos > car.getXPos() - LOADING_DISTANCE;
         boolean isCloseY = this.xPos < car.getXPos() + LOADING_DISTANCE && this.xPos > car.getXPos() - LOADING_DISTANCE;
 
-        if(isCloseX && isCloseY && platformAngle == 0){
-            carLoad.push(car);
+        if(isCloseX && isCloseY && platformAngle == 0 && !((Vehicle)car instanceof LoadingTruck)){ // cast for future
+            load.push(car);
+        }
+    }
+
+    /**
+     * Transfer the coordinates of the truck to the load.
+     * NEEDS TO BE UPDATED WITH THE MOVE FUNCTION // TODO fix? Other ideas? oRKa
+     */
+
+    private void moveLoad(){
+        for (Vehicle v:load
+             ) {
+            v.setXPos(this.xPos);
+            v.setYPos(this.yPos);
         }
     }
 

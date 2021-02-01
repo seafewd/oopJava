@@ -134,12 +134,38 @@ public abstract class Vehicle implements Movable {
         return "Current position: (" + vehicle.xPos + ", " + vehicle.yPos + ").";
     }
 
+    /**
+     * Get X pos
+     * @return xPos
+     */
+    @Override
     public double getXPos() {
         return xPos;
     }
 
+    /**
+     * Get Y pos
+     * @return yPos
+     */
+    @Override
     public double getYPos(){
         return yPos;
+    }
+
+    /**
+     * Set X pos
+     */
+    @Override
+    public void setXPos(double xPos) {
+        this.xPos = xPos;
+    }
+
+    /**
+     * Set X pos
+     */
+    @Override
+    public void setYPos(double yPos) {
+        this.yPos = yPos;
     }
 
     /**

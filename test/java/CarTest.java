@@ -77,7 +77,7 @@ public class CarTest {
     public void testGetPosition() {
         saab.xPos = 6;
         saab.yPos = 4;
-        Assertions.assertEquals("Current position: (6, 4).", saab.showPosition(saab));
+        Assertions.assertEquals("Current position: (6.0, 4.0).", saab.showPosition(saab));
     }
 
     /**
@@ -254,14 +254,14 @@ public class CarTest {
         v[0] = 0;
         v[1] = 0;
         transformedV = saab.rotateVector(v, Math.PI/2);
-        Assertions.assertEquals(transformedV[0], -1);
+        Assertions.assertEquals(transformedV[0], 0);
         Assertions.assertEquals(transformedV[1], 0);
 
         v[0] = 1;
         v[1] = 0;
         transformedV = saab.rotateVector(v, Math.PI/2);
-        Assertions.assertEquals(transformedV[0], -1);
-        Assertions.assertEquals(transformedV[1], 0);
+        Assertions.assertEquals(transformedV[0], 0);
+        Assertions.assertEquals(transformedV[1], 1);
 
         v[0] = 0;
         v[1] = 1;
