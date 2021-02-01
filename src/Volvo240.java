@@ -2,9 +2,9 @@ import java.awt.*;
 
 /**
  * A type of car
- * Extends Car which implements Movable
+ * Extends Vehicle which implements Movable
  */
-public class Volvo240 extends Car {
+public class Volvo240 extends MotorVehicle {
     private final static double trimFactor = 1.25;
 
     /**

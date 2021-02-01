@@ -6,7 +6,7 @@ import java.awt.*;
 /**
  * CarTest test class
  */
-public class CarTest {
+public class MotorVehicleTest {
 
     /**
      * Set up test car
