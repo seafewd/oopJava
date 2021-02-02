@@ -5,13 +5,16 @@ public abstract class LoadingTruck extends Vehicle {
     private static int MIN_ANGLE = 0;
     private static int MAX_ANGLE = 70;
     private static double LOADING_DISTANCE = 20;
-    private Stack<Vehicle> load = new Stack<>(); // TODO change to collection, que or whatever
+    private Stack<Vehicle> load = new Stack<>(); // TODO change to collection, queue or whatever
     //private boolean isTruck = LoadingTruck.class.isAss
 
     public LoadingTruck(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName) {
         super(nrDoors, enginePower, currentSpeed, color, modelName);
     }
 
+    /**
+     * Angle of the LoadingTruck's platform
+     */
     private int platformAngle;
 
     /**
@@ -51,26 +54,27 @@ public abstract class LoadingTruck extends Vehicle {
     }
 
     /**
-     * Set speed factor depending on properties of car
+     * Set speed factor depending on properties of LoadingTruck
      * @return speed factor (double)
      */
     @Override
     public double speedFactor(){
         return enginePower * 0.01;
     }
+
     /**
-     * Loads the given car if the car is close enough, the platform is lowered and if its not a truck.
+     * Loads the given Vehicle if the Vehicle is close enough, the platform is lowered and if it's not a truck.
      * Distance is set by LOADING_DISTANCE
-     * @param car car to be loaded
+     * @param vehicle Vehicle to be loaded
      */
-    public void loadCar(Vehicle car){
+    public void loadCar(Vehicle vehicle){
         // TODO make it more general... with object as parameter? (Same for moveLoad)
         // TODO limit of load?
-        boolean isCloseX = this.xPos < car.getXPos() + LOADING_DISTANCE && this.xPos > car.getXPos() - LOADING_DISTANCE;
-        boolean isCloseY = this.xPos < car.getXPos() + LOADING_DISTANCE && this.xPos > car.getXPos() - LOADING_DISTANCE;
+        boolean isCloseX = this.xPos < vehicle.getXPos() + LOADING_DISTANCE && this.xPos > vehicle.getXPos() - LOADING_DISTANCE;
+        boolean isCloseY = this.xPos < vehicle.getXPos() + LOADING_DISTANCE && this.xPos > vehicle.getXPos() - LOADING_DISTANCE;
 
-        if(isCloseX && isCloseY && platformAngle == 0 && !((Vehicle)car instanceof LoadingTruck)){ // cast for future
-            load.push(car);
+        if(isCloseX && isCloseY && platformAngle == 0 && !((Vehicle)vehicle instanceof LoadingTruck)){ // cast for future
+            load.push(vehicle);
         }
     }
 
@@ -80,8 +84,7 @@ public abstract class LoadingTruck extends Vehicle {
      */
 
     private void moveLoad(){
-        for (Vehicle v:load
-             ) {
+        for (Vehicle v : load) {
             v.setXPos(this.xPos);
             v.setYPos(this.yPos);
         }

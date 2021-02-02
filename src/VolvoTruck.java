@@ -1,7 +1,7 @@
 import java.awt.*;
 
 /**
- * A type of MotorVehicle
+ * A type of Vehicle
  * Extends Vehicle which implements Movable
  */
 public class VolvoTruck extends LoadingTruck {

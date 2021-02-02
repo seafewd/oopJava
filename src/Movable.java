@@ -1,7 +1,7 @@
 /**
  * Interface Movable
- * Implemented by Car
- * Prototypes movement of an object
+ * Implemented by Vehicle
+ * Prototypes movement and position of an object
  */
 public interface Movable {
 

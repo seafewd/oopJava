@@ -1,12 +1,10 @@
 
-import org.junit.jupiter.api.Test;
-
 /**
  * Program entry point
  */
 public class Main {
     /**
-     * Our main method
+     * Main method
      * @param args None defined
      */
     public static void main(String[] args) {

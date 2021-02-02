@@ -1,8 +1,8 @@
 import java.awt.*;
 
 /**
- * A type of car
- * Extends Car which implements Movable
+ * A type of Vehicle
+ * Extends Vehicle which implements Movable
  */
 public class Volvo240 extends Vehicle {
     private final static double trimFactor = 1.25;
@@ -15,7 +15,7 @@ public class Volvo240 extends Vehicle {
     }
 
     /**
-     * Set speed factor depending on properties of car
+     * Set speed factor depending on properties of Vehicle
      * @return speed factor (double)
      */
     @Override

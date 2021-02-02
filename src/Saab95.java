@@ -1,8 +1,8 @@
 import java.awt.*;
 
 /**
- * A type of car
- * Extends Car which implements Movable
+ * A type of Vehicle
+ * Extends Vehicle which implements Movable
  */
 
 public class Saab95 extends Vehicle {

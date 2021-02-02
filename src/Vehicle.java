@@ -6,30 +6,28 @@ import java.awt.*;
  */
 public abstract class Vehicle implements Movable {
 
-    // todo protected -> public where it makes sense
-
     /**
-     * Number of doors on the car
+     * Number of doors on the Vehicle
      */
-    protected int nrDoors;
+    private int nrDoors;
 
     /**
-     * Engine power of the car
+     * Engine power of the Vehicle
      */
     protected double enginePower;
 
     /**
-     * The current speed of the car
+     * The current speed of the Vehicle
      */
     protected double currentSpeed;
 
     /**
-     * Color of the car
+     * Color of the Vehicle
      */
     protected Color color;
 
     /**
-     * The car model name
+     * The Vehicle model name
      */
     protected String modelName;
 
@@ -54,7 +52,7 @@ public abstract class Vehicle implements Movable {
     private static final double BRAKE_LIMIT = 1;
 
     /**
-     * The direction the car is facing
+     * The direction the Vehicle is facing
      * Should be initialized with length 1 to keep it that way
      */
     protected double[] direction;
@@ -89,7 +87,7 @@ public abstract class Vehicle implements Movable {
     }
 
     /**
-     * Get engine power of car
+     * Get engine power of Vehicle
      * @return Engine power
      */
     protected double getEnginePower(){
@@ -97,7 +95,7 @@ public abstract class Vehicle implements Movable {
     }
 
     /**
-     * Get current speed of car
+     * Get current speed of Vehicle
      * The speed is the magnitude of the the velocity vector
      * @return Current speed
      */
@@ -116,7 +114,7 @@ public abstract class Vehicle implements Movable {
     }
 
     /**
-     * Get color of car
+     * Get color of Vehicle
      * @return Color
      */
     public Color getColor(){
@@ -124,7 +122,7 @@ public abstract class Vehicle implements Movable {
     }
 
     /**
-     * Set the color of the car
+     * Set the color of the Vehicle
      * @param clr Color to set
      */
     protected void setColor(Color clr){
@@ -132,9 +130,9 @@ public abstract class Vehicle implements Movable {
     }
 
     /**
-     * Gets a cars position
-     * @param vehicle The car you want to get a position of
-     * @return Fancy string describing the exact position of the car
+     * Gets a Vehicle's position
+     * @param vehicle The Vehicle you want to get a position of
+     * @return Fancy string describing the exact position of the Vehicle
      */
     public String showPosition(Vehicle vehicle) {
         return "Current position: (" + vehicle.xPos + ", " + vehicle.yPos + ").";
@@ -184,7 +182,7 @@ public abstract class Vehicle implements Movable {
 
 
     /**
-     * Start car engine
+     * Start Vehicle engine
      */
     protected void startEngine(){
         currentSpeed = 0.1;
@@ -192,7 +190,7 @@ public abstract class Vehicle implements Movable {
     }
 
     /**
-     * Stop car engine
+     * Stop Vehicle engine
      */
     public void stopEngine(){
         currentSpeed = 0;
@@ -209,7 +207,6 @@ public abstract class Vehicle implements Movable {
      * Increment speed
      * @param amount The amount with which to increment
      */
-
     protected void incrementSpeed(double amount){
         currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount,enginePower);
     }
@@ -232,7 +229,6 @@ public abstract class Vehicle implements Movable {
             incrementSpeed(amount);
     }
 
-
     /**
      * Brake car
      * Only accepts positive values in [0,1]
@@ -244,7 +240,7 @@ public abstract class Vehicle implements Movable {
     }
 
     /**
-     * Move the car
+     * Move the Vehicle
      * Sets the new position
      * Direction vector scaled by speed
      */
@@ -256,11 +252,10 @@ public abstract class Vehicle implements Movable {
     }
 
     /**
-     * Make car turn left. Only turns if the speed is not 0
+     * Make Vehicle turn left. Only turns if the speed is not 0
      */
     @Override
     public void turnLeft() {
-
         if (currentSpeed > 0) {
             setDirection(rotateVector(getDirection(), Math.PI/2));
             System.out.println("Left turn. " + showPosition(this));
