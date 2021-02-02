@@ -1,4 +1,5 @@
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 
 import java.awt.*;
@@ -11,7 +12,7 @@ public class CarTest {
     /**
      * Set up test car
      */
-    private final Saab95 saab = new Saab95();
+    private final Vehicle saab = new Saab95();
 
     /**
      * Test method getNrDoors
@@ -79,7 +80,7 @@ public class CarTest {
     public void testGetPosition() {
         saab.xPos = 6;
         saab.yPos = 4;
-        Assertions.assertEquals("Current position: (6, 4).", saab.getPosition(saab));
+        Assertions.assertEquals("Current position: (6.0, 4.0).", saab.showPosition(saab));
     }
 
     /**
@@ -87,33 +88,97 @@ public class CarTest {
      */
     @Test
     public void testMove() {
+        saab.xPos = 0;
         saab.yPos = 0;
-        saab.move();
-        Assertions.assertEquals(1, saab.yPos);
-    }
+        saab.direction[0] = 0;
+        saab.direction[1] = -1;
 
-    /**
+        saab.startEngine();
+
+
+        saab.move();
+
+        Assertions.assertEquals(0, saab.xPos);
+        Assertions.assertEquals(-0.1, saab.yPos);
+
+        saab.xPos = 0.2;
+        saab.yPos = 0.2;
+        saab.direction[0] = -1;
+        saab.direction[1] = 0;
+
+        saab.move();
+
+        Assertions.assertEquals(0.1, saab.xPos);
+        Assertions.assertEquals(0.2, saab.yPos);
+    }
+/*
+
+    */
+/**
      * Test method turnLeft
      */
+
     @Test
     public void testTurnLeft() {
         saab.xPos = 0;
-        saab.gas(0.3);
+        saab.yPos = 0;
+        saab.startEngine();
+
+        saab.move();
+
+        Assertions.assertEquals(1, saab.direction[0]);
+        Assertions.assertEquals(0, saab.direction[1]);
+
+        Assertions.assertEquals(0.1, saab.xPos);
+        Assertions.assertEquals(0, saab.yPos);
+
+
         saab.turnLeft();
-        Assertions.assertEquals(-1, saab.xPos);
+
+        // Should be same position
+        Assertions.assertEquals(0.1, saab.xPos);
+        Assertions.assertEquals(0, saab.yPos);
+
+        // Should be different direction
+        Assertions.assertEquals(0, saab.direction[0]);
+        Assertions.assertEquals(1, saab.direction[1]);
+
+        saab.move();
+
+        Assertions.assertEquals(0.1, saab.xPos);
+        Assertions.assertEquals(0.1, saab.yPos);
     }
 
-    /**
-     * Test method turnRight
-     */
     @Test
     public void testTurnRight() {
         saab.xPos = 0;
-        saab.gas(0.3);
-        saab.turnRight();
-        Assertions.assertEquals(1, saab.xPos);
-    }
+        saab.yPos = 0;
+        saab.startEngine();
 
+        saab.move();
+
+        Assertions.assertEquals(1, saab.direction[0]);
+        Assertions.assertEquals(0, saab.direction[1]);
+
+        Assertions.assertEquals(0.1, saab.xPos);
+        Assertions.assertEquals(0, saab.yPos);
+
+
+        saab.turnRight();
+
+        // Should be same position
+        Assertions.assertEquals(0.1, saab.xPos);
+        Assertions.assertEquals(0, saab.yPos);
+
+        // Should be different direction
+        Assertions.assertEquals(0, saab.direction[0]);
+        Assertions.assertEquals(-1, saab.direction[1]);
+
+        saab.move();
+
+        Assertions.assertEquals(0.1, saab.xPos);
+        Assertions.assertEquals(-0.1, saab.yPos);
+    }
     /**
      * Test method isInLimit (exceeding upper bound)
      */
@@ -180,6 +245,38 @@ public class CarTest {
         saab.currentSpeed = 0;
         saab.decrementSpeed(5);
         Assertions.assertEquals(0, saab.getCurrentSpeed());
+    }
+    @Test
+    public void testRotateVector(){
+
+        // TODO Add tests for PI/3, etc...
+
+        double [] v = new double[2]; // input vector
+        double[] transformedV; // output vector
+
+        v[0] = 0;
+        v[1] = 0;
+        transformedV = saab.rotateVector(v, Math.PI/2);
+        Assertions.assertEquals(transformedV[0], 0);
+        Assertions.assertEquals(transformedV[1], 0);
+
+        v[0] = 1;
+        v[1] = 0;
+        transformedV = saab.rotateVector(v, Math.PI/2);
+        Assertions.assertEquals(transformedV[0], 0);
+        Assertions.assertEquals(transformedV[1], 1);
+
+        v[0] = 0;
+        v[1] = 1;
+        transformedV = saab.rotateVector(v, Math.PI/2);
+        Assertions.assertEquals(transformedV[0], -1);
+        Assertions.assertEquals(transformedV[1], 0);
+
+        v[0] = 0;
+        v[1] = 1;
+        transformedV = saab.rotateVector(v, Math.PI/2);
+        Assertions.assertEquals(transformedV[0], -1);
+        Assertions.assertEquals(transformedV[1], 0);
     }
 
 }
