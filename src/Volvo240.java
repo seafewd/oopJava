@@ -11,7 +11,7 @@ public class Volvo240 extends Vehicle {
      * Default constructor
      */
     public Volvo240(){
-        super(4, 100, 0, Color.black, "Volvo240");
+        super(4, 100, 0, Color.black, "Volvo240", 2250);
     }
 
     /**

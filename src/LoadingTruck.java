@@ -1,21 +1,51 @@
 import java.awt.*;
-import java.util.Stack;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 public abstract class LoadingTruck extends Vehicle {
+    /**
+     * Min angle of platform
+     */
     private static int MIN_ANGLE = 0;
-    private static int MAX_ANGLE = 70;
-    private static double LOADING_DISTANCE = 20;
-    private Stack<Vehicle> load = new Stack<>(); // TODO change to collection, queue or whatever
-    //private boolean isTruck = LoadingTruck.class.isAss
 
-    public LoadingTruck(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName) {
-        super(nrDoors, enginePower, currentSpeed, color, modelName);
-    }
+    /**
+     * Max angle of platform
+     */
+    private static int MAX_ANGLE = 70;
+
+    /**
+     * Loading distance
+     */
+    private static double LOADING_DISTANCE = 20;
+
+    /**
+     * Current load of transport vehicle
+     */
+    private Deque<Vehicle> load = new ArrayDeque<>(); // TODO change to collection, queue or whatever
+
+    /**
+     * is truck??
+     */
+    //private boolean isTruck = LoadingTruck.class.isAss
 
     /**
      * Angle of the LoadingTruck's platform
      */
     private int platformAngle;
+
+
+    /**
+     * Default constructor
+     * @param nrDoors           Doors
+     * @param enginePower       Engine power
+     * @param currentSpeed      Current speed
+     * @param color             Color
+     * @param modelName         Model name
+     * @param weight            Weight
+     */
+    public LoadingTruck(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, int weight) {
+        super(nrDoors, enginePower, currentSpeed, color, modelName, weight);
+    }
 
     /**
      * Set angle of platform
@@ -67,7 +97,7 @@ public abstract class LoadingTruck extends Vehicle {
      * Distance is set by LOADING_DISTANCE
      * @param vehicle Vehicle to be loaded
      */
-    public void loadCar(Vehicle vehicle){
+    public void loadVehicles(Vehicle vehicle){
         // TODO make it more general... with object as parameter? (Same for moveLoad)
         // TODO limit of load?
         boolean isCloseX = this.xPos < vehicle.getXPos() + LOADING_DISTANCE && this.xPos > vehicle.getXPos() - LOADING_DISTANCE;
@@ -76,6 +106,24 @@ public abstract class LoadingTruck extends Vehicle {
         if(isCloseX && isCloseY && platformAngle == 0 && !((Vehicle)vehicle instanceof LoadingTruck)){ // cast for future
             load.push(vehicle);
         }
+    }
+
+    /**
+     * Unload the vehicles currently in truck cargo
+     * @param vehiclesToUnload number of vehicles to unload
+     */
+    private void unloadVehicles(int vehiclesToUnload) {
+        double loaderXPos = this.getXPos();
+        double loaderYPos = this.getYPos();
+
+        for (int i = 0; i < vehiclesToUnload; i++) {
+            if (!load.isEmpty()) {
+                Vehicle v = load.pop();
+                v.direction[0] = loaderXPos;
+                v.direction[1] = loaderYPos - 1 - i;
+            }
+        }
+
     }
 
     /**
@@ -88,6 +136,36 @@ public abstract class LoadingTruck extends Vehicle {
             v.setXPos(this.xPos);
             v.setYPos(this.yPos);
         }
+    }
+
+    /**
+     * Move the Vehicle
+     * Move all its cargo at the same time
+     */
+    @Override
+    public void move() {
+        super.move();
+        moveLoad();
+    }
+
+    /**
+     * Turn left
+     * Move all its cargo at the same time
+     */
+    @Override
+    public void turnLeft() {
+        super.turnLeft();
+        moveLoad();
+    }
+
+    /**
+     * Move right
+     * Move all its cargo at the same time
+     */
+    @Override
+    public void turnRight() {
+        super.turnRight();
+        moveLoad();
     }
 
 

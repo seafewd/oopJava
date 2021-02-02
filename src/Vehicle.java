@@ -57,6 +57,11 @@ public abstract class Vehicle implements Movable {
      */
     protected double[] direction;
 
+    /**
+     * Weight of Vehicle (kg)
+     */
+    private int weight;
+
 
     /**
      * Default constructor
@@ -66,7 +71,7 @@ public abstract class Vehicle implements Movable {
      * @param color         color
      * @param modelName     model name
      */
-    public Vehicle(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName) {
+    public Vehicle(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, int weight) {
         this.nrDoors = nrDoors;
         this.enginePower = enginePower;
         this.currentSpeed = 0;
@@ -75,6 +80,7 @@ public abstract class Vehicle implements Movable {
         this.xPos = 0;
         this.yPos = 0;
         this.direction = new double[]{1, 0};
+        this.weight = weight;
         stopEngine();
     }
 
