@@ -2,31 +2,21 @@ import java.awt.*;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-public abstract class LoadingTruck extends Vehicle {
+public abstract class LoadingTruck extends Loader {
     /**
      * Min angle of platform
      */
-    private static int MIN_ANGLE = 0;
+    private final static int MIN_ANGLE = 0;
 
     /**
      * Max angle of platform
      */
-    private static int MAX_ANGLE = 70;
-
-    /**
-     * Loading distance
-     */
-    private static double LOADING_DISTANCE = 20;
+    private final static int MAX_ANGLE = 70;
 
     /**
      * Current load of transport vehicle
      */
-    private Deque<Vehicle> load = new ArrayDeque<>(); // TODO change to collection, queue or whatever
-
-    /**
-     * is truck??
-     */
-    //private boolean isTruck = LoadingTruck.class.isAss
+    private Deque<Vehicle> load = new ArrayDeque<>();
 
     /**
      * Angle of the LoadingTruck's platform
@@ -84,27 +74,17 @@ public abstract class LoadingTruck extends Vehicle {
     }
 
     /**
-     * Set speed factor depending on properties of LoadingTruck
-     * @return speed factor (double)
-     */
-    @Override
-    public double speedFactor(){
-        return enginePower * 0.01;
-    }
-
-    /**
      * Loads the given Vehicle if the Vehicle is close enough, the platform is lowered and if it's not a truck.
      * Distance is set by LOADING_DISTANCE
-     * @param vehicle Vehicle to be loaded
+     * @param car Vehicle to be loaded
      */
-    public void loadVehicles(Vehicle vehicle){
-        // TODO make it more general... with object as parameter? (Same for moveLoad)
-        // TODO limit of load?
-        boolean isCloseX = this.xPos < vehicle.getXPos() + LOADING_DISTANCE && this.xPos > vehicle.getXPos() - LOADING_DISTANCE;
-        boolean isCloseY = this.yPos < vehicle.getYPos() + LOADING_DISTANCE && this.yPos > vehicle.getYPos() - LOADING_DISTANCE;
+    @Override
+    public void loadCar(Car car){
+        boolean isCloseX = this.xPos < car.getXPos() + LOADING_DISTANCE && this.xPos > car.getXPos() - LOADING_DISTANCE;
+        boolean isCloseY = this.xPos < car.getXPos() + LOADING_DISTANCE && this.xPos > car.getXPos() - LOADING_DISTANCE;
 
-        if(isCloseX && isCloseY && platformAngle == 0 && !((Vehicle)vehicle instanceof LoadingTruck)){ // cast for future
-            load.push(vehicle);
+        if(isCloseX && isCloseY && platformAngle == 0){
+            load.push(car);
         }
     }
 
@@ -128,44 +108,12 @@ public abstract class LoadingTruck extends Vehicle {
 
     /**
      * Transfer the coordinates of the truck to the load.
-     * NEEDS TO BE UPDATED WITH THE MOVE FUNCTION // TODO fix? Other ideas? oRKa
      */
-
-    private void moveLoad(){
+    protected void moveLoad() {
         for (Vehicle v : load) {
             v.setXPos(this.xPos);
             v.setYPos(this.yPos);
         }
-    }
-
-    /**
-     * Move the Vehicle
-     * Move all its cargo at the same time
-     */
-    @Override
-    public void move() {
-        super.move();
-        moveLoad();
-    }
-
-    /**
-     * Turn left
-     * Move all its cargo at the same time
-     */
-    @Override
-    public void turnLeft() {
-        super.turnLeft();
-        moveLoad();
-    }
-
-    /**
-     * Move right
-     * Move all its cargo at the same time
-     */
-    @Override
-    public void turnRight() {
-        super.turnRight();
-        moveLoad();
     }
 
 
