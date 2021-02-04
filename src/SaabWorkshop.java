@@ -7,15 +7,15 @@ import java.util.List;
 public class SaabWorkshop extends Workshop{
     private List<Saab95> cars;
 
-    public SaabWorkshop(){
-        super(10);
+    public SaabWorkshop(int maxCars){
+        super(maxCars);
         cars = new ArrayList<>();
     }
 
     @Override
-    protected boolean leaveCar(Saab95 saab) {
+    protected boolean leaveCar(Car saab) {
         if (cars.size() > MAX_CARS)
             return false;
-        return cars.add(saab);
+        return cars.add((Saab95) saab);
     }
 }

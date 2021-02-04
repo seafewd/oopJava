@@ -14,8 +14,8 @@ public class GeneralWorkshop extends Workshop{
     /**
      * Default constructor
      */
-    public GeneralWorkshop(){
-        super(12);
+    public GeneralWorkshop(int maxCars){
+        super(maxCars);
         cars = new ArrayList<>();
     }
 

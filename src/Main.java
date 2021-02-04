@@ -28,5 +28,8 @@ public class Main {
         volvoTruck.move();
         volvoTruck.turnRight();
         volvoTruck.move();
+
+        Workshop volvoWorkshop = new VolvoWorkshop();
+        volvoWorkshop.leaveCar(saab);
     }
 }
