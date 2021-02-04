@@ -6,6 +6,8 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/grad_main.iml" filepath="$PROJECT_DIR$/.idea/modules/grad_main.iml" group="grad" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/grad_test.iml" filepath="$PROJECT_DIR$/.idea/modules/grad_test.iml" group="grad" />
       <module fileurl="file://$PROJECT_DIR$/oopJavaLab.iml" filepath="$PROJECT_DIR$/oopJavaLab.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/org.example-grad_main.iml" filepath="$PROJECT_DIR$/.idea/modules/org.example-grad_main.iml" group="grad" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/org.example-grad_test.iml" filepath="$PROJECT_DIR$/.idea/modules/org.example-grad_test.iml" group="grad" />
     </modules>
   </component>
 </project>

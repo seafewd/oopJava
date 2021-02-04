@@ -22,4 +22,10 @@ public class Volvo240 extends Car {
     public double speedFactor(){
         return enginePower * 0.01 * trimFactor;
     }
+
+
+    @Override
+    public void driveBy() {
+        System.out.println("English, motherfucker! Do you speak it!?");
+    }
 }

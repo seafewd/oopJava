@@ -40,4 +40,9 @@ public class Saab95 extends Car {
         if(turboOn) turbo = 1.3;
         return enginePower * 0.01 * turbo;
     }
+
+    @Override
+    public void driveBy() {
+        System.out.println("God damn that's a pretty fucking good milkshake.");
+    }
 }

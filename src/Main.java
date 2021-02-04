@@ -8,6 +8,8 @@ public class Main {
      * @param args None defined
      */
     public static void main(String[] args) {
+
+
         Saab95 saab = new Saab95();
         saab.setTurboOff();
         saab.startEngine();
@@ -29,7 +31,10 @@ public class Main {
         volvoTruck.turnRight();
         volvoTruck.move();
 
-        VolvoWorkshop volvoWorkshop = new VolvoWorkshop(20);
-        //volvoWorkshop.leaveCar(saab);
+        Volvo240 volvo = new Volvo240();
+        Workshop<Volvo240> ws = new Workshop(volvo, 10);
+
+        ws.leaveCar(volvo);
+        //ws.leaveCar(saab);
     }
 }

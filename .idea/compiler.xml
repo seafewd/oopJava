@@ -5,6 +5,8 @@
       <module name="grad" target="15" />
       <module name="grad_main" target="15" />
       <module name="grad_test" target="15" />
+      <module name="org.example-grad_main" target="15" />
+      <module name="org.example-grad_test" target="15" />
     </bytecodeTargetLevel>
   </component>
 </project>
