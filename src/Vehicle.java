@@ -182,7 +182,7 @@ public abstract class Vehicle implements Movable {
      * Set direction
      * @param direction vector to be set
      */
-    private void setDirection(double[] direction){
+    protected void setDirection(double[] direction){
         this.direction = direction;
     }
 

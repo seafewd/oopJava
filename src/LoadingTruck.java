@@ -101,7 +101,7 @@ public abstract class LoadingTruck extends Vehicle {
         // TODO make it more general... with object as parameter? (Same for moveLoad)
         // TODO limit of load?
         boolean isCloseX = this.xPos < vehicle.getXPos() + LOADING_DISTANCE && this.xPos > vehicle.getXPos() - LOADING_DISTANCE;
-        boolean isCloseY = this.xPos < vehicle.getXPos() + LOADING_DISTANCE && this.xPos > vehicle.getXPos() - LOADING_DISTANCE;
+        boolean isCloseY = this.yPos < vehicle.getYPos() + LOADING_DISTANCE && this.yPos > vehicle.getYPos() - LOADING_DISTANCE;
 
         if(isCloseX && isCloseY && platformAngle == 0 && !((Vehicle)vehicle instanceof LoadingTruck)){ // cast for future
             load.push(vehicle);
@@ -119,8 +119,9 @@ public abstract class LoadingTruck extends Vehicle {
         for (int i = 0; i < vehiclesToUnload; i++) {
             if (!load.isEmpty()) {
                 Vehicle v = load.pop();
-                v.direction[0] = loaderXPos;
-                v.direction[1] = loaderYPos - 1 - i;
+                v.setXPos(loaderXPos);
+                v.setYPos(loaderYPos - 1 - i);
+                v.setDirection(direction);
             }
         }
 
