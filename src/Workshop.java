@@ -8,9 +8,9 @@ public abstract class Workshop {
     public Workshop(int maxCars) {
         MAX_CARS = maxCars;
     }
-
-    /**
+/*
+    *//**
      * Leave a car in the workshop
-     */
-    protected abstract boolean leaveCar(Car car);
+     *//*
+    protected abstract boolean leaveCar(Car car);*/
 }

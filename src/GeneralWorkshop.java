@@ -19,7 +19,6 @@ public class GeneralWorkshop extends Workshop{
         cars = new ArrayList<>();
     }
 
-    @Override
     protected boolean leaveCar(Car car) {
         if (cars.size() > MAX_CARS)
             return false;

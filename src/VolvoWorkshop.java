@@ -12,10 +12,10 @@ public class VolvoWorkshop extends Workshop{
         cars = new ArrayList<>();
     }
 
-    @Override
-    protected boolean leaveCar(Car volvo) {
+    protected boolean leaveCar(Volvo240 volvo) {
         if (cars.size() > MAX_CARS)
             return false;
         return cars.add((Volvo240) volvo);
     }
+
 }

@@ -12,8 +12,8 @@ public class SaabWorkshop extends Workshop{
         cars = new ArrayList<>();
     }
 
-    @Override
-    protected boolean leaveCar(Car saab) {
+
+    protected boolean leaveCar(Saab95 saab) {
         if (cars.size() > MAX_CARS)
             return false;
         return cars.add((Saab95) saab);
