@@ -214,7 +214,7 @@ public abstract class Vehicle implements Movable {
      * @param amount The amount with which to increment
      */
     protected void incrementSpeed(double amount){
-        currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount,enginePower);
+        currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, enginePower);
     }
 
     /**

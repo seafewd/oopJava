@@ -1,8 +1,21 @@
-public class VolvoWorkshop {
+import java.util.ArrayList;
+import java.util.List;
 
-    private Volvo240[] cars;
+/**
+ * Saab workshop. Only accepts Saab cars
+ */
+public class VolvoWorkshop extends Workshop{
+    private List<Volvo240> cars;
 
-    VolvoWorkshop(int numOfCars){
-        cars = new Volvo240[numOfCars];
+    public VolvoWorkshop(){
+        super(20);
+        cars = new ArrayList<>();
+    }
+
+    @Override
+    protected boolean leaveCar(Volvo240 volvo) {
+        if (cars.size() > MAX_CARS)
+            return false;
+        return cars.add(volvo);
     }
 }
