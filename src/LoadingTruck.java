@@ -23,7 +23,6 @@ public abstract class LoadingTruck extends Loader {
      */
     private int platformAngle;
 
-
     /**
      * Default constructor
      * @param nrDoors           Doors

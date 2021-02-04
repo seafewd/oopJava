@@ -13,4 +13,6 @@ public abstract class Workshop {
      * Leave a car in the workshop
      */
     protected abstract boolean leaveCar(Car car);
+    protected abstract boolean leaveCar(Saab95 car);
+    protected abstract boolean leaveCar(Volvo240 car);
 }

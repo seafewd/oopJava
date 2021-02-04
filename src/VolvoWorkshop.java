@@ -13,9 +13,9 @@ public class VolvoWorkshop extends Workshop{
     }
 
     @Override
-    protected boolean leaveCar(Car volvo) {
+    protected boolean leaveCar(Volvo240 volvo) {
         if (cars.size() > MAX_CARS)
             return false;
-        return cars.add((Volvo240) volvo);
+        return cars.add(volvo);
     }
 }
