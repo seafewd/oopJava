@@ -124,7 +124,6 @@ public abstract class LoadingTruck extends Vehicle {
                 v.setDirection(direction);
             }
         }
-
     }
 
     /**
