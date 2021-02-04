@@ -6,28 +6,21 @@ import java.util.ArrayList;
 public class Workshop<T> {
 
     /**
-     * Generic type T
-     */
-    private final T car;
-
-    /**
      * Max number of cars
      */
-    private final int maxCars;
+    private final int MAX_CARS;
 
     /**
      * For storing the cars
      */
-    ArrayList<T> cars = new ArrayList();
+    ArrayList<T> cars = new ArrayList<>();
 
     /**
-     * Workshop that can load/fix cars (or other objects). It depends on what type it is takes.
-     * @param car Object to be stored/fixed
-     * @param maxCars
+     * Workshop that can load/fix cars (or other objects). It depends on what type it takes.
+     * @param MAX_CARS      Max cars to hold
      */
-    Workshop(T car, int maxCars){
-        this.car = car;
-        this.maxCars = maxCars;
+    Workshop(int MAX_CARS){
+        this.MAX_CARS = MAX_CARS;
     }
 
     /**
@@ -35,8 +28,8 @@ public class Workshop<T> {
      * @param object the car in this case
      * @return true if car was successfully stored
      */
-    protected boolean leaveCar(T object) {
-        if (cars.size() > maxCars)
+    protected boolean storeCar(T object) {
+        if (cars.size() > MAX_CARS)
             return false;
         return cars.add(object);
     }

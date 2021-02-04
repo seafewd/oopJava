@@ -4,7 +4,7 @@ import java.awt.*;
  * A type of Vehicle
  * Extends Vehicle which implements Movable
  */
-public class Scania extends LoadingTruck {
+public class Scania extends Truck {
 
     /**
      * Default constructor

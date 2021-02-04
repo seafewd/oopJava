@@ -1,8 +1,7 @@
 import java.awt.*;
 import java.util.ArrayDeque;
-import java.util.Deque;
 
-public abstract class LoadingTruck extends Loader {
+public abstract class Truck extends Carrier {
     /**
      * Min angle of platform
      */
@@ -13,10 +12,6 @@ public abstract class LoadingTruck extends Loader {
      */
     private final static int MAX_ANGLE = 70;
 
-    /**
-     * Current load of transport vehicle
-     */
-    private Deque<Car> load = new ArrayDeque<>();
 
     /**
      * Angle of the LoadingTruck's platform
@@ -33,19 +28,11 @@ public abstract class LoadingTruck extends Loader {
      * @param modelName         Model name
      * @param weight            Weight
      * @param maxCars           Maximum amount of cars that fit on the transport
+     * @param ArrayDeque        Stack to store cargo
      */
-    public LoadingTruck(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, int weight, int maxCars) {
-        super(nrDoors, enginePower, currentSpeed, color, modelName, weight, maxCars);
+    public Truck(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, int weight, int maxCars) {
+        super(nrDoors, enginePower, currentSpeed, color, modelName, weight, maxCars, new ArrayDeque<>());
     }
-
-    /**
-     * Check if loading is possible (e.g. not exceeding maximum amount of cars already in transport)
-     */
-    @Override
-    protected boolean checkIfLoadPossible() {
-        return load.size() < MAX_CARS;
-    }
-
 
     /**
      * Set angle of platform
@@ -85,21 +72,12 @@ public abstract class LoadingTruck extends Loader {
     /**
      * Loads the given Vehicle if the Vehicle is close enough, the platform is lowered and if it's not a truck.
      * Distance is set by LOADING_DISTANCE
-     * @param car Vehicle to be loaded
+     * @param car Car to be loaded
      */
     @Override
     public void loadCar(Car car){
-        if (!checkIfLoadPossible()) {
-            System.out.println("Transport is full!");
-            return;
-        }
-        boolean isCloseX = this.xPos < car.getXPos() + LOADING_DISTANCE && this.xPos > car.getXPos() - LOADING_DISTANCE;
-        boolean isCloseY = this.xPos < car.getXPos() + LOADING_DISTANCE && this.xPos > car.getXPos() - LOADING_DISTANCE;
-
-        if(isCloseX && isCloseY && platformAngle == 0){
-            load.push(car);
-            
-        }
+        if (transportNotFull() && isCloseEnoughToLoad(car) && getAngle() == 0)
+            load.add(car);
     }
 
     /**

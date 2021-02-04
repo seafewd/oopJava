@@ -1,10 +1,16 @@
 import java.awt.*;
+import java.util.Deque;
 
 /**
- * Loader class
- * Can load other vehicles for transportation etc.
+ * Carrier class
+ * Can load other Cars for transportation etc.
  */
-public abstract class Loader extends Vehicle {
+public abstract class Carrier extends Vehicle {
+
+    /**
+     * The carrier's cargo
+     */
+    Deque<Car> load;
 
     /**
      * Loading distance
@@ -16,9 +22,33 @@ public abstract class Loader extends Vehicle {
      */
     protected static int MAX_CARS;
 
-    public Loader(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, int weight, int maxCars) {
+    public Carrier(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, int weight, int maxCars, Deque<Car> load) {
         super(nrDoors, enginePower, currentSpeed, color, modelName, weight);
         MAX_CARS = maxCars;
+        this.load = load;
+    }
+
+    /**
+     * Check if car is close enough to the transport to be able to be loaded onto it
+     * @param car   Car to check
+     * @return      Proximity check
+     */
+    protected boolean isCloseEnoughToLoad(Car car) {
+        boolean isCloseX = this.xPos < car.getXPos() + LOADING_DISTANCE && this.xPos > car.getXPos() - LOADING_DISTANCE;
+        boolean isCloseY = this.xPos < car.getXPos() + LOADING_DISTANCE && this.xPos > car.getXPos() - LOADING_DISTANCE;
+        return isCloseX && isCloseY;
+    }
+
+
+    /**
+     * Check if loading is possible (e.g. not exceeding maximum amount of cars already in transport)
+     */
+    protected boolean transportNotFull() {
+        if (load.size() < MAX_CARS) {
+            System.out.println("Transport is full!");
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -26,12 +56,6 @@ public abstract class Loader extends Vehicle {
      * @param car   Car to load
      */
     protected abstract void loadCar(Car car);
-
-    /**
-     * Check if loading is possible (e.g. not exceeding maximum amount of cars already in transport)
-     */
-    protected abstract boolean checkIfLoadPossible();
-
 
     /**
      * Set speed factor depending on properties of LoadingTruck

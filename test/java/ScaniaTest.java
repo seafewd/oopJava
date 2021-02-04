@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Assertions;
 
 public class ScaniaTest {
 
-    LoadingTruck scania = new Scania();
+    Truck scania = new Scania();
 
     /**
      * Test increment speed when angle of platform is not 0

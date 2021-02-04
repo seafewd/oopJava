@@ -19,8 +19,8 @@ public class Main {
         saab.move();
         saab.showDirection();
 
-        Loader scania = new Scania();
-        Loader volvoTruck = new VolvoTruck();
+        Carrier scania = new Scania();
+        Carrier volvoTruck = new VolvoTruck();
         scania.loadCar(saab);
         scania.move();
 
@@ -32,9 +32,9 @@ public class Main {
         volvoTruck.move();
 
         Volvo240 volvo = new Volvo240();
-        Workshop<Volvo240> ws = new Workshop(volvo, 10);
+        Workshop<Volvo240> ws = new Workshop(10);
 
-        ws.leaveCar(volvo);
+        ws.storeCar(volvo);
         //ws.leaveCar(saab);
     }
 }
