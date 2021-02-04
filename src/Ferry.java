@@ -29,6 +29,10 @@ public class Ferry extends Loader {
      */
     @Override
     public void loadCar(Car car){
+        if (!checkIfLoadPossible()) {
+            System.out.println("Transport is full!");
+            return;
+        }
         boolean isCloseX = this.xPos < car.getXPos() + LOADING_DISTANCE && this.xPos > car.getXPos() - LOADING_DISTANCE;
         boolean isCloseY = this.xPos < car.getXPos() + LOADING_DISTANCE && this.xPos > car.getXPos() - LOADING_DISTANCE;
         if(isCloseX && isCloseY){
