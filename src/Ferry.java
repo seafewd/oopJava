@@ -11,7 +11,15 @@ public class Ferry extends Loader {
     Queue<Car> load = new LinkedList<>();
 
     public Ferry(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, int weight) {
-        super(nrDoors, enginePower, currentSpeed, color, modelName, weight);
+        super(nrDoors, enginePower, currentSpeed, color, modelName, weight, 50);
+    }
+
+    /**
+     * Check if loading is possible (e.g. not exceeding maximum amount of cars already in transport)
+     */
+    @Override
+    protected boolean checkIfLoadPossible() {
+        return load.size() < MAX_CARS;
     }
 
     /**
@@ -40,6 +48,17 @@ public class Ferry extends Loader {
             Car c = load.remove();
             c.direction[0] = loaderXPos;
             c.direction[1] = loaderYPos + 1 + i;
+        }
+    }
+
+    /**
+     * Move load using Queue
+     */
+    @Override
+    protected void moveLoad() {
+        for (Car c : load) {
+            c.setXPos(this.xPos);
+            c.setYPos(this.yPos);
         }
     }
 }

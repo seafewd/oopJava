@@ -16,7 +16,7 @@ public abstract class LoadingTruck extends Loader {
     /**
      * Current load of transport vehicle
      */
-    private Deque<Vehicle> load = new ArrayDeque<>();
+    private Deque<Car> load = new ArrayDeque<>();
 
     /**
      * Angle of the LoadingTruck's platform
@@ -32,20 +32,29 @@ public abstract class LoadingTruck extends Loader {
      * @param color             Color
      * @param modelName         Model name
      * @param weight            Weight
+     * @param maxCars           Maximum amount of cars that fit on the transport
      */
-    public LoadingTruck(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, int weight) {
-        super(nrDoors, enginePower, currentSpeed, color, modelName, weight);
+    public LoadingTruck(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, int weight, int maxCars) {
+        super(nrDoors, enginePower, currentSpeed, color, modelName, weight, maxCars);
     }
+
+    /**
+     * Check if loading is possible (e.g. not exceeding maximum amount of cars already in transport)
+     */
+    @Override
+    protected boolean checkIfLoadPossible() {
+        return load.size() < MAX_CARS;
+    }
+
 
     /**
      * Set angle of platform
      * Require a minimum and a maximum angle in order to set
      * Also require that the speed of truck is 0
-     * @param truck     truck
      * @param degree    degree with which to set the platform angle
      */
-    protected boolean setAngle(LoadingTruck truck, int degree) {
-        if (truck.getCurrentSpeed() == 0 && (platformAngle >= MIN_ANGLE && platformAngle <= MAX_ANGLE)) {
+    protected boolean setAngle(int degree) {
+        if (this.getCurrentSpeed() == 0 && (platformAngle >= MIN_ANGLE && platformAngle <= MAX_ANGLE)) {
             platformAngle = degree;
             return true;
         }
@@ -109,10 +118,11 @@ public abstract class LoadingTruck extends Loader {
     /**
      * Transfer the coordinates of the truck to the load.
      */
+    @Override
     protected void moveLoad() {
-        for (Vehicle v : load) {
-            v.setXPos(this.xPos);
-            v.setYPos(this.yPos);
+        for (Car c : load) {
+            c.setXPos(this.xPos);
+            c.setYPos(this.yPos);
         }
     }
 

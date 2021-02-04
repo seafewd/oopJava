@@ -1,6 +1,4 @@
 import java.awt.*;
-import java.util.ArrayDeque;
-import java.util.Queue;
 
 /**
  * Loader class
@@ -13,11 +11,27 @@ public abstract class Loader extends Vehicle {
      */
     protected static double LOADING_DISTANCE = 20;
 
-    public Loader(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, int weight) {
+    /**
+     * Maximum amount of Cars that will fit
+     */
+    protected static int MAX_CARS;
+
+    public Loader(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, int weight, int maxCars) {
         super(nrDoors, enginePower, currentSpeed, color, modelName, weight);
+        MAX_CARS = maxCars;
     }
 
+    /**
+     * Load the transport with a car
+     * @param car   Car to load
+     */
     protected abstract void loadCar(Car car);
+
+    /**
+     * Check if loading is possible (e.g. not exceeding maximum amount of cars already in transport)
+     */
+    protected abstract boolean checkIfLoadPossible();
+
 
     /**
      * Set speed factor depending on properties of LoadingTruck
@@ -29,26 +43,10 @@ public abstract class Loader extends Vehicle {
     }
 
     /**
-     * Move load using Queue
-     * @param load  Cargo
+     * Move transporter's cargo
      */
-    protected void moveLoad(Queue<Vehicle> load) {
-        for (Vehicle v : load) {
-            v.setXPos(this.xPos);
-            v.setYPos(this.yPos);
-        }
-    }
+    protected abstract void moveLoad();
 
-    /**
-     * Move load using ArrayDeque
-     * @param load  Cargo
-     */
-    protected void moveLoad(ArrayDeque<Vehicle> load) {
-        for (Vehicle v : load) {
-            v.setXPos(this.xPos);
-            v.setYPos(this.yPos);
-        }
-    }
 
     /**
      * Move the Vehicle
