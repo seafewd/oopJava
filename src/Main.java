@@ -8,9 +8,8 @@ public class Main {
      * @param args None defined
      */
     public static void main(String[] args) {
-        Vehicle saab = new Saab95();
-        System.out.println("Created a " + saab.modelName);
-        ((Saab95) saab).setTurboOff();
+        Saab95 saab = new Saab95();
+        saab.setTurboOff();
         saab.startEngine();
         saab.showDirection();
         saab.move();
@@ -18,8 +17,10 @@ public class Main {
         saab.move();
         saab.showDirection();
 
-        LoadingTruck scania = new Scania();
-        LoadingTruck volvoTruck = new VolvoTruck();
+        Loader scania = new Scania();
+        Loader volvoTruck = new VolvoTruck();
+        scania.loadCar(saab);
+        scania.move();
 
         volvoTruck.move();
         volvoTruck.move();
