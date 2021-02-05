@@ -50,6 +50,10 @@ public abstract class Carrier extends Vehicle {
         return isCloseX && isCloseY;
     }
 
+    /**
+     * Get cargo load
+     * @return  Cargo load
+     */
     public Deque<Car> getLoad() {
         return load;
     }
