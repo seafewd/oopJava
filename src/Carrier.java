@@ -46,7 +46,7 @@ public abstract class Carrier extends Vehicle {
      */
     protected boolean isCloseEnoughToLoad(Car car) {
         boolean isCloseX = this.xPos < car.getXPos() + LOADING_DISTANCE && this.xPos > car.getXPos() - LOADING_DISTANCE;
-        boolean isCloseY = this.xPos < car.getXPos() + LOADING_DISTANCE && this.xPos > car.getXPos() - LOADING_DISTANCE;
+        boolean isCloseY = this.yPos < car.getYPos() + LOADING_DISTANCE && this.yPos > car.getYPos() - LOADING_DISTANCE;
         return isCloseX && isCloseY;
     }
 
