@@ -56,7 +56,7 @@ public class Atransporter extends Athing {
 
     protected boolean isCloseEnoughToLoad(Atransportee toBeTransported) {
         boolean isCloseX = this.xPos < toBeTransported.getxPos() + LOADING_DISTANCE && this.xPos > toBeTransported.getxPos() - LOADING_DISTANCE;
-        boolean isCloseY = this.yPos < toBeTransported.getyPos() + LOADING_DISTANCE && this.xPos > toBeTransported.getyPos() - LOADING_DISTANCE;
+        boolean isCloseY = this.yPos < toBeTransported.getyPos() + LOADING_DISTANCE && this.yPos > toBeTransported.getyPos() - LOADING_DISTANCE;
         return isCloseX && isCloseY;
     }
 
