@@ -26,7 +26,6 @@ public abstract class Truck extends Carrier {
      * @param modelName         Model name
      * @param weight            Weight
      * @param maxCars           Maximum amount of cars that fit on the transport
-     * @param ArrayDeque        Stack to store cargo
      */
     public Truck(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, int weight, int maxCars) {
         super(nrDoors, enginePower, currentSpeed, color, modelName, weight, maxCars, new ArrayDeque<>());

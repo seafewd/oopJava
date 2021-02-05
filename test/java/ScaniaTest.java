@@ -2,6 +2,9 @@
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ScaniaTest {
 
     Truck scania = new Scania();
@@ -26,5 +29,19 @@ public class ScaniaTest {
         scania.setAngle(0);
         scania.gas(.6);
         Assertions.assertEquals(0.6, scania.getCurrentSpeed());
+    }
+
+    @Test
+    public void testLoadCar(){
+        List<Car> cars = new ArrayList<>();
+        for(int i = 0; i < 3;i++){
+            cars.add(new Volvo240());
+        }
+        for (Car c:cars
+             ) {
+            scania.loadCar(c);
+        }
+        Assertions.assertEquals(scania.getLoad().getFirst(), cars.get(0));
+        Assertions.assertEquals(scania.getLoad().getLast(), cars.get(2));
     }
 }

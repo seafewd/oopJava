@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Workshop super class
@@ -13,7 +14,7 @@ public class Workshop<T> {
     /**
      * For storing the cars
      */
-    ArrayList<T> cars = new ArrayList<>();
+    List<T> cars = new ArrayList<>();
 
     /**
      * Workshop that can load/fix cars (or other objects). It depends on what type it takes.

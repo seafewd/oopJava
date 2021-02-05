@@ -35,6 +35,6 @@ public class Main {
         Workshop<Volvo240> ws = new Workshop(10);
 
         ws.storeCar(volvo);
-        //ws.leaveCar(saab);
+        //ws.storeCar(saab);
     }
 }

@@ -50,6 +50,10 @@ public abstract class Carrier extends Vehicle {
         return isCloseX && isCloseY;
     }
 
+    public Deque<Car> getLoad() {
+        return load;
+    }
+
     /**
      * Check if loading is possible (e.g. not exceeding maximum amount of cars already in transport)
      */
