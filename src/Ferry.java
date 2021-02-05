@@ -13,16 +13,6 @@ public class Ferry extends Carrier {
      */
     Deque<Car> load;
 
-    /**
-     * Ferry that loads and transports cars. Loads and unloads with the last-in-last-out principle
-     * @param nrDoors
-     * @param enginePower
-     * @param currentSpeed
-     * @param color
-     * @param modelName
-     * @param weight
-     */
-
     public Ferry(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, int weight) {
         super(nrDoors, enginePower, currentSpeed, color, modelName, weight, 50, new LinkedList<>());
     }
