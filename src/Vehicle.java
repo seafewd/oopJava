@@ -206,7 +206,9 @@ public abstract class Vehicle implements Movable {
      * Speed factor - varies depending on model
      * @return Speed factor
      */
-    protected abstract double speedFactor();
+    public double speedFactor(){
+        return enginePower * 0.01;
+    }
 
     /**
      * Increment speed

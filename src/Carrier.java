@@ -68,15 +68,6 @@ public abstract class Carrier extends Vehicle {
     protected abstract void loadCar(Car car);
 
     /**
-     * Set speed factor depending on properties of LoadingTruck
-     * @return speed factor (double)
-     */
-    @Override
-    public double speedFactor(){
-        return enginePower * 0.01;
-    }
-
-    /**
      * Move transporter's cargo
      */
     protected void moveLoad() {
