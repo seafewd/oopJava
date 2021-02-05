@@ -22,6 +22,17 @@ public abstract class Carrier extends Vehicle {
      */
     protected static int MAX_CARS;
 
+    /**
+     *
+     * @param nrDoors           No. of doors on transport
+     * @param enginePower       Engine power
+     * @param currentSpeed      Current speed
+     * @param color             Color
+     * @param modelName         Model name
+     * @param weight            Weight
+     * @param maxCars           Maximum no. of cars
+     * @param load              Current load
+     */
     public Carrier(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, int weight, int maxCars, Deque<Car> load) {
         super(nrDoors, enginePower, currentSpeed, color, modelName, weight);
         MAX_CARS = maxCars;
@@ -45,10 +56,10 @@ public abstract class Carrier extends Vehicle {
      */
     protected boolean transportNotFull() {
         if (load.size() < MAX_CARS) {
-            System.out.println("Transport is full!");
-            return false;
+            return true;
         }
-        return true;
+        System.out.println("Transport is full!");
+        return false;
     }
 
     /**

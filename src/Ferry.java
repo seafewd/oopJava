@@ -17,7 +17,7 @@ public class Ferry extends Carrier {
     /**
      * Loads the given Car if it's in proximity and if the transport isn't full
      * Distance is set by LOADING_DISTANCE
-     * @param car Vehicle to be loaded
+     * @param car Car to be loaded
      */
     @Override
     public void loadCar(Car car){
@@ -34,9 +34,9 @@ public class Ferry extends Carrier {
         double loaderYPos = this.getYPos();
 
         for (int i = 0; i < carsToUnload; i++) {
-            Car c = load.remove();
+            Car c = load.removeFirst();
             c.direction[0] = loaderXPos;
-            c.direction[1] = loaderYPos + 1 + i;
+            c.direction[1] = loaderYPos + 1 + carsToUnload - i;
         }
     }
 

@@ -90,7 +90,7 @@ public abstract class Truck extends Carrier {
 
         for (int i = 0; i < vehiclesToUnload; i++) {
             if (!load.isEmpty()) {
-                Vehicle v = load.pop();
+                Vehicle v = load.removeLast();
                 v.setXPos(loaderXPos);
                 v.setYPos(loaderYPos - 1 - i);
                 v.setDirection(direction);
