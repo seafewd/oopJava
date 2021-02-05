@@ -8,11 +8,6 @@ import java.util.LinkedList;
  */
 public class Ferry extends Carrier {
 
-    /**
-     * Ferry's cargo
-     */
-    Deque<Car> load;
-
     public Ferry(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, int weight) {
         super(nrDoors, enginePower, currentSpeed, color, modelName, weight, 50, new LinkedList<>());
     }
