@@ -23,7 +23,9 @@ public class Volvo240 extends Car {
         return enginePower * 0.01 * trimFactor;
     }
 
-
+    /**
+     * nåå i dånt tink såå
+     */
     @Override
     public void driveBy() {
         System.out.println("English, motherfucker! Do you speak it!?");

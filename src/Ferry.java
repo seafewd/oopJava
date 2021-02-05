@@ -8,6 +8,9 @@ import java.util.LinkedList;
  */
 public class Ferry extends Carrier {
 
+    /**
+     * Ferry's cargo
+     */
     Deque<Car> load;
 
     public Ferry(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, int weight) {
@@ -37,17 +40,6 @@ public class Ferry extends Carrier {
             Car c = load.removeFirst();
             c.direction[0] = loaderXPos;
             c.direction[1] = loaderYPos + 1 + carsToUnload - i;
-        }
-    }
-
-    /**
-     * Move load using Queue
-     */
-    @Override
-    protected void moveLoad() {
-        for (Car c : load) {
-            c.setXPos(this.xPos);
-            c.setYPos(this.yPos);
         }
     }
 }

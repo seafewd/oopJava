@@ -23,7 +23,7 @@ public abstract class Carrier extends Vehicle {
     protected static int MAX_CARS;
 
     /**
-     *
+     * Default constructor
      * @param nrDoors           No. of doors on transport
      * @param enginePower       Engine power
      * @param currentSpeed      Current speed
@@ -49,7 +49,6 @@ public abstract class Carrier extends Vehicle {
         boolean isCloseY = this.xPos < car.getXPos() + LOADING_DISTANCE && this.xPos > car.getXPos() - LOADING_DISTANCE;
         return isCloseX && isCloseY;
     }
-
 
     /**
      * Check if loading is possible (e.g. not exceeding maximum amount of cars already in transport)
@@ -80,8 +79,12 @@ public abstract class Carrier extends Vehicle {
     /**
      * Move transporter's cargo
      */
-    protected abstract void moveLoad();
-
+    protected void moveLoad() {
+        for (Car c : load) {
+            c.setXPos(this.xPos);
+            c.setYPos(this.yPos);
+        }
+    }
 
     /**
      * Move the Vehicle

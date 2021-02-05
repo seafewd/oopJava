@@ -12,12 +12,10 @@ public abstract class Truck extends Carrier {
      */
     private final static int MAX_ANGLE = 70;
 
-
     /**
      * Angle of the LoadingTruck's platform
      */
     private int platformAngle;
-
 
     /**
      * Default constructor
@@ -97,17 +95,4 @@ public abstract class Truck extends Carrier {
             }
         }
     }
-
-    /**
-     * Transfer the coordinates of the truck to the load.
-     */
-    @Override
-    protected void moveLoad() {
-        for (Car c : load) {
-            c.setXPos(this.xPos);
-            c.setYPos(this.yPos);
-        }
-    }
-
-
 }

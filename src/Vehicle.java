@@ -9,7 +9,7 @@ public abstract class Vehicle implements Movable {
     /**
      * Number of doors on the Vehicle
      */
-    private int nrDoors;
+    protected int nrDoors;
 
     /**
      * Engine power of the Vehicle
@@ -60,8 +60,7 @@ public abstract class Vehicle implements Movable {
     /**
      * Weight of Vehicle (kg)
      */
-    private int weight;
-
+    protected int weight;
 
     /**
      * Default constructor
@@ -279,12 +278,6 @@ public abstract class Vehicle implements Movable {
         }
     }
 
-    // -------- Set/get
-
-
-    // ---------- Helper functions
-
-
     /**
      * Rotate vector
      * A*v = v', where A is the rotation matrix and v is the velocity vector
@@ -297,7 +290,6 @@ public abstract class Vehicle implements Movable {
      * @param radians how much to rotate
      * @return transformed vector
      */
-
     protected double[] rotateVector(double[] vector, double radians){
 
         double dx = vector[0];

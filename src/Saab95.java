@@ -41,6 +41,9 @@ public class Saab95 extends Car {
         return enginePower * 0.01 * turbo;
     }
 
+    /**
+     * it's past midnight and im tired
+     */
     @Override
     public void driveBy() {
         System.out.println("God damn that's a pretty fucking good milkshake.");
