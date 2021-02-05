@@ -32,7 +32,7 @@ public class Main {
         volvoTruck.move();
 
         Volvo240 volvo = new Volvo240();
-        Workshop<Volvo240> ws = new Workshop(volvo, 10);
+        Workshop<Volvo240> ws = new Workshop(10);
 
         ws.leaveCar(volvo);
         //ws.leaveCar(saab);

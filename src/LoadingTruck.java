@@ -98,7 +98,6 @@ public abstract class LoadingTruck extends Loader {
 
         if(isCloseX && isCloseY && platformAngle == 0){
             load.push(car);
-            
         }
     }
 
