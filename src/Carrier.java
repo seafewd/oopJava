@@ -10,12 +10,12 @@ public abstract class Carrier extends Vehicle {
     /**
      * The carrier's cargo
      */
-    Deque<Car> load;
+    protected Deque<Car> load;
 
     /**
      * Loading distance
      */
-    protected static double LOADING_DISTANCE = 20;
+    private final static double LOADING_DISTANCE = 20;
 
     /**
      * Maximum amount of Cars that will fit
@@ -44,7 +44,7 @@ public abstract class Carrier extends Vehicle {
      * @param car   Car to check
      * @return      Proximity check
      */
-    protected boolean isCloseEnoughToLoad(Car car) {
+    public boolean isCloseEnoughToLoad(Car car) {
         boolean isCloseX = this.xPos < car.getXPos() + LOADING_DISTANCE && this.xPos > car.getXPos() - LOADING_DISTANCE;
         boolean isCloseY = this.yPos < car.getYPos() + LOADING_DISTANCE && this.yPos > car.getYPos() - LOADING_DISTANCE;
         return isCloseX && isCloseY;
@@ -61,7 +61,7 @@ public abstract class Carrier extends Vehicle {
     /**
      * Check if loading is possible (e.g. not exceeding maximum amount of cars already in transport)
      */
-    protected boolean transportNotFull() {
+    public boolean transportNotFull() {
         if (load.size() < MAX_CARS) {
             return true;
         }
@@ -73,7 +73,7 @@ public abstract class Carrier extends Vehicle {
      * Load the transport with a car
      * @param car   Car to load
      */
-    protected abstract void loadCar(Car car);
+    protected abstract boolean loadCar(Car car);
 
     /**
      * Move transporter's cargo
@@ -84,6 +84,11 @@ public abstract class Carrier extends Vehicle {
             c.setYPos(this.yPos);
         }
     }
+
+    /**
+     * Unload vehicles
+     */
+    public abstract void unloadVehicles(int vehiclesToUnload);
 
     /**
      * Move the Vehicle

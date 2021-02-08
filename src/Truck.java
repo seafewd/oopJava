@@ -72,25 +72,29 @@ public abstract class Truck extends Carrier {
      * @param car Car to be loaded
      */
     @Override
-    public void loadCar(Car car){
-        if (transportNotFull() && isCloseEnoughToLoad(car) && getAngle() == 0)
+    public boolean loadCar(Car car){
+        if (transportNotFull() && isCloseEnoughToLoad(car) && getAngle() == 0) {
             load.add(car);
+            return true;
+        }
+        return false;
     }
 
     /**
      * Unload the vehicles currently in truck cargo
      * @param vehiclesToUnload number of vehicles to unload
      */
-    private void unloadVehicles(int vehiclesToUnload) {
+    @Override
+    public void unloadVehicles(int vehiclesToUnload) {
         double loaderXPos = this.getXPos();
         double loaderYPos = this.getYPos();
 
         for (int i = 0; i < vehiclesToUnload; i++) {
             if (!load.isEmpty()) {
-                Vehicle v = load.removeLast();
-                v.setXPos(loaderXPos);
-                v.setYPos(loaderYPos - 1 - i);
-                v.setDirection(direction);
+                Car c = load.removeLast();
+                c.setXPos(loaderXPos);
+                c.setYPos(loaderYPos - 1 - i);
+                c.setDirection(direction);
             }
         }
     }

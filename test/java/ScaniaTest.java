@@ -28,6 +28,7 @@ public class ScaniaTest {
     public void testIncrementSpeedWithAngleOfZero() {
         scania.setAngle(0);
         scania.gas(.6);
+        // todo assert true check >= !!!!!
         Assertions.assertEquals(0.6, scania.getCurrentSpeed());
     }
 

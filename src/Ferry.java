@@ -6,7 +6,7 @@ import java.util.LinkedList;
  * Ferry class
  * Takes Cars as cargo
  */
-public class Ferry extends Carrier {
+public abstract class Ferry extends Carrier {
 
     /**
      * Ferry's cargo
@@ -23,16 +23,20 @@ public class Ferry extends Carrier {
      * @param car Car to be loaded
      */
     @Override
-    public void loadCar(Car car){
-        if (transportNotFull() && isCloseEnoughToLoad(car))
+    public boolean loadCar(Car car){
+        if (transportNotFull() && isCloseEnoughToLoad(car)) {
             load.add(car);
+            return true;
+        }
+        return false;
     }
 
     /**
      * Unload the cars currently in truck cargo
      * @param carsToUnload number of vehicles to unload
      */
-    private void unloadVehicles(int carsToUnload) {
+    @Override
+    public void unloadVehicles(int carsToUnload) {
         double loaderXPos = this.getXPos();
         double loaderYPos = this.getYPos();
 
