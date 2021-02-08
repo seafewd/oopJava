@@ -1,4 +1,3 @@
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
@@ -11,7 +10,7 @@ public class CarrierTest {
     Car volvo3 = new Volvo240();
     Car volvo4 = new Volvo240();
     Car volvo5 = new Volvo240();
-    Carrier scania = new Scania();
+    Scania scania = new Scania();
     Carrier ferry = new BoatyMcBoatFace();
 
     /**
@@ -19,6 +18,8 @@ public class CarrierTest {
      */
     @Before
     public void resetPositionsAndClearCargo() {
+        scania.load.clear();
+
         volvo.setXPos(0);
         volvo.setYPos(0);
         volvo2.setXPos(0);
@@ -33,8 +34,6 @@ public class CarrierTest {
         saab.setYPos(0);
         scania.setXPos(0);
         scania.setYPos(0);
-
-        scania.load.clear();
     }
 
     /**
@@ -70,21 +69,23 @@ public class CarrierTest {
     public void testLoadCar() {
         scania.loadCar(saab);
         scania.loadCar(volvo);
-        Assertions.assertEquals(2, scania.getLoad().toArray().length);
+        Assertions.assertEquals(2, scania.getLoad().size());
     }
 
     /**
      * Test transportNotFull
      */
     @Test
-    public void testTransportIsFull() {
+    public void testTransportNotFull() {
         scania.loadCar(saab);
         scania.loadCar(volvo);
         scania.loadCar(volvo2);
         scania.loadCar(volvo3);
         scania.loadCar(volvo4);
+        System.out.println("cars: " + scania.getLoad().size());
+        System.out.println(scania.modelName);
         // should fail here because Scania only takes 5 cars
-        Assertions.assertFalse(scania.loadCar(volvo5));
+        Assertions.assertFalse(scania.transportNotFull());
     }
 
     /**
