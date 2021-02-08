@@ -20,7 +20,7 @@ public abstract class Carrier extends Vehicle {
     /**
      * Maximum amount of Cars that will fit
      */
-    protected static int MAX_CARS;
+    protected int MAX_CARS;
 
     /**
      * Default constructor

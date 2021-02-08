@@ -8,11 +8,6 @@ import java.util.LinkedList;
  */
 public abstract class Ferry extends Carrier {
 
-    /**
-     * Ferry's cargo
-     */
-    Deque<Car> load;
-
     public Ferry(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, int weight) {
         super(nrDoors, enginePower, currentSpeed, color, modelName, weight, 50, new LinkedList<>());
     }
@@ -40,10 +35,11 @@ public abstract class Ferry extends Carrier {
         double loaderXPos = this.getXPos();
         double loaderYPos = this.getYPos();
 
-        for (int i = 0; i < carsToUnload; i++) {
+        for (int i = carsToUnload; i > 0; i--) {
             Car c = load.removeFirst();
-            c.direction[0] = loaderXPos;
-            c.direction[1] = loaderYPos + 1 + carsToUnload - i;
+            c.setXPos(loaderXPos + i);
+            c.setYPos(loaderYPos);
+            c.setDirection(direction);
         }
     }
 }

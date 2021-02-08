@@ -89,11 +89,11 @@ public abstract class Truck extends Carrier {
         double loaderXPos = this.getXPos();
         double loaderYPos = this.getYPos();
 
-        for (int i = 0; i < vehiclesToUnload; i++) {
+        for (int i = vehiclesToUnload; i > 0; i--) {
             if (!load.isEmpty()) {
                 Car c = load.removeLast();
-                c.setXPos(loaderXPos);
-                c.setYPos(loaderYPos - 1 - i);
+                c.setXPos(loaderXPos + i);
+                c.setYPos(loaderYPos);
                 c.setDirection(direction);
             }
         }
