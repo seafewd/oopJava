@@ -15,10 +15,10 @@ public class CarrierTest {
     Carrier ferry = new BoatyMcBoatFace();
 
     /**
-     * Reset vehicle positions
+     * Reset vehicle positions & clear cargo
      */
     @Before
-    public void resetPositions() {
+    public void resetPositionsAndClearCargo() {
         volvo.setXPos(0);
         volvo.setYPos(0);
         volvo2.setXPos(0);
@@ -33,6 +33,8 @@ public class CarrierTest {
         saab.setYPos(0);
         scania.setXPos(0);
         scania.setYPos(0);
+
+        scania.load.clear();
     }
 
     /**
@@ -76,7 +78,6 @@ public class CarrierTest {
      */
     @Test
     public void testTransportIsFull() {
-        scania.load.clear();
         scania.loadCar(saab);
         scania.loadCar(volvo);
         scania.loadCar(volvo2);
@@ -92,11 +93,6 @@ public class CarrierTest {
     @Test
     public void testMoveLoad() {
         scania.load.clear();
-        // reset positions
-        saab.setXPos(0);
-        saab.setYPos(0);
-        scania.setXPos(0);
-        scania.setYPos(0);
         scania.loadCar(saab);
         scania.move();
         scania.move();
@@ -126,12 +122,11 @@ public class CarrierTest {
      */
     @Test
     public void testUnloadVehicles() {
-        scania.unloadVehicles(3);
         scania.load.clear();
         scania.loadCar(saab);
         scania.loadCar(volvo);
         scania.loadCar(volvo2);
-
+        scania.unloadVehicles(3);
         Assertions.assertEquals(-4, volvo2.getXPos());
     }
 }
