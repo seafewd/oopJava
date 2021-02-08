@@ -62,7 +62,7 @@ public abstract class Carrier extends Vehicle {
      * Check if loading is possible (e.g. not exceeding maximum amount of cars already in transport)
      */
     public boolean transportNotFull() {
-        if (load.size() < MAX_CARS) {
+        if (load.size() < maxCars) {
             return true;
         }
         System.out.println("Transport is full!");
