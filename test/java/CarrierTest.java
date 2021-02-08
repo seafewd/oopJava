@@ -10,7 +10,7 @@ public class CarrierTest {
     Car volvo3 = new Volvo240();
     Car volvo4 = new Volvo240();
     Car volvo5 = new Volvo240();
-    Scania scania = new Scania();
+    Carrier scania = new Scania();
     Carrier ferry = new BoatyMcBoatFace();
 
     /**
@@ -82,8 +82,6 @@ public class CarrierTest {
         scania.loadCar(volvo2);
         scania.loadCar(volvo3);
         scania.loadCar(volvo4);
-        System.out.println("cars: " + scania.getLoad().size());
-        System.out.println(scania.modelName);
         // should fail here because Scania only takes 5 cars
         Assertions.assertFalse(scania.transportNotFull());
     }
@@ -119,15 +117,28 @@ public class CarrierTest {
     }
 
     /**
+     * TRUCK unload
      * Test unloadVehicles (y-pos)
      */
     @Test
-    public void testUnloadVehicles() {
-        scania.load.clear();
+    public void testUnloadVehiclesTruck() {
         scania.loadCar(saab);
         scania.loadCar(volvo);
         scania.loadCar(volvo2);
         scania.unloadVehicles(3);
-        Assertions.assertEquals(-4, volvo2.getXPos());
+        Assertions.assertEquals(-1, volvo2.getYPos());
+    }
+
+    /**
+     * FERRY unload
+     * Test unloadVehicles (y-pos)
+     */
+    @Test
+    public void testUnloadVehiclesFerry() {
+        ferry.loadCar(saab);
+        ferry.loadCar(volvo);
+        ferry.loadCar(volvo2);
+        ferry.unloadVehicles(3);
+        Assertions.assertEquals(4, volvo2.getYPos());
     }
 }
