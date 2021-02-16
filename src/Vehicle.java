@@ -276,7 +276,7 @@ public abstract class Vehicle implements Movable {
     public void turnRight() {
         if (currentSpeed > 0) {
             setDirection(rotateVector(getDirection(), -Math.PI/2));
-            System.out.println("Left turn. " + showPosition(this));
+            System.out.println("Right turn. " + showPosition(this));
         }
     }
 

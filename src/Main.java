@@ -8,7 +8,10 @@ public class Main {
      * @param args None defined
      */
     public static void main(String[] args) {
-
+/*
+        CarController cc = new CarController();
+        CarView view = new CarView("View", cc);
+        */
 
         Saab95 saab = new Saab95();
         saab.setTurboOff();
