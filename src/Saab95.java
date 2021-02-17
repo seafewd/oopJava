@@ -11,8 +11,8 @@ public class Saab95 extends Car {
     /**
      * Default constructor
      */
-    public Saab95(){
-        super(2, 125, 0, Color.red, "Saab95", 2300);
+    public Saab95(double xPos, double yPos){
+        super(xPos, yPos, 2, 125, 0, Color.red, "Saab95", 2300);
 	    turboOn = false;
     }
 
