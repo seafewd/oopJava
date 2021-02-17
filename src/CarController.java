@@ -97,7 +97,14 @@ public class CarController {
 
     void stopAllCars() {
         for (Vehicle v : cars) {
-            v.currentSpeed = 0;
+            v.setCurrentSpeed(0);
+        }
+    }
+
+    void startAllCars(int amount) {
+        for (Vehicle v : cars) {
+            if (v.getCurrentSpeed() == 0)
+                v.setCurrentSpeed(((double) amount) / 100);
         }
     }
 }

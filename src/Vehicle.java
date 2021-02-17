@@ -322,4 +322,8 @@ public abstract class Vehicle implements Movable {
         System.out.println("Current direction: (" + getDirection()[0] +  ", " + getDirection()[1] + ")");
     }
 
+    protected void setCurrentSpeed(double amount) {
+        currentSpeed = amount;
+    }
+
 }
