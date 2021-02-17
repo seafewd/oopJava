@@ -136,8 +136,8 @@ public class CarrierTest {
         System.out.println("ferry pos x  " + ferry.getXPos());
         System.out.println("ferry pos y  " + ferry.getYPos());
 
-        System.out.println("saab pos x  " + saab.getXPos());
-        System.out.println("saab pos y  " + saab.getYPos());
+        System.out.println("saab.jpg pos x  " + saab.getXPos());
+        System.out.println("saab.jpg pos y  " + saab.getYPos());
 
         System.out.println("volvo pos x  " + volvo.getXPos());
         System.out.println("volvo pos y  " + volvo.getYPos());
@@ -156,8 +156,8 @@ public class CarrierTest {
         System.out.println("ferry pos x  " + ferry.getXPos());
         System.out.println("ferry pos y  " + ferry.getYPos());
 
-        System.out.println("saab pos x  " + saab.getXPos());
-        System.out.println("saab pos y  " + saab.getYPos());
+        System.out.println("saab.jpg pos x  " + saab.getXPos());
+        System.out.println("saab.jpg pos y  " + saab.getYPos());
 
         System.out.println("volvo pos x  " + volvo.getXPos());
         System.out.println("volvo pos y  " + volvo.getYPos());
@@ -173,8 +173,8 @@ public class CarrierTest {
         System.out.println("ferry pos x  " + ferry.getXPos());
         System.out.println("ferry pos y  " + ferry.getYPos());
 
-        System.out.println("saab pos x  " + saab.getXPos());
-        System.out.println("saab pos y  " + saab.getYPos());
+        System.out.println("saab.jpg pos x  " + saab.getXPos());
+        System.out.println("saab.jpg pos y  " + saab.getYPos());
 
         System.out.println("volvo pos x  " + volvo.getXPos());
         System.out.println("volvo pos y  " + volvo.getYPos());

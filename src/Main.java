@@ -38,6 +38,6 @@ public class Main {
         Workshop<Volvo240> ws = new Workshop(10);
 
         ws.storeCar(volvo);
-        //ws.storeCar(saab);
+        //ws.storeCar(saab.jpg);
     }
 }

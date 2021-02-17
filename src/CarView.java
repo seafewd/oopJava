@@ -132,22 +132,22 @@ public class CarView extends JFrame{
         });
 
         /**
-         * If button pressed set turbo on if the vehicle is a saab
+         * If button pressed set turbo on if the vehicle is a saab.jpg
          */
         turboOnButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.setTurboOn();
+                carC.setTurboState(true);
             }
         });
 
         /**
-         * If button pressed set turbo off if the vehicle is a saab
+         * If button pressed set turbo off if the vehicle is a saab.jpg
          */
-        turboOnButton.addActionListener(new ActionListener() {
+        turboOffButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.setTurboOff();
+                carC.setTurboState(false);
             }
         });
 

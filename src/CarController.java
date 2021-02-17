@@ -12,7 +12,7 @@ import java.util.List;
 
 public class CarController {
 
-    private final int CAR_WIDTH = 20;
+    private final int CAR_WIDTH = 46;
     // member fields:
 
     // The delay (ms) corresponds to 20 updates a sec (hz)
@@ -36,11 +36,8 @@ public class CarController {
         cc.cars.add(new Saab95(0, 100));
         cc.cars.add(new Scania(0,200));
 
-        for (Vehicle v:cc.cars
-             ) {
+        for (Vehicle v:cc.cars)
             System.out.println(v.getYPos());
-        }
-
 
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc);
@@ -127,6 +124,25 @@ public class CarController {
         for (Vehicle v : cars) {
             if (v.getCurrentSpeed() == 0)
                 v.setCurrentSpeed(((double) amount) / 100);
+        }
+    }
+
+    /**
+     * Set turbo on or off
+     * @param state false for off, true for on
+     */
+    void setTurboState(boolean state) {
+        List<Saab95> saabs = new ArrayList<>();
+        for (Vehicle v : cars) {
+            if (v instanceof Saab95) {
+                saabs.add((Saab95) v);
+            }
+        }
+        for (Saab95 s : saabs) {
+            if (state)
+                s.setTurboOn();
+            else
+                s.setTurboOff();
         }
     }
 }
