@@ -278,7 +278,7 @@ public abstract class Vehicle implements Movable {
     public void move() {
         xPos += getDirection()[0] * getCurrentSpeed();
         yPos += getDirection()[1] * getCurrentSpeed();
-        System.out.println("Moving. " + showPosition(this));
+        //System.out.println("Moving. " + showPosition(this));
     }
 
     /**
