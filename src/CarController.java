@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
 
 /*
 * This class represents the Controller part in the MVC pattern.
@@ -60,24 +61,31 @@ public class CarController {
         }
     }
 
-    // Calls the gas method for each car once
+    /**
+     * Call gas method for each vehicle once
+     * @param amount amount to gas
+     */
     void gas(int amount) {
         double gas = ((double) amount) / 100;
         for (Vehicle vehicle : cars) {
             vehicle.gas(gas);
         }
     }
+
     /**
-     * Only checks X-axis
-     * @param vehicle
-     * @return
+     * Check if vehicle is out of x-axis bounds
+     * @param vehicle vehicle
+     * @return is out of bounds
+     * todo add y bounds
      */
-    // TODO: Add y
     private boolean isOutOfBounds(Vehicle vehicle){
         return vehicle.getXPos() + CAR_WIDTH > frame.getWidth() || vehicle.getXPos() < 0;
     }
 
-    // brake car
+    /**
+     * Brake vehicle
+     * @param amount brake amount
+     */
     void brake(int amount) {
         double brake = ((double) amount) / 100;
         for (Vehicle vehicle : cars) {
@@ -85,26 +93,60 @@ public class CarController {
         }
     }
 
+    /**
+     * Flip x direction of vehicle
+     * @param v direction
+     */
     void flipXDirection(Vehicle v) {
         double[] currentDirection = v.getDirection();
         v.setDirection(new double[]{currentDirection[0] * -1, currentDirection[1]});
     }
 
+    /**
+     * Flip y direction of vehicle
+     * @param v vehicle
+     */
     void flipYDirection(Vehicle v) {
         double[] currentDirection = v.getDirection();
         v.setDirection(new double[]{currentDirection[0], currentDirection[1] * -1});
     }
 
+    /**
+     * Stop all vehicles
+     */
     void stopAllCars() {
         for (Vehicle v : cars) {
             v.setCurrentSpeed(0);
         }
     }
 
+    /**
+     * Start all vehicles with speed parameter
+     * @param amount speed
+     */
     void startAllCars(int amount) {
         for (Vehicle v : cars) {
             if (v.getCurrentSpeed() == 0)
                 v.setCurrentSpeed(((double) amount) / 100);
+        }
+    }
+
+    /**
+     * Set turbo on or off
+     * @param state false for off, true for on
+     */
+    void setTurboState(boolean state) {
+        List<Saab95> saabs = new ArrayList<>();
+        for (Vehicle v : cars) {
+            if (v instanceof Saab95) {
+                saabs.add((Saab95) v);
+            }
+        }
+        for (Saab95 s : saabs) {
+            if (state)
+                s.setTurboOn();
+            else
+                s.setTurboOff();
         }
     }
 }
