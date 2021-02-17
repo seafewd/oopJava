@@ -95,4 +95,10 @@ public class CarController {
         double[] currentDirection = v.getDirection();
         v.setDirection(new double[]{currentDirection[0], currentDirection[1] * -1});
     }
+
+    void stopAllCars() {
+        for (Vehicle v : cars) {
+            v.currentSpeed = 0;
+        }
+    }
 }
