@@ -33,6 +33,12 @@ public abstract class Carrier extends Vehicle {
      * @param maxCars           Maximum no. of cars
      * @param load              Current load
      */
+    public Carrier(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, int weight, int maxCars, Deque<Car> load) {
+        super(nrDoors, enginePower, currentSpeed, color, modelName, weight);
+        this.maxCars = maxCars;
+        this.load = load;
+    }
+
     public Carrier(double xPos, double yPos, int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, int weight, int maxCars, Deque<Car> load) {
         super(xPos, yPos, nrDoors, enginePower, currentSpeed, color, modelName, weight);
         this.maxCars = maxCars;
