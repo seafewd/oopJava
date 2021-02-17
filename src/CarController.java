@@ -10,6 +10,8 @@ import java.util.ArrayList;
  */
 
 public class CarController {
+
+    private final int CAR_WIDTH = 20;
     // member fields:
 
     // The delay (ms) corresponds to 20 updates a sec (hz)
@@ -46,6 +48,8 @@ public class CarController {
         public void actionPerformed(ActionEvent e) {
             for (Vehicle vehicle : cars) {
                 vehicle.move();
+                if(isOutOfBounds(vehicle))
+                    flipXDirection(vehicle);
                 int x = (int) Math.round(vehicle.getXPos());
                 int y = (int) Math.round(vehicle.getYPos());
                 frame.drawPanel.moveit(x, y);
@@ -60,10 +64,18 @@ public class CarController {
         double gas = ((double) amount) / 100;
         for (Vehicle vehicle : cars) {
             vehicle.gas(gas);
-            if (vehicle.getXPos() >= frame.getWidth()) {
-                changeXDirection(vehicle);
-            }
+
         }
+    }
+
+    /**
+     * Only checks X-axis
+     * @param vehicle
+     * @return
+     */
+    // TODO: Add y
+    private boolean isOutOfBounds(Vehicle vehicle){
+        return vehicle.getXPos() + CAR_WIDTH > frame.getWidth() || vehicle.getXPos() < 0;
     }
 
     // brake car
@@ -74,11 +86,13 @@ public class CarController {
         }
     }
 
-    void changeXDirection(Vehicle v) {
-        v.setDirection(new double[]{v.xPos * -1, 0});
+    void flipXDirection(Vehicle v) {
+        double[] currentDirection = v.getDirection();
+        v.setDirection(new double[]{currentDirection[0] * -1, currentDirection[1]});
     }
 
-    void changeYDirection(Vehicle v) {
-        v.setDirection(new double[]{0, v.yPos * -1});
+    void flipYDirection(Vehicle v) {
+        double[] currentDirection = v.getDirection();
+        v.setDirection(new double[]{currentDirection[0], currentDirection[1] * -1});
     }
 }
