@@ -18,16 +18,13 @@ public class DrawPanel extends JPanel{
 
     // To keep track of a single car's position
     Point volvoPoint = new Point();
-    Point saabPoint = new Point();
-    Point scaniaPoint = new Point();
-    List<Point> pointList = new ArrayList<>();
+
+    //List<Point> pointList = new ArrayList<>();
 
     // TODO: Make this genereal for all cars
     void moveit(int x, int y){
-        for (Point point : pointList) {
-            point.x = x;
-            point.y = y;
-        }
+        volvoPoint.x = x;
+        volvoPoint.y = y;
     }
 
     // Initializes the panel and reads the images
@@ -35,9 +32,9 @@ public class DrawPanel extends JPanel{
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(x, y));
         this.setBackground(Color.green);
-        pointList.add(volvoPoint);
-        pointList.add(saabPoint);
-        pointList.add(scaniaPoint);
+        //pointList.add(volvoPoint);
+        //pointList.add(saabPoint);
+        //pointList.add(scaniaPoint);
 
         // Print an error message in case file is not found with a try/catch block
         try {
@@ -63,7 +60,8 @@ public class DrawPanel extends JPanel{
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(volvoImage, volvoPoint.x, volvoPoint.y, null); // see javadoc for more info on the parameters
-        //g.drawImage(saabImage, saabPoint.x, saabPoint.y, null); // see javadoc for more info on the parameters
+        g.drawImage(saabImage, volvoPoint.x, volvoPoint.y+100, null); // see javadoc for more info on the parameters
+        g.drawImage(scaniaImage, volvoPoint.x, volvoPoint.y+200, null); // see javadoc for more info on the parameters
     }
 
     public BufferedImage getImage() {

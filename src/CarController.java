@@ -36,6 +36,12 @@ public class CarController {
         cc.cars.add(new Saab95(0, 100));
         cc.cars.add(new Scania(0,200));
 
+        for (Vehicle v:cc.cars
+             ) {
+            System.out.println(v.getYPos());
+        }
+
+
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc);
 
