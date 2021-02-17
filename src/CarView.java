@@ -131,6 +131,26 @@ public class CarView extends JFrame{
             }
         });
 
+        /**
+         * If button pressed set turbo on if the vehicle is a saab
+         */
+        turboOnButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carC.setTurboOn();
+            }
+        });
+
+        /**
+         * If button pressed set turbo off if the vehicle is a saab
+         */
+        turboOnButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carC.setTurboOff();
+            }
+        });
+
         // Make the frame pack all it's components by respecting the sizes if possible.
         this.pack();
 

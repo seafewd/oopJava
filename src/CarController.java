@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
 
 /*
 * This class represents the Controller part in the MVC pattern.
@@ -23,7 +24,7 @@ public class CarController {
     // The frame that represents this instance View of the MVC pattern
     CarView frame;
     // A list of cars, modify if needed
-    ArrayList<Vehicle> cars = new ArrayList<>();
+    List<Vehicle> cars = new ArrayList<>();
 
     //methods:
 
@@ -67,6 +68,21 @@ public class CarController {
             vehicle.gas(gas);
         }
     }
+
+    void setTurboOn(){
+        for (Vehicle vehicle : cars) {
+            if(vehicle instanceof Saab95)
+                ((Saab95) vehicle).setTurboOn();
+        }
+    }
+
+    void setTurboOff(){
+        for (Vehicle vehicle : cars) {
+            if(vehicle instanceof Saab95)
+                ((Saab95) vehicle).setTurboOff();
+        }
+    }
+
     /**
      * Only checks X-axis
      * @param vehicle

@@ -17,4 +17,8 @@ public class Scania extends Truck {
         super(xPos, yPos,2, 300, 0, Color.WHITE, "Scania", 3900, 5);
     }
 
+    @Override
+    public double speedFactor() {
+        return enginePower * 0.01;
+    }
 }
