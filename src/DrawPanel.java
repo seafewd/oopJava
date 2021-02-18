@@ -13,15 +13,23 @@ public class DrawPanel extends JPanel{
     BufferedImage saabImage;
     BufferedImage scaniaImage;
 
-    // To keep track of a single car's position
     Point volvoPoint = new Point();
-
-    //List<Point> pointList = new ArrayList<>();
+    Point saabPoint = new Point();
+    Point scaniaPoint = new Point();
 
     // TODO: Make this genereal for all cars
-    void moveit(int x, int y){
-        volvoPoint.x = x;
-        volvoPoint.y = y;
+    void moveit(int x, int y, Vehicle vehicle){
+        if(vehicle instanceof Volvo240){
+            volvoPoint.x = x;
+            volvoPoint.y = y;
+        }else if(vehicle instanceof Saab95){
+            saabPoint.x = x;
+            saabPoint.y = y;
+        }else if(vehicle instanceof Scania){
+            scaniaPoint.x = x;
+            scaniaPoint.y = y;
+        }else
+            System.out.println("No vehicle found");
     }
 
     // Initializes the panel and reads the images
@@ -54,11 +62,11 @@ public class DrawPanel extends JPanel{
     // This method is called each time the panel updates/refreshes/repaints itself
     // TODO: Change to suit your needs.
     @Override
-    protected void paintComponent(Graphics g) {
+    public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(volvoImage, volvoPoint.x, volvoPoint.y, null); // see javadoc for more info on the parameters
-        g.drawImage(saabImage, volvoPoint.x, volvoPoint.y+100, null); // see javadoc for more info on the parameters
-        g.drawImage(scaniaImage, volvoPoint.x, volvoPoint.y+200, null); // see javadoc for more info on the parameters
+        g.drawImage(saabImage, saabPoint.x, saabPoint.y, null); // see javadoc for more info on the parameters
+        g.drawImage(scaniaImage, scaniaPoint.x, scaniaPoint.y, null); // see javadoc for more info on the parameters
     }
 
     public BufferedImage getImage() {
