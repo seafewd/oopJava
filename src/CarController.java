@@ -145,4 +145,18 @@ public class CarController {
                 s.setTurboOff();
         }
     }
+
+    /**
+     * Flip truck platform up or down
+     */
+    void setPlatformAngle(int angle) {
+        //hardcoded because gui reasons...
+        List<Truck> trucks = new ArrayList<>();
+        for (Vehicle v : cars)
+            if (v instanceof Truck)
+                trucks.add((Truck) v);
+
+        for (Truck truck : trucks)
+            truck.setAngle(angle);
+    }
 }

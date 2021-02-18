@@ -151,6 +151,28 @@ public class CarView extends JFrame{
             }
         });
 
+        /**
+         * Raise platform
+         * Hardcoded because gui reasons
+         */
+        liftBedButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carC.setPlatformAngle(70);
+            }
+        });
+
+        /**
+         * Raise platform
+         * Hardcoded because gui reasons
+         */
+        lowerBedButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carC.setPlatformAngle(0);
+            }
+        });
+
         // Make the frame pack all it's components by respecting the sizes if possible.
         this.pack();
 
