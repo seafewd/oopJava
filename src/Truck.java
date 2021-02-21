@@ -1,7 +1,7 @@
 import java.awt.*;
 import java.util.ArrayDeque;
 
-public abstract class Truck extends Carrier {
+public abstract class Truck extends DefaultTransporter<Car> implements Transporter<Car> {
     /**
      * Min angle of platform
      */
@@ -76,9 +76,9 @@ public abstract class Truck extends Carrier {
      * @param car Car to be loaded
      */
     @Override
-    public boolean loadCar(Car car){
-        if (transportNotFull() && isCloseEnoughToLoad(car) && getAngle() == 0) {
-            load.add(car);
+    public boolean load(Transportable t){
+        if (transportNotFull() && isCloseEnoughToLoad(t) && getAngle() == 0) {
+            load.add(t);
             return true;
         }
         return false;
@@ -89,7 +89,7 @@ public abstract class Truck extends Carrier {
      * @param vehiclesToUnload number of vehicles to unload
      */
     @Override
-    public void unloadVehicles(int vehiclesToUnload) {
+    public Transportable unload(int vehiclesToUnload) {
         double loaderXPos = this.getXPos();
         double loaderYPos = this.getYPos();
 

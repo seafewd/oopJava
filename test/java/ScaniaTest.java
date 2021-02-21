@@ -40,7 +40,7 @@ public class ScaniaTest {
         }
         for (Car c:cars
              ) {
-            scania.loadCar(c);
+            scania.load(c);
         }
         Assertions.assertEquals(scania.getLoad().getFirst(), cars.get(0));
         Assertions.assertEquals(scania.getLoad().getLast(), cars.get(2));

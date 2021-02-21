@@ -1,3 +1,4 @@
+import old.Carrier;
 
 /**
  * Program entry point
@@ -24,7 +25,7 @@ public class Main {
 
         Carrier scania = new Scania();
         Carrier volvoTruck = new VolvoTruck();
-        scania.loadCar(saab);
+        scania.load(saab);
         scania.move();
 
         volvoTruck.move();

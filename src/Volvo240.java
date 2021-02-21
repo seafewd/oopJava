@@ -4,7 +4,7 @@ import java.awt.*;
  * A type of Vehicle
  * Extends Vehicle which implements Movable
  */
-public class Volvo240 extends Car {
+public class Volvo240 extends Vehicle implements Car {
     private final static double trimFactor = 1.25;
 
     /**
@@ -29,11 +29,4 @@ public class Volvo240 extends Car {
         return enginePower * 0.01 * trimFactor;
     }
 
-    /**
-     * nåå i dånt tink såå
-     */
-    @Override
-    public void driveBy() {
-        System.out.println("English, motherfucker! Do you speak it!?");
-    }
 }

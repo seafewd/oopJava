@@ -5,7 +5,7 @@ import java.awt.*;
  * Extends Vehicle which implements Movable
  */
 
-public class Saab95 extends Car {
+public class Saab95 extends Vehicle implements Car, Transportable {
     protected boolean turboOn;
 
     /**
@@ -45,13 +45,5 @@ public class Saab95 extends Car {
         double turbo = 1;
         if(turboOn) turbo = 1.3;
             return enginePower * 0.01 * turbo;
-    }
-
-    /**
-     * it's past midnight and im tired
-     */
-    @Override
-    public void driveBy() {
-        System.out.println("God damn that's a pretty fucking good milkshake.");
     }
 }
