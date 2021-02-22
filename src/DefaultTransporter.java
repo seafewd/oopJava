@@ -46,6 +46,7 @@ public class DefaultTransporter<T extends Transportable> extends Vehicle impleme
      * @param carsToUnload number of vehicles to unload
      */
     public Transportable unload(int carsToUnload) {
+        if (carsToUnload == 0)
         double loaderXPos = this.getXPos();
         double loaderYPos = this.getYPos();
 

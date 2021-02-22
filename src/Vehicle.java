@@ -89,6 +89,20 @@ public abstract class Vehicle implements Movable {
         stopEngine();
     }
 
+    public Vehicle(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, int weight, int maxLoad) {
+        this.xPos = 0;
+        this.yPos = 0;
+        this.nrDoors = nrDoors;
+        this.enginePower = enginePower;
+        this.currentSpeed = currentSpeed;
+        this.color = color;
+        this.modelName = modelName;
+        this.direction = new double[]{1, 0};
+        this.weight = weight;
+        this.maxLoad = maxLoad;
+        stopEngine();
+    }
+
     /**
      * With set position
      * @param xPos

@@ -17,23 +17,6 @@ public abstract class Truck extends DefaultTransporter<Car> implements Transport
      */
     private int platformAngle;
 
-    /**
-     * Default constructor
-     * @param nrDoors           Doors
-     * @param enginePower       Engine power
-     * @param currentSpeed      Current speed
-     * @param color             Color
-     * @param modelName         Model name
-     * @param weight            Weight
-     * @param maxCars           Maximum amount of cars that fit on the transport
-     */
-    public Truck(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, int weight, int maxCars) {
-        super(nrDoors, enginePower, currentSpeed, color, modelName, weight, maxCars);
-    }
-
-    public Truck(double xPos, double yPos, int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, int weight, int maxCars) {
-        super(xPos, yPos, nrDoors, enginePower, currentSpeed, color, modelName, weight, maxCars);
-    }
 
     /**
      * Set angle of platform

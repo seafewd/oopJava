@@ -12,7 +12,7 @@ public class Scania extends DefaultTransporter<Transportable> implements Transpo
      * Default constructor
      */
     public Scania() {
-        dt = new DefaultTransporter<Car>(2, 300, 0, Color.WHITE, "Scania", 3900, 5);
+        dt = new DefaultTransporter<>(2, 300, 0, Color.WHITE, "Scania", 3900, 5);
     }
 
     public Scania(double xPos, double yPos) {
