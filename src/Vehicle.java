@@ -63,6 +63,11 @@ public abstract class Vehicle implements Movable {
     protected int weight;
 
     /**
+     * Max load weight
+     */
+    protected int maxLoad;
+
+    /**
      * Default constructor
      * @param nrDoors       no. of doors
      * @param enginePower   engine power
@@ -76,7 +81,7 @@ public abstract class Vehicle implements Movable {
         this.yPos = 0;
         this.nrDoors = nrDoors;
         this.enginePower = enginePower;
-        this.currentSpeed = 0;
+        this.currentSpeed = currentSpeed;
         this.color = color;
         this.modelName = modelName;
         this.direction = new double[]{1, 0};
@@ -100,11 +105,25 @@ public abstract class Vehicle implements Movable {
         this.yPos = yPos;
         this.nrDoors = nrDoors;
         this.enginePower = enginePower;
-        this.currentSpeed = 0;
+        this.currentSpeed = currentSpeed;
         this.color = color;
         this.modelName = modelName;
         this.direction = new double[]{1, 0};
         this.weight = weight;
+        stopEngine();
+    }
+
+    public Vehicle(double xPos, double yPos, int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, int weight, int maxLoad) {
+        this.xPos = xPos;
+        this.yPos = yPos;
+        this.nrDoors = nrDoors;
+        this.enginePower = enginePower;
+        this.currentSpeed = currentSpeed;
+        this.color = color;
+        this.modelName = modelName;
+        this.direction = new double[]{1, 0};
+        this.weight = weight;
+        this.maxLoad = maxLoad;
         stopEngine();
     }
 

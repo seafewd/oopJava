@@ -6,7 +6,7 @@ import java.awt.*;
  */
 public class Scania extends DefaultTransporter<Transportable> implements Transporter<Transportable> {
 
-    private DefaultTransporter<Car> dt;
+    private final DefaultTransporter<Car> dt;
 
     /**
      * Default constructor

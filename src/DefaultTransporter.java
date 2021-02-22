@@ -16,12 +16,16 @@ public class DefaultTransporter<T extends Transportable> extends Vehicle impleme
      */
     protected int maxLoad;
 
-    public DefaultTransporter(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, int weight) {
-        super(nrDoors, enginePower, currentSpeed, color, modelName, weight);
+    public DefaultTransporter(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, int weight, int maxLoad) {
+        super(nrDoors, enginePower, currentSpeed, color, modelName, weight, maxLoad);
     }
 
     public DefaultTransporter(double xPos, double yPos, int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, int weight) {
         super(xPos, yPos, nrDoors, enginePower, currentSpeed, color, modelName, weight);
+    }
+
+    public DefaultTransporter(double xPos, double yPos, int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, int weight, int maxLoad) {
+        super(xPos, yPos, nrDoors, enginePower, currentSpeed, color, modelName, weight, maxLoad);
     }
 
     /**

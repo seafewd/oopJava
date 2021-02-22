@@ -28,11 +28,11 @@ public abstract class Truck extends DefaultTransporter<Car> implements Transport
      * @param maxCars           Maximum amount of cars that fit on the transport
      */
     public Truck(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, int weight, int maxCars) {
-        super(nrDoors, enginePower, currentSpeed, color, modelName, weight, maxCars, new ArrayDeque<>());
+        super(nrDoors, enginePower, currentSpeed, color, modelName, weight, maxCars);
     }
 
     public Truck(double xPos, double yPos, int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, int weight, int maxCars) {
-        super(xPos, yPos, nrDoors, enginePower, currentSpeed, color, modelName, weight, maxCars, new ArrayDeque<>());
+        super(xPos, yPos, nrDoors, enginePower, currentSpeed, color, modelName, weight, maxCars);
     }
 
     /**
@@ -73,7 +73,7 @@ public abstract class Truck extends DefaultTransporter<Car> implements Transport
     /**
      * Loads the given Vehicle if the Vehicle is close enough, the platform is lowered and if it's not a truck.
      * Distance is set by LOADING_DISTANCE
-     * @param car Car to be loaded
+     * @param t Transportable to be loaded
      */
     @Override
     public boolean load(Transportable t){
