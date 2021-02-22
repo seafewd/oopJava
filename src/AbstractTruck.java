@@ -1,7 +1,8 @@
 import java.awt.*;
 import java.util.ArrayDeque;
 
-public abstract class Truck extends DefaultTransporter<Car> implements Transporter<Car> {
+public abstract class AbstractTruck extends DefaultTransporter<Car> implements Transporter<Car> {
+
     /**
      * Min angle of platform
      */
@@ -16,7 +17,6 @@ public abstract class Truck extends DefaultTransporter<Car> implements Transport
      * Angle of the LoadingTruck's platform
      */
     private int platformAngle;
-
 
     /**
      * Set angle of platform

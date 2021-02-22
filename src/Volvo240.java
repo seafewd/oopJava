@@ -4,7 +4,7 @@ import java.awt.*;
  * A type of Vehicle
  * Extends Vehicle which implements Movable
  */
-public class Volvo240 extends Vehicle implements Car {
+public class Volvo240 extends AbstractVehicle implements Car {
     private final static double trimFactor = 1.25;
 
     /**

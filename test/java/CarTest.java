@@ -12,7 +12,7 @@ public class CarTest {
     /**
      * Set up test car
      */
-    private final Vehicle saab = new Saab95();
+    private final AbstractVehicle saab = new Saab95();
 
     /**
      * Test method getNrDoors

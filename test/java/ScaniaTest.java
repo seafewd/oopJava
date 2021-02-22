@@ -7,7 +7,7 @@ import java.util.List;
 
 public class ScaniaTest {
 
-    Truck scania = new Scania();
+    AbstractTruck scania = new Scania();
 
     /**
      * Test increment speed when angle of platform is not 0

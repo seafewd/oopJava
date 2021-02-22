@@ -24,7 +24,7 @@ public class CarController {
     // The frame that represents this instance View of the MVC pattern
     CarView frame;
     // A list of cars, modify if needed
-    List<Vehicle> cars = new ArrayList<>();
+    List<AbstractVehicle> cars = new ArrayList<>();
 
     //methods:
 
@@ -36,7 +36,7 @@ public class CarController {
         cc.cars.add(new Saab95(0, 100));
         cc.cars.add(new Scania(0,200));
 
-        for (Vehicle v:cc.cars)
+        for (AbstractVehicle v:cc.cars)
             System.out.println(v.getYPos());
 
         // Start a new view and send a reference of self
@@ -51,12 +51,12 @@ public class CarController {
     * */
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            for (Vehicle vehicle : cars) {
-                vehicle.move();
-                if(isOutOfBounds(vehicle))
-                    flipXDirection(vehicle);
-                int x = (int) Math.round(vehicle.getXPos());
-                int y = (int) Math.round(vehicle.getYPos());
+            for (AbstractVehicle abstractVehicle : cars) {
+                abstractVehicle.move();
+                if(isOutOfBounds(abstractVehicle))
+                    flipXDirection(abstractVehicle);
+                int x = (int) Math.round(abstractVehicle.getXPos());
+                int y = (int) Math.round(abstractVehicle.getYPos());
                 frame.drawPanel.moveit(x, y);
                 // repaint() calls the paintComponent method of the panel
                 frame.drawPanel.repaint();
@@ -67,61 +67,61 @@ public class CarController {
     // Calls the gas method for each car once
     void gas(int amount) {
         double gas = ((double) amount) / 100;
-        for (Vehicle vehicle : cars) {
-            vehicle.gas(gas);
+        for (AbstractVehicle abstractVehicle : cars) {
+            abstractVehicle.gas(gas);
         }
     }
 
     void setTurboOn(){
-        for (Vehicle vehicle : cars) {
-            if(vehicle instanceof Saab95)
-                ((Saab95) vehicle).setTurboOn();
+        for (AbstractVehicle abstractVehicle : cars) {
+            if(abstractVehicle instanceof Saab95)
+                ((Saab95) abstractVehicle).setTurboOn();
         }
     }
 
     void setTurboOff(){
-        for (Vehicle vehicle : cars) {
-            if(vehicle instanceof Saab95)
-                ((Saab95) vehicle).setTurboOff();
+        for (AbstractVehicle abstractVehicle : cars) {
+            if(abstractVehicle instanceof Saab95)
+                ((Saab95) abstractVehicle).setTurboOff();
         }
     }
 
     /**
      * Only checks X-axis
-     * @param vehicle
+     * @param abstractVehicle
      * @return
      */
     // TODO: Add y
-    private boolean isOutOfBounds(Vehicle vehicle){
-        return vehicle.getXPos() + CAR_WIDTH > frame.getWidth() || vehicle.getXPos() < 0;
+    private boolean isOutOfBounds(AbstractVehicle abstractVehicle){
+        return abstractVehicle.getXPos() + CAR_WIDTH > frame.getWidth() || abstractVehicle.getXPos() < 0;
     }
 
     // brake car
     void brake(int amount) {
         double brake = ((double) amount) / 100;
-        for (Vehicle vehicle : cars) {
-            vehicle.brake(brake);
+        for (AbstractVehicle abstractVehicle : cars) {
+            abstractVehicle.brake(brake);
         }
     }
 
-    void flipXDirection(Vehicle v) {
+    void flipXDirection(AbstractVehicle v) {
         double[] currentDirection = v.getDirection();
         v.setDirection(new double[]{currentDirection[0] * -1, currentDirection[1]});
     }
 
-    void flipYDirection(Vehicle v) {
+    void flipYDirection(AbstractVehicle v) {
         double[] currentDirection = v.getDirection();
         v.setDirection(new double[]{currentDirection[0], currentDirection[1] * -1});
     }
 
     void stopAllCars() {
-        for (Vehicle v : cars) {
+        for (AbstractVehicle v : cars) {
             v.setCurrentSpeed(0);
         }
     }
 
     void startAllCars(int amount) {
-        for (Vehicle v : cars) {
+        for (AbstractVehicle v : cars) {
             if (v.getCurrentSpeed() == 0)
                 v.setCurrentSpeed(((double) amount) / 100);
         }
@@ -133,7 +133,7 @@ public class CarController {
      */
     void setTurboState(boolean state) {
         List<Saab95> saabs = new ArrayList<>();
-        for (Vehicle v : cars) {
+        for (AbstractVehicle v : cars) {
             if (v instanceof Saab95) {
                 saabs.add((Saab95) v);
             }
@@ -151,12 +151,12 @@ public class CarController {
      */
     void setPlatformAngle(int angle) {
         //hardcoded because gui reasons...
-        List<Truck> trucks = new ArrayList<>();
-        for (Vehicle v : cars)
-            if (v instanceof Truck)
-                trucks.add((Truck) v);
+        List<AbstractTruck> abstractTrucks = new ArrayList<>();
+        for (AbstractVehicle v : cars)
+            if (v instanceof AbstractTruck)
+                abstractTrucks.add((AbstractTruck) v);
 
-        for (Truck truck : trucks)
-            truck.setAngle(angle);
+        for (AbstractTruck abstractTruck : abstractTrucks)
+            abstractTruck.setAngle(angle);
     }
 }

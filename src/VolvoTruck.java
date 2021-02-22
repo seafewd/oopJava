@@ -4,7 +4,7 @@ import java.awt.*;
  * A type of Vehicle
  * Extends Vehicle which implements Movable
  */
-public class VolvoTruck extends Vehicle implements Transporter<Car>, Transportable{
+public class VolvoTruck extends AbstractVehicle implements Transporter<Car>, Transportable{
 
     DefaultTransporter<Car> dt;
 

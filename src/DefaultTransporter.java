@@ -1,8 +1,7 @@
 import java.awt.*;
 import java.util.Collection;
-import java.util.Deque;
 
-public class DefaultTransporter<T extends Transportable> extends Vehicle implements Transporter<Transportable>, Movable {
+public class DefaultTransporter<T extends Transportable> implements Transporter<Transportable> {
 
     Collection<Transportable> load;
 
@@ -20,9 +19,6 @@ public class DefaultTransporter<T extends Transportable> extends Vehicle impleme
         super(nrDoors, enginePower, currentSpeed, color, modelName, weight, maxLoad);
     }
 
-    public DefaultTransporter(double xPos, double yPos, int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, int weight) {
-        super(xPos, yPos, nrDoors, enginePower, currentSpeed, color, modelName, weight);
-    }
 
     public DefaultTransporter(double xPos, double yPos, int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, int weight, int maxLoad) {
         super(xPos, yPos, nrDoors, enginePower, currentSpeed, color, modelName, weight, maxLoad);
@@ -46,12 +42,11 @@ public class DefaultTransporter<T extends Transportable> extends Vehicle impleme
      * @param carsToUnload number of vehicles to unload
      */
     public Transportable unload(int carsToUnload) {
-        if (carsToUnload == 0)
         double loaderXPos = this.getXPos();
         double loaderYPos = this.getYPos();
 
         for (int i = carsToUnload; i > 0; i--) {
-            Car c = load.removeFirst();
+            Transportable c = load.removeFirst();
             c.setXPos(loaderXPos + i);
             c.setYPos(loaderYPos);
             c.setDirection(direction);

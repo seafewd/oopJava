@@ -11,6 +11,7 @@ import java.util.LinkedList;
 public abstract class Ferry extends Vehicle implements Transporter {
 
     public Ferry(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, int weight) {
-        super(nrDoors, enginePower, currentSpeed, color, modelName, weight, 50, new LinkedList<>());
+        super(nrDoors, enginePower, currentSpeed, color, modelName, weight, 50);
     }
+
 }
