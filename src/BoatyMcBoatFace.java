@@ -1,20 +1,15 @@
 import java.awt.*;
 
-public class BoatyMcBoatFace implements Transporter<Transportable> {
+public class BoatyMcBoatFace extends AbstractFerry {
 
-    private Loader<Transportable> dt;
+    private Loader<AbstractCar> loader;
 
     public BoatyMcBoatFace() {
-        this.dt = new Loader<>(5, 3000, 0, Color.BLACK, "BoatyMcBoatFace", 90000);
+        super(5, 3000, 0, Color.BLACK, "BoatyMcBoatFace", 90000, 20);
     }
 
-    @Override
-    public boolean load(Transportable t) {
-        return dt.load(t);
+    public BoatyMcBoatFace(int xPos, int yPos) {
+        super(xPos, yPos, 5, 3000, 0, Color.BLACK, "BoatyMcBoatFace", 90000, 20);
     }
 
-    @Override
-    public Transportable unload(int vehiclesToUnload) {
-        return dt.unload(vehiclesToUnload);
-    }
 }

@@ -8,8 +8,16 @@ import java.util.LinkedList;
  */
 public abstract class AbstractFerry extends AbstractVehicle {
 
-    public AbstractFerry(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, int weight) {
+    private final int loadingDistance;
+
+    public AbstractFerry(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, int weight, int loadingDistance) {
         super(nrDoors, enginePower, currentSpeed, color, modelName, weight);
+        this.loadingDistance = loadingDistance;
+    }
+
+    public AbstractFerry(int xPos, int yPos, int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, int weight, int loadingDistance) {
+        super(xPos, yPos, nrDoors, enginePower, currentSpeed, color, modelName, weight);
+        this.loadingDistance = loadingDistance;
     }
 
 }

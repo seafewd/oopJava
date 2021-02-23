@@ -10,7 +10,7 @@ public class VolvoTruck extends AbstractTruck {
      * Default constructor
      */
     public VolvoTruck() {
-        super(2, 300, 0, Color.BLACK, "Volvo Truckerino", 6250);
+        super(2, 300, 0, Color.BLACK, "Volvo Truckerino", 6250, 4);
     }
 
     /**
@@ -19,6 +19,6 @@ public class VolvoTruck extends AbstractTruck {
      * @param yPos  ypos
      */
     public VolvoTruck(int xPos, int yPos) {
-        super(xPos, yPos, 2, 300, 0, Color.BLACK, "Volvo Truckerino", 6250);
+        super(xPos, yPos, 2, 300, 0, Color.BLACK, "Volvo Truckerino", 6250, 4);
     }
 }

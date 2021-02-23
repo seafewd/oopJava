@@ -11,7 +11,7 @@ public class Scania extends AbstractTruck {
      * Default constructor
      */
     public Scania() {
-        super(2, 300, 0, Color.WHITE, "Scania", 3900);
+        super(2, 300, 0, Color.WHITE, "Scania", 3900, 2);
     }
 
     /**
@@ -20,7 +20,7 @@ public class Scania extends AbstractTruck {
      * @param yPos  ypos
      */
     public Scania(int xPos, int yPos) {
-        super(xPos, yPos,2, 300, 0, Color.WHITE, "Scania", 3900);
+        super(xPos, yPos,2, 300, 0, Color.WHITE, "Scania", 3900, 2);
     }
 
 }

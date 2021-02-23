@@ -1,53 +1,33 @@
 import java.awt.*;
+import java.util.Collection;
+import java.util.Iterator;
 
 public abstract class AbstractTruck extends AbstractVehicle {
 
-    // todo create loader & move loader code
+    /**
+     * Ramp attached to Truck
+     */
+    private final Ramp ramp;
 
     /**
-     * Min angle of platform
+     * Loader attached to Truck
      */
-    private final static int MIN_ANGLE = 0;
+    private final Loader<AbstractCar> loader;
 
-    /**
-     * Max angle of platform
-     */
-    private final static int MAX_ANGLE = 70;
 
-    /**
-     * Angle of the LoadingTruck's platform
-     */
-    private int platformAngle;
-
-    public AbstractTruck(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, int weight) {
+    public AbstractTruck(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, int weight, int loadingDistance) {
         super(nrDoors, enginePower, currentSpeed, color, modelName, weight);
+        this.ramp = new Ramp(this);
+        this.loader = new Loader<>(loadingDistance);
     }
 
-    public AbstractTruck(int xPos, int yPos, int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, int weight) {
+    public AbstractTruck(int xPos, int yPos, int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, int weight, int loadingDistance) {
         super(xPos, yPos, nrDoors, enginePower, currentSpeed, color, modelName, weight);
+        this.ramp = new Ramp(this);
+        this.loader = new Loader<>(loadingDistance);
     }
 
-    /**
-     * Set angle of platform
-     * Require a minimum and a maximum angle in order to set
-     * Also require that the speed of truck is 0
-     * @param degree    degree with which to set the platform angle
-     */
-    protected boolean setAngle(int degree) {
-        if (this.getCurrentSpeed() == 0 && (platformAngle >= MIN_ANGLE && platformAngle <= MAX_ANGLE)) {
-            platformAngle = degree;
-            return true;
-        }
-        return false;
-    }
 
-    /**
-     * Get current angle of platform
-     * @return angle
-     */
-    public int getAngle() {
-        return platformAngle;
-    }
 
     /**
      * Increment speed
@@ -56,7 +36,7 @@ public abstract class AbstractTruck extends AbstractVehicle {
      */
     @Override
     protected void incrementSpeed(double amount){
-        if (platformAngle == 0)
+        if (ramp.getAngle() == 0)
             super.incrementSpeed(amount);
         else
             System.out.println("Can't move unless platform angle is 0");
@@ -65,33 +45,74 @@ public abstract class AbstractTruck extends AbstractVehicle {
     /**
      * Loads the given Vehicle if the Vehicle is close enough, the platform is lowered and if it's not a truck.
      * Distance is set by LOADING_DISTANCE
-     * @param t Transportable to be loaded
+     * @param ac AbstractCar to be loaded
      */
-    @Override
-    public boolean load(AbstractVehicle c){
-        if (transportNotFull() && isCloseEnoughToLoad(c) && getAngle() == 0) {
-            load.add(c);
-            return true;
-        }
+    public boolean load(AbstractCar ac) {
+        if (loader.transportNotFull() && loader.isCloseEnoughToLoad(ac) && ramp.getAngle() == 0)
+            return loader.load.add(ac);
         return false;
     }
 
     /**
      * Unload the vehicles currently in truck cargo
+     * TODO TEST THIS!!!!!!!!
      * @param vehiclesToUnload number of vehicles to unload
      */
-    @Override
-    public Transportable unload(int vehiclesToUnload) {
+    public void unload(int vehiclesToUnload) {
         double loaderXPos = this.getXPos();
         double loaderYPos = this.getYPos();
+        Collection<AbstractCar> load = loader.getLoad();
+        Iterator<AbstractCar> it = load.iterator();
 
         for (int i = vehiclesToUnload; i > 0; i--) {
             if (!load.isEmpty()) {
-                Car c = load.removeLast();
-                c.setXPos(loaderXPos + i);
-                c.setYPos(loaderYPos);
-                c.setDirection(direction);
+                AbstractCar ac = it.next();
+                ac.setXPos(loaderXPos + i);
+                ac.setYPos(loaderYPos);
+                ac.setDirection(direction);
+                it.remove();
             }
         }
+    }
+
+
+    /**
+     * Move transporter's cargo
+     */
+    protected void moveLoad() {
+        for (AbstractCar ac : loader.getLoad()) {
+            ac.setXPos(this.xPos);
+            ac.setYPos(this.yPos);
+        }
+    }
+
+    /**
+     * Move the Vehicle
+     * Move all its cargo at the same time
+     */
+    @Override
+    public void move() {
+        super.move();
+        moveLoad();
+    }
+
+    /**
+     * Turn left
+     * Move all its cargo at the same time
+     */
+    @Override
+    public void turnLeft() {
+        super.turnLeft();
+        moveLoad();
+    }
+
+    /**
+     * Move right
+     * Move all its cargo at the same time
+     */
+    @Override
+    public void turnRight() {
+        super.turnRight();
+        moveLoad();
     }
 }
