@@ -1,27 +1,23 @@
 import java.awt.*;
 import java.util.Collection;
 
-public class DefaultTransporter<T extends Transportable> implements Transporter<Transportable> {
+public class Loader<T extends Transportable> implements Transporter<Transportable> {
 
     Collection<Transportable> load;
 
     /**
      * Loading distance
      */
-    private final static double LOADING_DISTANCE = 20;
+    private final int loadingDistance;
 
     /**
      * Maximum amount of Cars that will fit
      */
     protected int maxLoad;
 
-    public DefaultTransporter(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, int weight, int maxLoad) {
-        super(nrDoors, enginePower, currentSpeed, color, modelName, weight, maxLoad);
-    }
+    public Loader(int loadingDistance) {
+        this.loadingDistance = loadingDistance;
 
-
-    public DefaultTransporter(double xPos, double yPos, int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, int weight, int maxLoad) {
-        super(xPos, yPos, nrDoors, enginePower, currentSpeed, color, modelName, weight, maxLoad);
     }
 
     /**

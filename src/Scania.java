@@ -4,19 +4,19 @@ import java.awt.*;
  * A type of Vehicle
  * Extends Vehicle which implements Movable
  */
-public class Scania extends DefaultTransporter<Transportable> implements Transporter<Transportable> {
+public class Scania extends Loader<Transportable> implements Transporter<Transportable> {
 
-    private final DefaultTransporter<Car> dt;
+    private final Loader<Car> dt;
 
     /**
      * Default constructor
      */
     public Scania() {
-        dt = new DefaultTransporter<>(2, 300, 0, Color.WHITE, "Scania", 3900, 5);
+        dt = new Loader<>(2, 300, 0, Color.WHITE, "Scania", 3900, 5);
     }
 
     public Scania(double xPos, double yPos) {
-        dt = new DefaultTransporter<Car>(xPos, yPos,2, 300, 0, Color.WHITE, "Scania", 3900, 5);
+        dt = new Loader<Car>(xPos, yPos,2, 300, 0, Color.WHITE, "Scania", 3900, 5);
     }
 
     @Override
