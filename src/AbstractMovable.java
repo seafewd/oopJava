@@ -1,4 +1,9 @@
-public abstract class AbstractMovable implements Movable{
+public abstract class AbstractMovable implements Movable {
+
+    /**
+     * Move power of the movable object (horse power, energy, whatever...)
+     */
+    protected double movePower;
 
     /**
      * The current speed of the Vehicle
@@ -21,6 +26,52 @@ public abstract class AbstractMovable implements Movable{
      */
     protected double[] direction;
 
+    /**
+     * Weight of AbstractMovable (kg)
+     */
+    protected int weight;
+
+    /**
+     * Default constructor
+     */
+    public AbstractMovable(int weight) {
+        this.xPos = 0;
+        this.yPos = 0;
+        this.direction = new double[]{1, 0};
+        this.weight = weight;
+        this.currentSpeed = 0;
+        this.movePower = 1;
+    }
+
+    /**
+     * Constructor with predef. values
+     * @param currentSpeed  current speed
+     * @param movePower     move power
+     */
+    public AbstractMovable(double currentSpeed, double movePower, int weight) {
+        this.xPos = 0;
+        this.yPos = 0;
+        this.weight = weight;
+        this.direction = new double[]{1, 0};
+        this.currentSpeed = currentSpeed;
+        this.movePower = movePower;
+    }
+
+    /**
+     * Constructor with predef. values + position
+     * @param xPos         xpos
+     * @param yPos         ypos
+     * @param currentSpeed current speed
+     * @param movePower    move power
+     */
+    public AbstractMovable(int xPos, int yPos, double currentSpeed, double movePower, int weight) {
+        this.xPos = xPos;
+        this.yPos = yPos;
+        this.weight = weight;
+        this.direction = new double[]{1, 0};
+        this.currentSpeed = currentSpeed;
+        this.movePower = movePower;
+    }
 
 
     /**
@@ -31,7 +82,6 @@ public abstract class AbstractMovable implements Movable{
     protected double getCurrentSpeed(){
         return currentSpeed;
     }
-
 
     /**
      * Get current normalized direction.
@@ -51,7 +101,6 @@ public abstract class AbstractMovable implements Movable{
     public String showPosition(AbstractMovable am) {
         return "Current position: (" + am.xPos + ", " + am.yPos + ").";
     }
-
 
     /**
      * Get X pos
@@ -101,7 +150,7 @@ public abstract class AbstractMovable implements Movable{
      * @return Speed factor
      */
     public double speedFactor() {
-        return enginePower * 0.01;
+        return movePower * 0.01;
     }
 
     /**
@@ -109,7 +158,7 @@ public abstract class AbstractMovable implements Movable{
      * @param amount The amount with which to increment
      */
     protected void incrementSpeed(double amount){
-        currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, enginePower);
+        currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, movePower);
     }
 
     /**

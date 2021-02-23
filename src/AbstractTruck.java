@@ -1,4 +1,8 @@
-public abstract class AbstractTruck extends Loader<Car> implements Transporter<Car> {
+import java.awt.*;
+
+public abstract class AbstractTruck extends AbstractVehicle {
+
+    // todo create loader & move loader code
 
     /**
      * Min angle of platform
@@ -14,6 +18,14 @@ public abstract class AbstractTruck extends Loader<Car> implements Transporter<C
      * Angle of the LoadingTruck's platform
      */
     private int platformAngle;
+
+    public AbstractTruck(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, int weight) {
+        super(nrDoors, enginePower, currentSpeed, color, modelName, weight);
+    }
+
+    public AbstractTruck(int xPos, int yPos, int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, int weight) {
+        super(xPos, yPos, nrDoors, enginePower, currentSpeed, color, modelName, weight);
+    }
 
     /**
      * Set angle of platform
@@ -56,9 +68,9 @@ public abstract class AbstractTruck extends Loader<Car> implements Transporter<C
      * @param t Transportable to be loaded
      */
     @Override
-    public boolean load(Transportable t){
-        if (transportNotFull() && isCloseEnoughToLoad(t) && getAngle() == 0) {
-            load.add(t);
+    public boolean load(AbstractVehicle c){
+        if (transportNotFull() && isCloseEnoughToLoad(c) && getAngle() == 0) {
+            load.add(c);
             return true;
         }
         return false;

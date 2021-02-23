@@ -1,9 +1,9 @@
 import java.awt.*;
 import java.util.Collection;
 
-public class Loader<T extends Transportable> implements Transporter<Transportable> {
+public class Loader{
 
-    Collection<Transportable> load;
+    Collection<AbstractMovable> load;
 
     /**
      * Loading distance
@@ -14,6 +14,7 @@ public class Loader<T extends Transportable> implements Transporter<Transportabl
      * Maximum amount of Cars that will fit
      */
     protected int maxLoad;
+
 
     public Loader(int loadingDistance) {
         this.loadingDistance = loadingDistance;
@@ -55,7 +56,7 @@ public class Loader<T extends Transportable> implements Transporter<Transportabl
      * @param car   Car to check
      * @return      Proximity check
      */
-    public boolean isCloseEnoughToLoad(Transportable t) {
+    public boolean isCloseEnoughToLoad(AbstractVehicle t) {
         boolean isCloseX = this.xPos < t.getXPos() + LOADING_DISTANCE && this.xPos > t.getXPos() - LOADING_DISTANCE;
         boolean isCloseY = this.yPos < t.getYPos() + LOADING_DISTANCE && this.yPos > t.getYPos() - LOADING_DISTANCE;
         return isCloseX && isCloseY;

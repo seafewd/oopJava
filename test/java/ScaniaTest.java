@@ -34,11 +34,11 @@ public class ScaniaTest {
 
     @Test
     public void testLoadCar(){
-        List<Car> cars = new ArrayList<>();
+        List<AbstractCar> cars = new ArrayList<>();
         for(int i = 0; i < 3;i++){
             cars.add(new Volvo240());
         }
-        for (Car c:cars
+        for (AbstractCar c:cars
              ) {
             scania.load(c);
         }

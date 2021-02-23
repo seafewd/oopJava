@@ -11,10 +11,6 @@ public abstract class AbstractVehicle extends AbstractMovable {
      */
     protected int nrDoors;
 
-    /**
-     * Engine power of the Vehicle
-     */
-    protected double enginePower;
 
     /**
      * Color of the Vehicle
@@ -37,88 +33,56 @@ public abstract class AbstractVehicle extends AbstractMovable {
      */
     private static final double BRAKE_LIMIT = 1;
 
-
     /**
-     * Weight of Vehicle (kg)
+     * Constrctor
+     * @param nrDoors   Doors
+     * @param color     Color
+     * @param modelName Model name
+     * @param weight    Weight
      */
-    protected int weight;
-
-    /**
-     * Max load weight
-     */
-    protected int maxLoad;
-
-    /**
-     * Default constructor
-     * @param nrDoors       no. of doors
-     * @param enginePower   engine power
-     * @param currentSpeed  current speed
-     * @param color         color
-     * @param modelName     model name
-     */
-
-    public AbstractVehicle(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, int weight) {
-        this.xPos = 0;
-        this.yPos = 0;
+    public AbstractVehicle(int nrDoors, Color color, String modelName, int weight) {
+        super(weight);
         this.nrDoors = nrDoors;
-        this.enginePower = enginePower;
-        this.currentSpeed = currentSpeed;
         this.color = color;
         this.modelName = modelName;
-        this.direction = new double[]{1, 0};
-        this.weight = weight;
-        stopEngine();
-    }
-
-    public AbstractVehicle(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, int weight, int maxLoad) {
-        this.xPos = 0;
-        this.yPos = 0;
-        this.nrDoors = nrDoors;
-        this.enginePower = enginePower;
-        this.currentSpeed = currentSpeed;
-        this.color = color;
-        this.modelName = modelName;
-        this.direction = new double[]{1, 0};
-        this.weight = weight;
-        this.maxLoad = maxLoad;
         stopEngine();
     }
 
     /**
-     * With set position
-     * @param xPos
-     * @param yPos
-     * @param nrDoors
-     * @param enginePower
-     * @param currentSpeed
-     * @param color
-     * @param modelName
-     * @param weight
+     * Constructor 2
+     * @param nrDoors      Doors
+     * @param movePower    Move power
+     * @param currentSpeed Current speed
+     * @param color        Color
+     * @param modelName    Model name
+     * @param weight       Weight
      */
-    public AbstractVehicle(double xPos, double yPos, int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, int weight) {
-        this.xPos = xPos;
-        this.yPos = yPos;
+    public AbstractVehicle(int nrDoors, double movePower, double currentSpeed, Color color, String modelName, int weight) {
+        super(currentSpeed, movePower, weight);
         this.nrDoors = nrDoors;
-        this.enginePower = enginePower;
+        this.movePower = movePower;
         this.currentSpeed = currentSpeed;
         this.color = color;
         this.modelName = modelName;
-        this.direction = new double[]{1, 0};
-        this.weight = weight;
         stopEngine();
     }
 
-    public AbstractVehicle(double xPos, double yPos, int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, int weight, int maxLoad) {
-        this.xPos = xPos;
-        this.yPos = yPos;
+    /**
+     * Constructor 3
+     * @param xPos         x pos
+     * @param yPos         y pos
+     * @param nrDoors      Doors
+     * @param movePower    Move power
+     * @param currentSpeed Current speed
+     * @param color        Color
+     * @param modelName    Model name
+     * @param weight       Weight
+     */
+    public AbstractVehicle(int xPos, int yPos, int nrDoors, double movePower, double currentSpeed, Color color, String modelName, int weight) {
+        super(xPos, yPos, currentSpeed, movePower, weight);
         this.nrDoors = nrDoors;
-        this.enginePower = enginePower;
-        this.currentSpeed = currentSpeed;
         this.color = color;
         this.modelName = modelName;
-        this.direction = new double[]{1, 0};
-        this.weight = weight;
-        this.maxLoad = maxLoad;
         stopEngine();
     }
 
@@ -135,7 +99,7 @@ public abstract class AbstractVehicle extends AbstractMovable {
      * @return Engine power
      */
     protected double getEnginePower(){
-        return enginePower;
+        return movePower;
     }
 
 

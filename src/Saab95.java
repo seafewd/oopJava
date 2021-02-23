@@ -6,34 +6,24 @@ import java.awt.*;
  */
 
 public class Saab95 extends AbstractVehicle implements Car, Transportable {
-    protected boolean turboOn;
+    private final Turbo turbo;
 
     /**
      * Default constructor
      */
-
     public Saab95(){
         super(2, 125, 0, Color.red, "Saab95", 2300);
-        turboOn = false;
+        this.turbo = new Turbo();
     }
 
-    public Saab95(double xPos, double yPos){
+    /**
+     * Constructor with position
+     * @param xPos xpos
+     * @param yPos ypos
+     */
+    public Saab95(int xPos, int yPos){
         super(xPos, yPos, 2, 125, 0, Color.red, "Saab95", 2300);
-	    turboOn = false;
-    }
-
-    /**
-     * Set turbo on
-     */
-    public void setTurboOn(){
-	    turboOn = true;
-    }
-
-    /**
-     * Set turbo off
-     */
-    public void setTurboOff(){
-	    turboOn = false;
+        this.turbo = new Turbo();
     }
 
     /**
@@ -42,8 +32,11 @@ public class Saab95 extends AbstractVehicle implements Car, Transportable {
      */
     @Override
     public double speedFactor(){
-        double turbo = 1;
-        if(turboOn) turbo = 1.3;
-            return enginePower * 0.01 * turbo;
+        double power;
+        if(turbo.isTurboOn())
+            power = 1.3;
+        else
+            power = 1;
+        return movePower * 0.01 * power;
     }
 }
