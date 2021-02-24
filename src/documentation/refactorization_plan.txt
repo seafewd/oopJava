@@ -1,0 +1,8 @@
+1. Separate (package) the model, view and controller. Vehicle and related stuff in model (Separation of concern, OCP)
+2. Make a top layer with an IMovable interface. Vehicles are movables. This makes room for possible future classes that are not vehicles (OCP)
+3. Make car, truck and ferry interfaces instead of abstract classes (if we want to add stuff to the abstract class layers, otherwise keep them as interfaces (because there are no methods in the classes at the moment) (DIP)
+4. Replace carriers loading functionality with a Loader class.  interface. (Composition over inheritance, SR)
+5. Make platform a separate class (Composition over inheritance, SR, OCP)
+6. Make CarTurbo a separate class (Composition over inheritance, )?
+7. Move WORLD_SIZE. Now it's in the view. We are not sure which class that should be responsible for this
+8. Fix the communication between CarController and DrawPanel, specifically how we handle the update of car positions. Model should not talk to view. (MVC, SR)
