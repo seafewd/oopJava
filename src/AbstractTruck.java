@@ -93,9 +93,11 @@ public abstract class AbstractTruck extends AbstractVehicle {
      * Move transporter's cargo
      */
     protected void moveLoad() {
-        for (AbstractCar ac : loader.getLoad()) {
-            ac.setXPos(this.xPos);
-            ac.setYPos(this.yPos);
+        if (loader.getLoad() != null) {
+            for (AbstractCar ac : loader.getLoad()) {
+                ac.setXPos(this.xPos);
+                ac.setYPos(this.yPos);
+            }
         }
     }
 

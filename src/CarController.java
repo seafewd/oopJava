@@ -129,8 +129,14 @@ public class CarController {
      * Set turbo on or off
      */
     void toggleTurbo() {
+        List<Saab95> saabs = new ArrayList<>();
         for (AbstractVehicle v : vehicles) {
-            ((Saab95) v).toggleTurbo();
+            if (v instanceof Saab95) {
+                saabs.add((Saab95) v);
+            }
+        }
+        for (Saab95 s : saabs) {
+            s.toggleTurbo();
         }
     }
 
