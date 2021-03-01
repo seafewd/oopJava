@@ -127,22 +127,13 @@ public class CarController {
 
     /**
      * Set turbo on or off
-     * @param state false for off, true for on
      */
-    void setTurboState(boolean state) {
-        List<Saab95> saabs = new ArrayList<>();
+    void toggleTurbo() {
         for (AbstractVehicle v : cars) {
-            if (v instanceof Saab95) {
-                saabs.add((Saab95) v);
-            }
-        }
-        for (Saab95 s : saabs) {
-            if (state)
-                s.setTurboOn();
-            else
-                s.setTurboOff();
+            ((Saab95) v).toggleTurbo();
         }
     }
+
 
     /**
      * Flip truck platform up or down
@@ -155,6 +146,6 @@ public class CarController {
                 abstractTrucks.add((AbstractTruck) v);
 
         for (AbstractTruck abstractTruck : abstractTrucks)
-            abstractTruck.setAngle(angle);
+            abstractTruck.getRamp().setAngle(angle);
     }
 }

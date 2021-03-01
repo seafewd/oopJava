@@ -38,6 +38,10 @@ public abstract class AbstractTruck extends AbstractVehicle {
         return isCloseX && isCloseY;
     }
 
+    public Ramp getRamp() {
+        return ramp;
+    }
+
     /**
      * Increment speed
      * Require that the truck platform is down in order to increment speed
