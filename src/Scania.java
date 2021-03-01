@@ -4,21 +4,23 @@ import java.awt.*;
  * A type of Vehicle
  * Extends Vehicle which implements Movable
  */
-public class Scania extends Truck {
+public class Scania extends AbstractTruck {
+
 
     /**
      * Default constructor
      */
     public Scania() {
-        super(2, 300, 0, Color.WHITE, "Scania", 3900, 5);
+        super(2, 300, 0, Color.WHITE, "Scania", 3900, 2);
     }
 
-    public Scania(double xPos, double yPos) {
-        super(xPos, yPos,2, 300, 0, Color.WHITE, "Scania", 3900, 5);
+    /**
+     * Constructor with position
+     * @param xPos  xpos
+     * @param yPos  ypos
+     */
+    public Scania(int xPos, int yPos) {
+        super(xPos, yPos,2, 300, 0, Color.WHITE, "Scania", 3900, 2);
     }
 
-    @Override
-    public double speedFactor() {
-        return enginePower * 0.01;
-    }
 }

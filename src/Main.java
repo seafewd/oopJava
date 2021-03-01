@@ -1,4 +1,3 @@
-
 /**
  * Program entry point
  */
@@ -11,7 +10,7 @@ public class Main {
 /*
         CarController cc = new CarController();
         CarView view = new CarView("View", cc);
-        */
+
 
         Saab95 saab = new Saab95();
         saab.setTurboOff();
@@ -24,7 +23,7 @@ public class Main {
 
         Carrier scania = new Scania();
         Carrier volvoTruck = new VolvoTruck();
-        scania.loadCar(saab);
+        scania.load(saab);
         scania.move();
 
         volvoTruck.move();
@@ -38,6 +37,6 @@ public class Main {
         Workshop<Volvo240> ws = new Workshop(10);
 
         ws.storeCar(volvo);
-        //ws.storeCar(saab.jpg);
+        //ws.storeCar(saab.jpg);*/
     }
 }

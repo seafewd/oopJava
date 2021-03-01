@@ -1,35 +1,14 @@
-import java.awt.*;
-
-/**
- * Parent class, handles all types of cars
- * Implements Movable for movement related issues
- */
-public abstract class Vehicle implements Movable {
+public abstract class AbstractMovable implements Movable {
 
     /**
-     * Number of doors on the Vehicle
+     * Move power of the movable object (horse power, energy, whatever...)
      */
-    protected int nrDoors;
-
-    /**
-     * Engine power of the Vehicle
-     */
-    protected double enginePower;
+    protected double movePower;
 
     /**
      * The current speed of the Vehicle
      */
     protected double currentSpeed;
-
-    /**
-     * Color of the Vehicle
-     */
-    protected Color color;
-
-    /**
-     * The Vehicle model name
-     */
-    protected String modelName;
 
     /**
      * Current x-position
@@ -42,87 +21,58 @@ public abstract class Vehicle implements Movable {
     protected double yPos;
 
     /**
-     * Gas limit
-     */
-    private static final double GAS_LIMIT = 1;
-
-    /**
-     * Brake Limit
-     */
-    private static final double BRAKE_LIMIT = 1;
-
-    /**
      * The direction the Vehicle is facing
      * Should be initialized with length 1 to keep it that way
      */
     protected double[] direction;
 
     /**
-     * Weight of Vehicle (kg)
+     * Weight of AbstractMovable (kg)
      */
     protected int weight;
 
     /**
      * Default constructor
-     * @param nrDoors       no. of doors
-     * @param enginePower   engine power
-     * @param currentSpeed  current speed
-     * @param color         color
-     * @param modelName     model name
      */
-
-    public Vehicle(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, int weight) {
+    public AbstractMovable(int weight) {
         this.xPos = 0;
         this.yPos = 0;
-        this.nrDoors = nrDoors;
-        this.enginePower = enginePower;
-        this.currentSpeed = 0;
-        this.color = color;
-        this.modelName = modelName;
         this.direction = new double[]{1, 0};
         this.weight = weight;
-        stopEngine();
+        this.currentSpeed = 0;
+        this.movePower = 1;
     }
 
     /**
-     * With set position
-     * @param xPos
-     * @param yPos
-     * @param nrDoors
-     * @param enginePower
-     * @param currentSpeed
-     * @param color
-     * @param modelName
-     * @param weight
+     * Constructor with predef. values
+     * @param currentSpeed  current speed
+     * @param movePower     move power
      */
-    public Vehicle(double xPos, double yPos, int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, int weight) {
+    public AbstractMovable(double currentSpeed, double movePower, int weight) {
+        this.xPos = 0;
+        this.yPos = 0;
+        this.weight = weight;
+        this.direction = new double[]{1, 0};
+        this.currentSpeed = currentSpeed;
+        this.movePower = movePower;
+    }
+
+    /**
+     * Constructor with predef. values + position
+     * @param xPos         xpos
+     * @param yPos         ypos
+     * @param currentSpeed current speed
+     * @param movePower    move power
+     */
+    public AbstractMovable(int xPos, int yPos, double currentSpeed, double movePower, int weight) {
         this.xPos = xPos;
         this.yPos = yPos;
-        this.nrDoors = nrDoors;
-        this.enginePower = enginePower;
-        this.currentSpeed = 0;
-        this.color = color;
-        this.modelName = modelName;
-        this.direction = new double[]{1, 0};
         this.weight = weight;
-        stopEngine();
+        this.direction = new double[]{1, 0};
+        this.currentSpeed = currentSpeed;
+        this.movePower = movePower;
     }
 
-    /**
-     * Get number of doors
-     * @return Number of doors
-     */
-    public int getNrDoors(){
-        return nrDoors;
-    }
-
-    /**
-     * Get engine power of Vehicle
-     * @return Engine power
-     */
-    protected double getEnginePower(){
-        return enginePower;
-    }
 
     /**
      * Get current speed of Vehicle
@@ -144,28 +94,12 @@ public abstract class Vehicle implements Movable {
     }
 
     /**
-     * Get color of Vehicle
-     * @return Color
-     */
-    public Color getColor(){
-        return color;
-    }
-
-    /**
-     * Set the color of the Vehicle
-     * @param clr Color to set
-     */
-    protected void setColor(Color clr){
-        color = clr;
-    }
-
-    /**
      * Gets a Vehicle's position
-     * @param vehicle The Vehicle you want to get a position of
+     * @param am The Vehicle you want to get a position of
      * @return Fancy string describing the exact position of the Vehicle
      */
-    public String showPosition(Vehicle vehicle) {
-        return "Current position: (" + vehicle.xPos + ", " + vehicle.yPos + ").";
+    public String showPosition(AbstractMovable am) {
+        return "Current position: (" + am.xPos + ", " + am.yPos + ").";
     }
 
     /**
@@ -212,33 +146,19 @@ public abstract class Vehicle implements Movable {
 
 
     /**
-     * Start Vehicle engine
-     */
-    protected void startEngine(){
-        currentSpeed = 0.1;
-        System.out.println("Engine started.");
-    }
-
-    /**
-     * Stop Vehicle engine
-     */
-    public void stopEngine(){
-        currentSpeed = 0;
-        System.out.println("Engine stopped.");
-    }
-
-    /**
      * Speed factor - varies depending on model
      * @return Speed factor
      */
-    public abstract double speedFactor();
+    public double speedFactor() {
+        return movePower * 0.01;
+    }
 
     /**
      * Increment speed
      * @param amount The amount with which to increment
      */
     protected void incrementSpeed(double amount){
-        currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, enginePower);
+        currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, movePower);
     }
 
     /**
@@ -249,25 +169,6 @@ public abstract class Vehicle implements Movable {
         currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount,0);
     }
 
-    /**
-     * Give gas
-     * Only accepts values in [0,GAS_LIMIT]
-     * @param amount The amount with which to give gas
-     */
-    public void gas(double amount){
-        if(isInLimit(0, GAS_LIMIT, amount) && amount > 0)
-            incrementSpeed(amount);
-    }
-
-    /**
-     * Brake car
-     * Only accepts positive values in [0,1]
-     * @param amount Amount with which to brake
-     */
-    public void brake(double amount){
-        if(isInLimit(0, BRAKE_LIMIT, amount) && amount > 0)
-            decrementSpeed(amount);
-    }
 
     /**
      * Move the Vehicle
@@ -348,5 +249,6 @@ public abstract class Vehicle implements Movable {
     protected void setCurrentSpeed(double amount) {
         currentSpeed = amount;
     }
+
 
 }

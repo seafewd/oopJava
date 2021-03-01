@@ -14,8 +14,8 @@ public class SaabTest {
      */
     @Test
     public void testSetTurboOn() {
-        saab.setTurboOn();
-        Assertions.assertTrue(saab.turboOn);
+        saab.toggleTurbo();
+        Assertions.assertTrue(saab.getTurbo().isTurboOn());
     }
 
     /**
@@ -23,8 +23,8 @@ public class SaabTest {
      */
     @Test
     public void testSetTurboOff() {
-        saab.setTurboOff();
-        Assertions.assertFalse(saab.turboOn);
+        saab.toggleTurbo();
+        Assertions.assertFalse(saab.getTurbo().isTurboOn());
     }
 
     /**
@@ -32,7 +32,7 @@ public class SaabTest {
      */
     @Test
     public void testSpeedfactorWithoutTurbo() {
-        saab.setTurboOff();
+        saab.toggleTurbo();
         Assertions.assertEquals(1.25, saab.speedFactor());
     }
 
@@ -41,7 +41,7 @@ public class SaabTest {
      */
     @Test
     public void testSpeedfactorWithTurbo() {
-        saab.setTurboOn();
+        saab.toggleTurbo();
         Assertions.assertEquals(1.625, saab.speedFactor());
     }
 }
