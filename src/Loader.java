@@ -20,16 +20,14 @@ public class Loader<T extends AbstractMovable> {
 
     }
 
-     /**
-     * Check if car is close enough to the transport to be able to be loaded onto it
-     * @param t     T to check
-     * @return      Proximity check
+    /**
+     * Get loading distance
+     * @return loading distance
      */
-    public boolean isCloseEnoughToLoad(T t) {
-        boolean isCloseX = this.xPos < t.getXPos() + loadingDistance && this.xPos > t.getXPos() - loadingDistance;
-        boolean isCloseY = this.yPos < t.getYPos() + loadingDistance && this.yPos > t.getYPos() - loadingDistance;
-        return isCloseX && isCloseY;
+    public int getLoadingDistance() {
+        return loadingDistance;
     }
+
 
     /**
      * Get cargo load

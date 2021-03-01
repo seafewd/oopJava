@@ -39,4 +39,8 @@ public class Saab95 extends AbstractVehicle implements Car, Transportable {
             power = 1;
         return movePower * 0.01 * power;
     }
+
+    public void toggleTurbo() {
+        turbo.toggleTurboOn();
+    }
 }

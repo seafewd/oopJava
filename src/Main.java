@@ -1,5 +1,3 @@
-import old.Carrier;
-
 /**
  * Program entry point
  */

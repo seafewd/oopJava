@@ -27,7 +27,16 @@ public abstract class AbstractTruck extends AbstractVehicle {
         this.loader = new Loader<>(loadingDistance);
     }
 
-
+    /**
+     * Check if car is close enough to the transport to be able to be loaded onto it
+     * @param ac    AbstractCar to check
+     * @return      Proximity check
+     */
+    public boolean isCloseEnoughToLoad(AbstractCar ac) {
+        boolean isCloseX = this.xPos < ac.getXPos() + loader.getLoadingDistance() && this.xPos > ac.getXPos() - loader.getLoadingDistance();
+        boolean isCloseY = this.yPos < ac.getYPos() + loader.getLoadingDistance() && this.yPos > ac.getYPos() - loader.getLoadingDistance();
+        return isCloseX && isCloseY;
+    }
 
     /**
      * Increment speed
@@ -48,7 +57,7 @@ public abstract class AbstractTruck extends AbstractVehicle {
      * @param ac AbstractCar to be loaded
      */
     public boolean load(AbstractCar ac) {
-        if (loader.transportNotFull() && loader.isCloseEnoughToLoad(ac) && ramp.getAngle() == 0)
+        if (loader.transportNotFull() && isCloseEnoughToLoad(ac) && ramp.getAngle() == 0)
             return loader.load.add(ac);
         return false;
     }
