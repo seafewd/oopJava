@@ -26,6 +26,8 @@ public class CarController {
     // A list of cars, modify if needed
     List<AbstractVehicle> vehicles = new ArrayList<>();
 
+    VehicleFactory vFactory = new VehicleFactory();
+
     //methods:
 
     public static void main(String[] args) {
