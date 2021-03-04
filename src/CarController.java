@@ -24,6 +24,7 @@ public class CarController {
     CarView frame;
     CarModel model;
     VehicleFactory vFactory;
+    List<AbstractVehicle> vehicles;
 
     //methods:
 
@@ -38,6 +39,7 @@ public class CarController {
         for (AbstractVehicle v:cc.model.getVehicles())
             System.out.println(v.getYPos());
 
+        cc.vehicles = cc.model.getVehicles();
         // Start the timer
         cc.timer.start();
     }
@@ -47,6 +49,7 @@ public class CarController {
     * */
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
+            /*
             for (AbstractVehicle vehicle : model.getVehicles()) {
                 vehicle.move();
                 if(isOutOfBounds(vehicle))
@@ -58,6 +61,20 @@ public class CarController {
                 // repaint() calls the paintComponent method of the panel
                 frame.drawPanel.repaint();
             }
+             */
+
+             // FOR TRYING ONE CAR AT A TIME
+            AbstractVehicle v = vehicles.get(1);
+            v.move();
+            if(isOutOfBounds(v))
+                flipXDirection(v);
+            int x = (int) Math.round(v.getXPos());
+            int y = (int) Math.round(v.getYPos());
+            frame.drawPanel.updateImage(v);
+            frame.drawPanel.moveit(x, y, v);
+            // repaint() calls the paintComponent method of the panel
+            frame.drawPanel.repaint();
+             
         }
     }
 

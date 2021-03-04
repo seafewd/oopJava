@@ -63,7 +63,7 @@ public class Assets {
         BufferedImage image = objectImageMap.get(object);
 
         if (image == null) {
-            return objectImageMap.get(object.getClass());  // .. if fail, check if class bound
+            return objectImageMap.get(object.getClass());
         }
         return image;
 
