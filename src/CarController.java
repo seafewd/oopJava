@@ -12,7 +12,6 @@ import java.util.List;
 
 public class CarController {
 
-    private final int CAR_WIDTH = 46;
     // member fields:
 
     // The delay (ms) corresponds to 20 updates a sec (hz)
@@ -21,12 +20,10 @@ public class CarController {
     // each step between delays.
     private Timer timer = new Timer(delay, new TimerListener());
 
-    // The frame that represents this instance View of the MVC pattern
+    // View, Model and Vehicle Factory
     CarView frame;
-    // A list of cars, modify if needed
-    List<AbstractVehicle> vehicles = new ArrayList<>();
-
-    VehicleFactory vFactory = new VehicleFactory();
+    CarModel model;
+    VehicleFactory vFactory;
 
     //methods:
 
@@ -34,15 +31,12 @@ public class CarController {
         // Instance of this class
         CarController cc = new CarController();
 
-        cc.vehicles.add(new Volvo240(0,0));
-        cc.vehicles.add(new Saab95(0, 100));
-        cc.vehicles.add(new Scania(0,200));
-
-        for (AbstractVehicle v:cc.vehicles)
-            System.out.println(v.getYPos());
-
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc);
+        cc.model = new CarModel();
+
+        for (AbstractVehicle v:cc.model.getVehicles())
+            System.out.println(v.getYPos());
 
         // Start the timer
         cc.timer.start();
@@ -53,7 +47,7 @@ public class CarController {
     * */
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            for (AbstractVehicle vehicle : vehicles) {
+            for (AbstractVehicle vehicle : model.getVehicles()) {
                 vehicle.move();
                 if(isOutOfBounds(vehicle))
                     flipXDirection(vehicle);
@@ -69,19 +63,19 @@ public class CarController {
     // Calls the gas method for each car once
     void gas(int amount) {
         double gas = ((double) amount) / 100;
-        for (AbstractVehicle abstractVehicle : vehicles) {
+        for (AbstractVehicle abstractVehicle : model.getVehicles()) {
             abstractVehicle.gas(gas);
         }
     }
 
     void setTurboOn(){
-        for (AbstractVehicle av : vehicles) {
+        for (AbstractVehicle av : model.getVehicles()) {
             ((Saab95) av).toggleTurbo();
         }
     }
 
     void setTurboOff(){
-        for (AbstractVehicle av : vehicles) {
+        for (AbstractVehicle av : model.getVehicles()) {
             ((Saab95) av).toggleTurbo();
         }
     }
@@ -93,13 +87,13 @@ public class CarController {
      */
     // TODO: Add y
     private boolean isOutOfBounds(AbstractVehicle abstractVehicle){
-        return abstractVehicle.getXPos() + CAR_WIDTH > frame.getWidth() || abstractVehicle.getXPos() < 0;
+        return abstractVehicle.getXPos() + model.getCAR_WIDTH() > frame.getWidth() || abstractVehicle.getXPos() < 0;
     }
 
     // brake car
     void brake(int amount) {
         double brake = ((double) amount) / 100;
-        for (AbstractVehicle abstractVehicle : vehicles) {
+        for (AbstractVehicle abstractVehicle : model.getVehicles()) {
             abstractVehicle.brake(brake);
         }
     }
@@ -115,13 +109,13 @@ public class CarController {
     }
 
     void stopAllCars() {
-        for (AbstractVehicle v : vehicles) {
+        for (AbstractVehicle v : model.getVehicles()) {
             v.setCurrentSpeed(0);
         }
     }
 
     void startAllCars(int amount) {
-        for (AbstractVehicle v : vehicles) {
+        for (AbstractVehicle v : model.getVehicles()) {
             if (v.getCurrentSpeed() == 0)
                 v.setCurrentSpeed(((double) amount) / 100);
         }
@@ -132,7 +126,7 @@ public class CarController {
      */
     void toggleTurbo() {
         List<Saab95> saabs = new ArrayList<>();
-        for (AbstractVehicle v : vehicles) {
+        for (AbstractVehicle v : model.getVehicles()) {
             if (v instanceof Saab95) {
                 saabs.add((Saab95) v);
             }
@@ -149,15 +143,11 @@ public class CarController {
     void setPlatformAngle(int angle) {
         //hardcoded because gui reasons...
         List<AbstractTruck> abstractTrucks = new ArrayList<>();
-        for (AbstractVehicle v : vehicles)
+        for (AbstractVehicle v : model.getVehicles())
             if (v instanceof AbstractTruck)
                 abstractTrucks.add((AbstractTruck) v);
 
         for (AbstractTruck abstractTruck : abstractTrucks)
             abstractTruck.getRamp().setAngle(angle);
-    }
-
-    public List<AbstractVehicle> getVehicles(){
-        return vehicles;
     }
 }
