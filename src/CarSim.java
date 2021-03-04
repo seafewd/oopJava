@@ -1,7 +1,7 @@
 /**
  * Program entry point
  */
-public class Main {
+public class CarSim {
     /**
      * Main method
      * @param args None defined
