@@ -106,8 +106,12 @@ public class CarView extends JFrame{
         stopButton.setPreferredSize(new Dimension(X/5-15,200));
         this.add(stopButton);
 
-        // This actionListener is for the gas button only
-        // TODO: Create more for each component as necessary
+
+        // Listeners ****************************************************
+
+        /**
+         * Gas button
+         */
         gasButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -115,6 +119,9 @@ public class CarView extends JFrame{
             }
         });
 
+        /**
+         * Stop cars button
+         */
         stopButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -122,6 +129,9 @@ public class CarView extends JFrame{
             }
         });
 
+        /**
+         * Brake button
+         */
         brakeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -129,6 +139,9 @@ public class CarView extends JFrame{
             }
         });
 
+        /**
+         * Start cars button
+         */
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -137,7 +150,7 @@ public class CarView extends JFrame{
         });
 
         /**
-         * If button pressed set turbo on if the vehicle is a saab.jpg
+         * Turbo on button
          */
         turboOnButton.addActionListener(new ActionListener() {
             @Override
@@ -147,7 +160,7 @@ public class CarView extends JFrame{
         });
 
         /**
-         * If button pressed set turbo off if the vehicle is a saab.jpg
+         * Turbo off button
          */
         turboOffButton.addActionListener(new ActionListener() {
             @Override
@@ -157,8 +170,7 @@ public class CarView extends JFrame{
         });
 
         /**
-         * Raise platform
-         * Hardcoded because gui reasons
+         * Raise platform button
          */
         liftBedButton.addActionListener(new ActionListener() {
             @Override
@@ -168,8 +180,7 @@ public class CarView extends JFrame{
         });
 
         /**
-         * Raise platform
-         * Hardcoded because gui reasons
+         * Lower platform
          */
         lowerBedButton.addActionListener(new ActionListener() {
             @Override
@@ -179,7 +190,7 @@ public class CarView extends JFrame{
         });
 
         /**
-         * Add car
+         * Add car button
          */
         addCarButton.addActionListener(new ActionListener() {
             @Override
@@ -190,15 +201,17 @@ public class CarView extends JFrame{
         });
 
         /**
-         * Remove car
+         * Remove car button
          */
         removeCarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Remove car");
-                //carC.removeCar();
+                //carC.removeCar(AbstractVehicle v);
             }
         });
+
+        // End listeners ****************************************************
 
         // Make the frame pack all it's components by respecting the sizes if possible.
         this.pack();
@@ -211,5 +224,6 @@ public class CarView extends JFrame{
         this.setVisible(true);
         // Make sure the frame exits when "x" is pressed
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
     }
 }

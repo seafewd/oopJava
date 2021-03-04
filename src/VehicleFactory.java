@@ -1,7 +1,5 @@
 public class VehicleFactory {
 
-    AbstractVehicle av;
-
     public VehicleFactory() {
 
     }
@@ -20,6 +18,8 @@ public class VehicleFactory {
      * @return
      */
     public AbstractVehicle createVehicleWithNoPosition(String v) {
+        AbstractVehicle av = null;
+
         switch (v) {
             case "Saab":
                 av = new Saab95();
@@ -49,6 +49,8 @@ public class VehicleFactory {
      * @return
      */
     public AbstractVehicle createVehicleWithNoPosition(String v, int xPos, int yPos) {
+        AbstractVehicle av = null;
+
         switch (v) {
             case "Saab":
                 av = new Saab95(xPos, yPos);
