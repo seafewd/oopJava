@@ -25,6 +25,7 @@ public class DrawPanel extends JPanel{
     void paint(){
         //updateImage();
         repaint();
+
     }
 
     void updateImage(AbstractVehicle vehicle){
