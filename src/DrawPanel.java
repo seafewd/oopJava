@@ -22,11 +22,7 @@ public class DrawPanel extends JPanel{
     Point saabPoint = new Point();
     Point scaniaPoint = new Point();
 
-    void paint(){
-        //updateImage();
-        repaint();
 
-    }
 
     void updateImage(AbstractVehicle vehicle){
         try {
