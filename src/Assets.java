@@ -13,7 +13,7 @@ public class Assets {
      * Dictionary to link a vehicle/movable to an image
      * For example, a volvo240 should have a specific image of a volvo, etc
      */
-    private final static Map<Object, Image> objectImageMap = new HashMap<Object, Image>();
+    private final static Map<Object, BufferedImage> objectImageMap = new HashMap<Object, BufferedImage>();
 
     /**
      * Constructor.
@@ -51,7 +51,7 @@ public class Assets {
         }
     }
 
-    public Image getAssociatedImage(Object object){
+    public BufferedImage getAssociatedImage(Object object){
         /*
         pseudo:
         1. Get the right image by passing in the given object as key to the map
@@ -60,7 +60,7 @@ public class Assets {
            else:
                 return the image bound to the class of the object
          */
-        Image image = objectImageMap.get(object);
+        BufferedImage image = objectImageMap.get(object);
 
         if (image == null) {
             return objectImageMap.get(object.getClass());  // .. if fail, check if class bound
