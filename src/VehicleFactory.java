@@ -4,18 +4,29 @@ public class VehicleFactory {
 
     }
 
+    /**
+     * Create vehicle wrapper
+     * @param v vehicle type
+     * @return AbstractVehicle
+     */
     public AbstractVehicle createVehicle(String v) {
         return createVehicleWithNoPosition(v);
     }
 
+    /**
+     * Create vehicle wrapper
+     * Handles position
+     * @param v vehicle type
+     * @return AbstractVehicle
+     */
     public AbstractVehicle createVehicle(String v, int xPos, int yPos) {
         return createVehicleWithNoPosition(v, xPos, yPos);
     }
 
     /**
      * Create a vehicle with no position
-     * @param v
-     * @return
+     * @param v vehicle type
+     * @return AbstractVehicle
      */
     public AbstractVehicle createVehicleWithNoPosition(String v) {
         AbstractVehicle av = null;
@@ -45,8 +56,8 @@ public class VehicleFactory {
 
     /**
      * Create a vehicle with position
-     * @param v
-     * @return
+     * @param v vehicle type
+     * @return AbstractVehicle
      */
     public AbstractVehicle createVehicleWithNoPosition(String v, int xPos, int yPos) {
         AbstractVehicle av = null;
