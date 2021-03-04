@@ -1,7 +1,8 @@
-import javafx.scene.image.Image;
-import javafx.scene.media.AudioClip;
-import javafx.scene.paint.Color;
-
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,7 +41,7 @@ public class Assets {
            else:
                 throw exception
          */
-        Image image = getImage(imageFileName); // image of movable
+        BufferedImage image = getImage(imageFileName); // image of movable
 
         if(image != null){
             objectImageMap.put(object, image);
@@ -70,10 +71,19 @@ public class Assets {
 
     // Helpers ------
 
-    private Image getImage(String fileName){return new Image(IMAGE_DIR + fileName);}
-
-    private Image getImage(String fileName, int width, int height){
-        return new Image(IMAGE_DIR + fileName, width, height, true, true);
+    private BufferedImage getImage(String fileName){
+        try{
+            return ImageIO.read(Assets.class.getResourceAsStream(IMAGE_DIR + fileName));
+        }
+        catch(IOException ex){
+            ex.printStackTrace();
+            return null;
+        }
     }
 
+    /*
+    private BufferedImage getImage(String fileName, int width, int height){
+        return new BufferedImage(IMAGE_DIR + fileName, width, height, true, true);
+    }
+    */
 }
