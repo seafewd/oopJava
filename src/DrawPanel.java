@@ -11,7 +11,7 @@ public class DrawPanel extends JPanel{
     Assets assets = new Assets();
     // Just a single image, TODO: Generalize
     BufferedImage vehicleImage;
-    Point vehiclePosition;
+    Point vehiclePosition = new Point();
 
 
     BufferedImage volvoImage;
@@ -31,6 +31,8 @@ public class DrawPanel extends JPanel{
             System.out.println("Missing image");
         }
     }
+
+
 
     // TODO: Make this genereal for all cars
     void moveit(int x, int y, AbstractVehicle vehicle){
@@ -86,7 +88,7 @@ public class DrawPanel extends JPanel{
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(vehicleImage, volvoPoint.x, volvoPoint.y, null);
+        g.drawImage(vehicleImage, vehiclePosition.x, vehiclePosition.y, null);
         //g.drawImage(volvoImage, volvoPoint.x, volvoPoint.y, null); // see javadoc for more info on the parameters
         //g.drawImage(saabImage, saabPoint.x, saabPoint.y, null); // see javadoc for more info on the parameters
         //g.drawImage(scaniaImage, scaniaPoint.x, scaniaPoint.y, null); // see javadoc for more info on the parameters
@@ -95,7 +97,4 @@ public class DrawPanel extends JPanel{
     public BufferedImage getImage() {
         return volvoImage;
     }
-
-
-
 }

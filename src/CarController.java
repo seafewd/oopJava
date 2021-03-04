@@ -53,6 +53,7 @@ public class CarController {
                     flipXDirection(vehicle);
                 int x = (int) Math.round(vehicle.getXPos());
                 int y = (int) Math.round(vehicle.getYPos());
+                frame.drawPanel.updateImage(vehicle);
                 frame.drawPanel.moveit(x, y, vehicle);
                 // repaint() calls the paintComponent method of the panel
                 frame.drawPanel.repaint();
