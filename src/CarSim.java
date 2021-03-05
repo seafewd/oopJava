@@ -7,6 +7,12 @@ public class CarSim {
      * @param args None defined
      */
     public static void main(String[] args) {
+
+        CarModel carModel = new CarModel();
+        CarController carController = new CarController(carModel);
+        CarView carView = new CarView("kûken", carController, carModel);
+
+
 /*
         CarController cc = new CarController();
         CarView view = new CarView("View", cc);

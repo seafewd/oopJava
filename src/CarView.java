@@ -4,6 +4,7 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 /**
  * This class represents the full view of the MVC pattern of your car simulator.
@@ -18,9 +19,9 @@ public class CarView extends JFrame{
     private static final int Y = 700;
 
     // The controller member
-    CarController carC;
-
-    DrawPanel drawPanel = new DrawPanel(X, Y-240);
+    CarController carController;
+    CarModel carModel;
+    DrawPanel drawPanel;
 
     JPanel controlPanel = new JPanel();
 
@@ -43,14 +44,35 @@ public class CarView extends JFrame{
     JButton startButton = new JButton("Start all cars");
     JButton stopButton = new JButton("Stop all cars");
 
-    public void draw(){
-        //drawPanel.updateImage();
-    }
+    // The timer is started with an listener (see below) that executes the statements
+    // each step between delays.
+    // The delay (ms) corresponds to 20 updates a sec (hz)
+    private final int delay = 10;
+    private Timer timer = new Timer(delay, new TimerListener());
+
 
     // Constructor
-    public CarView(String framename, CarController cc){
-        this.carC = cc;
+    public CarView(String framename, CarController carController, CarModel carModel){
+        this.carController = carController;
+        this.carModel = carModel;
+        this.drawPanel = new DrawPanel(X, Y-240, carModel);
         initComponents(framename);
+        startTimer();
+    }
+
+    public void startTimer(){
+        timer.start();
+    }
+
+
+    /* Each step the TimerListener moves all the cars in the list and tells the
+     * view to update its images. Change this method to your needs.
+     * */
+    private class TimerListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            carModel.update();
+            drawPanel.repaint();
+        }
     }
 
     // Sets everything in place and fits everything
@@ -62,7 +84,6 @@ public class CarView extends JFrame{
         this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
 
         this.add(drawPanel);
-
 
 
         SpinnerModel spinnerModel =
@@ -119,7 +140,7 @@ public class CarView extends JFrame{
         gasButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.gas(gasAmount);
+                carController.gas(gasAmount);
             }
         });
 
@@ -129,7 +150,7 @@ public class CarView extends JFrame{
         stopButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.stopAllCars();
+                carController.stopAllCars();
             }
         });
 
@@ -139,7 +160,7 @@ public class CarView extends JFrame{
         brakeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.brake(brakeAmount);
+                carController.brake(brakeAmount);
             }
         });
 
@@ -149,7 +170,7 @@ public class CarView extends JFrame{
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.startAllCars(gasAmount);
+                carController.startAllCars(gasAmount);
             }
         });
 
@@ -159,7 +180,7 @@ public class CarView extends JFrame{
         turboOnButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.toggleTurbo();
+                carController.toggleTurbo();
             }
         });
 
@@ -169,7 +190,7 @@ public class CarView extends JFrame{
         turboOffButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.toggleTurbo();
+                carController.toggleTurbo();
             }
         });
 
@@ -179,7 +200,7 @@ public class CarView extends JFrame{
         liftBedButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.setPlatformAngle(70);
+                carController.setPlatformAngle(70);
             }
         });
 
@@ -189,7 +210,7 @@ public class CarView extends JFrame{
         lowerBedButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.setPlatformAngle(0);
+                carController.setPlatformAngle(0);
             }
         });
 
@@ -200,7 +221,7 @@ public class CarView extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Add car");
-                carC.vFactory.createVehicle("Volvo");
+                carController.vFactory.createVehicle("Volvo");
             }
         });
 
@@ -230,4 +251,6 @@ public class CarView extends JFrame{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     }
+
+
 }
