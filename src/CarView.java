@@ -4,6 +4,8 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * This class represents the full view of the MVC pattern of your car simulator.
@@ -195,8 +197,24 @@ public class CarView extends JFrame{
         addCarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Add car");
-                carC.vFactory.createVehicle("Volvo");
+                String[] options = {"Volvo 240", "Saab 95", "Scania", "Volvo Truck", "Random vehicle"};
+                /* Scuffed...
+                Map<String, Integer> map = new HashMap<>();
+                map.put("Volvo 240", 0);
+                map.put("Saab 95", 1);
+                map.put("Scania", 2);
+                map.put("Volvo Truck", 3);
+                */
+                String result = (String) JOptionPane.showInputDialog(
+                    drawPanel,
+                    "Which vehicle would you like to add?",
+                    "Add vehicle",
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    options,    // options array
+                    options[0]                  // initial state
+                );
+                carC.addVehicle(result);
             }
         });
 

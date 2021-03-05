@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class VehicleFactory {
 
     public VehicleFactory() {
@@ -34,16 +36,19 @@ public class VehicleFactory {
         switch (v) {
             case "Saab":
                 av = new Saab95();
+                System.out.println("created a Saab 95");
                 break;
             case "Volvo":
                 av = new Volvo240();
-                System.out.println("created a volvo kuk40");
+                System.out.println("created a Volvo 240");
                 break;
             case "Scania":
                 av = new Scania();
+                System.out.println("created a Scania");
                 break;
             case "VolvoTruck":
                 av = new VolvoTruck();
+                System.out.println("created a Volvo Truck");
                 break;
             case "Ferry":
                 av = new BoatyMcBoatFace();

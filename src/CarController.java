@@ -150,4 +150,17 @@ public class CarController {
         for (AbstractTruck abstractTruck : abstractTrucks)
             abstractTruck.getRamp().setAngle(angle);
     }
+
+    public AbstractVehicle addVehicle(String option) {
+        AbstractVehicle av;
+        switch (option) {
+            case "Volvo 240" -> av = model.getVehicleFactory().createVehicle("Volvo");
+            case "Saab 95" -> av = model.getVehicleFactory().createVehicle("Saab");
+            case "Scania" -> av = model.getVehicleFactory().createVehicle("Scania");
+            case "Volvo Truck" -> av = model.getVehicleFactory().createVehicle("VolvoTruck");
+            case "Random vehicle" -> av = model.getVehicleFactory().createVehicle("Volvo");
+            default -> throw new IllegalArgumentException("Couldn't create car!");
+        }
+        return av;
+    }
 }
