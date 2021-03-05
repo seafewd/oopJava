@@ -79,7 +79,7 @@ public abstract class AbstractMovable implements Movable {
      * The speed is the magnitude of the the velocity vector
      * @return Current speed
      */
-    protected double getCurrentSpeed(){
+    public double getCurrentSpeed(){
         return currentSpeed;
     }
 
@@ -89,7 +89,7 @@ public abstract class AbstractMovable implements Movable {
      * @return direction
      */
 
-    protected double[] getDirection(){
+    public double[] getDirection(){
         return direction;
     }
 

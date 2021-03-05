@@ -2,8 +2,6 @@ import java.awt.*;
 
 public class BoatyMcBoatFace extends AbstractFerry {
 
-    private Loader<AbstractCar> loader;
-
     public BoatyMcBoatFace() {
         super(5, 3000, 0, Color.BLACK, "BoatyMcBoatFace", 90000, 20);
     }
