@@ -5,7 +5,7 @@ import java.awt.*;
  * Extends Vehicle which implements Movable
  */
 
-public class Saab95 extends AbstractCar implements Car, Transportable {
+public class Saab95 extends AbstractCar implements Transportable {
     private final Turbo turbo;
 
     /**
