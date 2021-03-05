@@ -67,6 +67,7 @@ public class CarView extends JFrame {
         public void actionPerformed(ActionEvent e) {
             carModel.update();
             drawPanel.repaint();
+            carModel.checkIfOutOfBounds(CarView.X);
         }
     }
 

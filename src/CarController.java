@@ -17,7 +17,7 @@ public class CarController {
     VehicleFactory vFactory;
     List<AbstractVehicle> vehicles;
 
-    public final int VEHICLE_SPACING = 30;
+    public final int VEHICLE_SPACING = 65;
 
 
     public CarController(CarModel model){
@@ -44,20 +44,6 @@ public class CarController {
             ((Saab95) av).toggleTurbo();
         }
     }
-
-    /**
-     * Only checks X-axis
-     * @param
-     * @return
-     */
-    // TODO: move to model
-
-    /*
-    private boolean isOutOfBounds(AbstractVehicle abstractVehicle){
-        return abstractVehicle.getXPos() + model.getCAR_WIDTH() > frame.getWidth() || abstractVehicle.getXPos() < 0;
-    }
-
-     */
 
     // brake car
     void brake(int amount) {
