@@ -57,13 +57,8 @@ public class CarView extends JFrame{
         this.carModel = carModel;
         this.drawPanel = new DrawPanel(X, Y-240, carModel);
         initComponents(framename);
-        startTimer();
-    }
-
-    public void startTimer(){
         timer.start();
     }
-
 
     /* Each step the TimerListener moves all the cars in the list and tells the
      * view to update its images. Change this method to your needs.

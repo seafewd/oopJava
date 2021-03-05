@@ -1,9 +1,6 @@
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.util.ArrayList;
 import java.util.List;
 
 // This panel represent the animated part of the view with the car images.
@@ -12,11 +9,7 @@ public class DrawPanel extends JPanel{
 
     List<AbstractVehicle> vehicleList;
     Assets assets = new Assets();
-    CarController ccRef;
-
-    // Just a single image, TODO: Generalize
     BufferedImage vehicleImage;
-
 
     void updateImage(AbstractVehicle vehicle){
         try {

@@ -12,10 +12,6 @@ import java.util.List;
 
 public class CarController {
 
-    // member fields:
-
-
-
     // View, Model and Vehicle Factory
     CarModel model;
     VehicleFactory vFactory;
@@ -52,7 +48,7 @@ public class CarController {
      * @param
      * @return
      */
-    // TODO: Add y
+    // TODO: move to model
 
     /*
     private boolean isOutOfBounds(AbstractVehicle abstractVehicle){
