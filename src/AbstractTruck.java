@@ -14,18 +14,36 @@ public abstract class AbstractTruck extends AbstractVehicle {
      */
     private final Loader<AbstractCar> loader;
 
+    VehicleState rampRaised;
+    VehicleState rampLowered;
+
+    VehicleState vehicleState;
+
 
     public AbstractTruck(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, int weight, int loadingDistance) {
         super(nrDoors, enginePower, currentSpeed, color, modelName, weight);
         this.ramp = new Ramp(this);
         this.loader = new Loader<>(loadingDistance);
+        rampRaised = new RampRaised(this);
+        rampLowered = new RampLowered(this);
+        vehicleState = rampRaised;
     }
 
     public AbstractTruck(int xPos, int yPos, int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, int weight, int loadingDistance) {
         super(xPos, yPos, nrDoors, enginePower, currentSpeed, color, modelName, weight);
         this.ramp = new Ramp(this);
         this.loader = new Loader<>(loadingDistance);
+        rampRaised = new RampRaised(this);
+        rampLowered = new RampLowered(this);
+        vehicleState = rampRaised;
     }
+
+    void setVehicleState(VehicleState newVehicleState) {
+        vehicleState = newVehicleState;
+    }
+
+    public VehicleState getRampRaisedState() { return rampRaised; }
+    public VehicleState getRampLoweredState() { return rampLowered; }
 
     /**
      * Check if car is close enough to the transport to be able to be loaded onto it
@@ -47,9 +65,16 @@ public abstract class AbstractTruck extends AbstractVehicle {
      * Require that the truck platform is down in order to increment speed
      * @param amount The amount with which to increment
      */
-    @Override
+/*    @Override
     protected void incrementSpeed(double amount){
         if (ramp.getAngle() == 0)
+            super.incrementSpeed(amount);
+        else
+            System.out.println("Can't move unless platform angle is 0");
+    }*/
+    @Override
+    protected void incrementSpeed(double amount){
+        if (getRampRaisedState() == RampRaised)
             super.incrementSpeed(amount);
         else
             System.out.println("Can't move unless platform angle is 0");
@@ -107,8 +132,13 @@ public abstract class AbstractTruck extends AbstractVehicle {
      */
     @Override
     public void move() {
-        super.move();
-        moveLoad();
+        if (getRamp().getAngle() > 0) {
+            vehicleState = rampLowered;
+        } else {
+            vehicleState = rampRaised;
+            super.move();
+            moveLoad();
+        }
     }
 
     /**
