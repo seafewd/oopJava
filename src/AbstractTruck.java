@@ -14,10 +14,10 @@ public abstract class AbstractTruck extends AbstractVehicle {
      */
     private final Loader<AbstractCar> loader;
 
-    VehicleState rampRaised;
-    VehicleState rampLowered;
+    private VehicleState rampRaised;
+    private VehicleState rampLowered;
 
-    VehicleState vehicleState;
+    private VehicleState vehicleState;
 
 
     public AbstractTruck(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, int weight, int loadingDistance) {
@@ -38,10 +38,9 @@ public abstract class AbstractTruck extends AbstractVehicle {
         vehicleState = rampRaised;
     }
 
-    void setVehicleState(VehicleState newVehicleState) {
-        vehicleState = newVehicleState;
-    }
+    public void setVehicleState(VehicleState newVehicleState) { vehicleState = newVehicleState; }
 
+    public VehicleState getVehicleState() { return vehicleState; }
     public VehicleState getRampRaisedState() { return rampRaised; }
     public VehicleState getRampLoweredState() { return rampLowered; }
 
@@ -74,7 +73,7 @@ public abstract class AbstractTruck extends AbstractVehicle {
     }*/
     @Override
     protected void incrementSpeed(double amount){
-        if (getRampRaisedState() == RampRaised)
+        if (ramp.getAngle() == 0)
             super.incrementSpeed(amount);
         else
             System.out.println("Can't move unless platform angle is 0");

@@ -1,14 +1,14 @@
 public class RampLowered implements VehicleState {
 
-    AbstractVehicle vehicle;
+    AbstractTruck truck;
 
-    public RampLowered(AbstractVehicle vehicle) {
-        this.vehicle = vehicle;
+    public RampLowered(AbstractTruck truck) {
+        this.truck = truck;
     }
-
     @Override
     public void raiseRamp() {
         System.out.println("Raising ramp");
+        truck.setVehicleState(truck.getRampRaisedState());
     }
 
     @Override
