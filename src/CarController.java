@@ -163,4 +163,12 @@ public class CarController {
         }
         return av;
     }
+
+    public boolean removeVehicle(AbstractVehicle av) {
+        return model.getVehicles().remove(av);
+    }
+
+    public boolean vehicleListFull() {
+        return model.getVehicles().size() >= model.getVehicleFactory().MAX_CARS;
+    }
 }

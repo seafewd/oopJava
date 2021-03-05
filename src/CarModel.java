@@ -11,7 +11,7 @@ public class CarModel {
 
     public CarModel() {
 
-        this.vehicleFactory = new VehicleFactory();
+        this.vehicleFactory = new VehicleFactory(this);
         // create vehicles
         this.getVehicles().add(getVehicleFactory().createVehicle("Volvo", 0, 0));
         this.getVehicles().add(getVehicleFactory().createVehicle("Saab", 0, 100));

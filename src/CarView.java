@@ -4,8 +4,9 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Random;
 
 /**
  * This class represents the full view of the MVC pattern of your car simulator.
@@ -197,6 +198,14 @@ public class CarView extends JFrame{
         addCarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
+                // check if able to add cars
+                if (carC.vehicleListFull()) {
+                    JFrame frame = new JFrame();
+                    JOptionPane.showMessageDialog(frame,"The vehicle list is full.\nYou can only have up to 10 vehicles.");
+                    return;
+                }
+
                 String[] options = {"Volvo 240", "Saab 95", "Scania", "Volvo Truck", "Random vehicle"};
                 /* Scuffed...
                 Map<String, Integer> map = new HashMap<>();
@@ -224,8 +233,9 @@ public class CarView extends JFrame{
         removeCarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Remove car");
-                //carC.removeCar(AbstractVehicle v);
+                // remove a random car LMAO
+                Random rand = new Random();
+                carC.removeVehicle(carC.model.getVehicles().get(rand.nextInt(carC.model.getVehicles().size()+1)));
             }
         });
 

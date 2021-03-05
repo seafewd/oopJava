@@ -1,9 +1,12 @@
 import java.util.Random;
 
 public class VehicleFactory {
+    CarModel model;
 
-    public VehicleFactory() {
+    public final int MAX_CARS = 10;
 
+    public VehicleFactory(CarModel model) {
+        this.model = model;
     }
 
     /**
@@ -12,7 +15,9 @@ public class VehicleFactory {
      * @return AbstractVehicle
      */
     public AbstractVehicle createVehicle(String v) {
-        return createVehicleWithNoPosition(v);
+        AbstractVehicle av = createVehicleWithNoPosition(v);
+        model.getVehicles().add(av);
+        return av;
     }
 
     /**
@@ -22,7 +27,9 @@ public class VehicleFactory {
      * @return AbstractVehicle
      */
     public AbstractVehicle createVehicle(String v, int xPos, int yPos) {
-        return createVehicleWithNoPosition(v, xPos, yPos);
+        AbstractVehicle av = createVehicleWithNoPosition(v, xPos, yPos);
+        model.getVehicles().add(av);
+        return av;
     }
 
     /**
@@ -73,7 +80,7 @@ public class VehicleFactory {
                 break;
             case "Volvo":
                 av = new Volvo240(xPos, yPos);
-                System.out.println("created a volvo kuk40");
+                System.out.println("created a Volvo 240");
                 break;
             case "Scania":
                 av = new Scania(xPos, yPos);
