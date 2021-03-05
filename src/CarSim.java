@@ -10,7 +10,7 @@ public class CarSim {
 
         CarModel carModel = new CarModel();
         CarController carController = new CarController(carModel);
-        CarView carView = new CarView("kûken", carController, carModel);
+        CarView carView = new CarView("Totally amazing and fun car simulation", carController, carModel);
 
 
 /*
