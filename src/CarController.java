@@ -68,10 +68,10 @@ public class CarController {
             v.move();
             if(isOutOfBounds(v))
                 flipXDirection(v);
-            int x = (int) Math.round(v.getXPos());
-            int y = (int) Math.round(v.getYPos());
-            frame.drawPanel.updateImage(v);
-            frame.drawPanel.moveit(x, y, v);
+            //int x = (int) Math.round(v.getXPos());
+            //int y = (int) Math.round(v.getYPos());
+            //frame.drawPanel.updateImage(v);
+            //frame.drawPanel.moveit(x, y, v);
             // repaint() calls the paintComponent method of the panel
             frame.drawPanel.repaint();
              
