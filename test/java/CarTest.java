@@ -101,8 +101,8 @@ public class CarTest {
         Assertions.assertEquals(0, saab.xPos);
         Assertions.assertEquals(-0.1, saab.yPos);
 
-        saab.xPos = 0.2;
-        saab.yPos = 0.2;
+       /* saab.xPos = 0.2;
+        saab.yPos = 0.2;*/
         saab.direction[0] = -1;
         saab.direction[1] = 0;
 

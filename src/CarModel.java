@@ -22,6 +22,13 @@ public class CarModel {
         return CAR_WIDTH;
     }
 
+    public void update(){
+        for (AbstractVehicle vehicle : vehicles
+             ) {
+            vehicle.move();
+        }
+    }
+
     public List<AbstractVehicle> getVehicles() {
         return vehicles;
     }

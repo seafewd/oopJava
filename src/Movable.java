@@ -9,23 +9,23 @@ public interface Movable {
      * Get X pos
      * @return xPos
      */
-    double getXPos();
+    int getXPos();
 
     /**
      * Get Y pos
      * @return yPos
      */
-    double getYPos();
+    int getYPos();
 
     /**
      * Set X pos
      */
-    void setXPos(double xPos);
+    void setXPos(int xPos);
 
     /**
      * Set X pos
      */
-    void setYPos(double yPos);
+    void setYPos(int yPos);
 
     /**
      * Move object

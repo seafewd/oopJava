@@ -12,52 +12,17 @@ import java.util.List;
 
 public class CarController {
 
-    // member fields:
-
-    // The delay (ms) corresponds to 20 updates a sec (hz)
-    private final int delay = 10;
-    // The timer is started with an listener (see below) that executes the statements
-    // each step between delays.
-    private Timer timer = new Timer(delay, new TimerListener());
-
     // View, Model and Vehicle Factory
-    CarView frame;
     CarModel model;
     VehicleFactory vFactory;
+    List<AbstractVehicle> vehicles;
 
-    //methods:
+    public final int VEHICLE_SPACING = 30;
 
-    public static void main(String[] args) {
-        // Instance of this class
-        CarController cc = new CarController();
 
-        // Start a new view and send a reference of self
-        cc.frame = new CarView("CarSim 1.0", cc);
-        cc.model = new CarModel();
-
-        for (AbstractVehicle v:cc.model.getVehicles())
-            System.out.println(v.getYPos());
-
-        // Start the timer
-        cc.timer.start();
-    }
-
-    /* Each step the TimerListener moves all the cars in the list and tells the
-    * view to update its images. Change this method to your needs.
-    * */
-    private class TimerListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            for (AbstractVehicle vehicle : model.getVehicles()) {
-                vehicle.move();
-                if(isOutOfBounds(vehicle))
-                    flipXDirection(vehicle);
-                int x = (int) Math.round(vehicle.getXPos());
-                int y = (int) Math.round(vehicle.getYPos());
-                frame.drawPanel.moveit(x, y, vehicle);
-                // repaint() calls the paintComponent method of the panel
-                frame.drawPanel.repaint();
-            }
-        }
+    public CarController(CarModel model){
+        this.model = model;
+        vehicles = model.getVehicles();
     }
 
     // Calls the gas method for each car once
@@ -82,13 +47,17 @@ public class CarController {
 
     /**
      * Only checks X-axis
-     * @param abstractVehicle
+     * @param
      * @return
      */
-    // TODO: Add y
+    // TODO: move to model
+
+    /*
     private boolean isOutOfBounds(AbstractVehicle abstractVehicle){
         return abstractVehicle.getXPos() + model.getCAR_WIDTH() > frame.getWidth() || abstractVehicle.getXPos() < 0;
     }
+
+     */
 
     // brake car
     void brake(int amount) {
@@ -153,12 +122,18 @@ public class CarController {
 
     public AbstractVehicle addVehicle(String option) {
         AbstractVehicle av;
+        List<AbstractVehicle> vs = model.getVehicles();
+        int lastVehicleYPosition;
+        if (!vs.isEmpty())
+            lastVehicleYPosition = vs.get(vs.size()-1).getYPos() + VEHICLE_SPACING;
+        else
+            lastVehicleYPosition = 0;
         switch (option) {
-            case "Volvo 240" -> av = model.getVehicleFactory().createVehicle("Volvo");
-            case "Saab 95" -> av = model.getVehicleFactory().createVehicle("Saab");
-            case "Scania" -> av = model.getVehicleFactory().createVehicle("Scania");
-            case "Volvo Truck" -> av = model.getVehicleFactory().createVehicle("VolvoTruck");
-            case "Random vehicle" -> av = model.getVehicleFactory().createVehicle("Volvo");
+            case "Volvo 240" -> av = model.getVehicleFactory().createVehicle("Volvo", 0, lastVehicleYPosition);
+            case "Saab 95" -> av = model.getVehicleFactory().createVehicle("Saab", 0, lastVehicleYPosition);
+            case "Scania" -> av = model.getVehicleFactory().createVehicle("Scania", 0, lastVehicleYPosition);
+            case "Volvo Truck" -> av = model.getVehicleFactory().createVehicle("VolvoTruck", 0, lastVehicleYPosition);
+            case "Random vehicle" -> av = model.getVehicleFactory().createVehicle("Volvo", 0, lastVehicleYPosition);
             default -> throw new IllegalArgumentException("Couldn't create car!");
         }
         return av;
@@ -170,5 +145,9 @@ public class CarController {
 
     public boolean vehicleListFull() {
         return model.getVehicles().size() >= model.getVehicleFactory().MAX_CARS;
+    }
+
+    public boolean vehicleListEmpty() {
+        return model.getVehicles().isEmpty();
     }
 }

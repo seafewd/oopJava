@@ -72,8 +72,8 @@ public abstract class AbstractTruck extends AbstractVehicle {
      * @param vehiclesToUnload number of vehicles to unload
      */
     public void unload(int vehiclesToUnload) {
-        double loaderXPos = this.getXPos();
-        double loaderYPos = this.getYPos();
+        int loaderXPos = this.getXPos();
+        int loaderYPos = this.getYPos();
         Collection<AbstractCar> load = loader.getLoad();
         Iterator<AbstractCar> it = load.iterator();
 

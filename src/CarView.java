@@ -4,9 +4,7 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Random;
+import java.util.List;
 
 /**
  * This class represents the full view of the MVC pattern of your car simulator.
@@ -16,14 +14,14 @@ import java.util.Random;
  * TODO: Write more actionListeners and wire the rest of the buttons
  **/
 
-public class CarView extends JFrame{
+public class CarView extends JFrame {
     private static final int X = 1200;
     private static final int Y = 700;
 
     // The controller member
-    CarController carC;
-
-    DrawPanel drawPanel = new DrawPanel(X, Y-240);
+    CarController carController;
+    CarModel carModel;
+    DrawPanel drawPanel;
 
     JPanel controlPanel = new JPanel();
 
@@ -46,10 +44,30 @@ public class CarView extends JFrame{
     JButton startButton = new JButton("Start all cars");
     JButton stopButton = new JButton("Stop all cars");
 
+    // The timer is started with an listener (see below) that executes the statements
+    // each step between delays.
+    // The delay (ms) corresponds to 20 updates a sec (hz)
+    private final int delay = 10;
+    private Timer timer = new Timer(delay, new TimerListener());
+
+
     // Constructor
-    public CarView(String framename, CarController cc){
-        this.carC = cc;
+    public CarView(String framename, CarController carController, CarModel carModel){
+        this.carController = carController;
+        this.carModel = carModel;
+        this.drawPanel = new DrawPanel(X, Y-240, carModel);
         initComponents(framename);
+        timer.start();
+    }
+
+    /* Each step the TimerListener moves all the cars in the list and tells the
+     * view to update its images. Change this method to your needs.
+     * */
+    private class TimerListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            carModel.update();
+            drawPanel.repaint();
+        }
     }
 
     // Sets everything in place and fits everything
@@ -61,7 +79,6 @@ public class CarView extends JFrame{
         this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
 
         this.add(drawPanel);
-
 
 
         SpinnerModel spinnerModel =
@@ -118,7 +135,7 @@ public class CarView extends JFrame{
         gasButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.gas(gasAmount);
+                carController.gas(gasAmount);
             }
         });
 
@@ -128,7 +145,7 @@ public class CarView extends JFrame{
         stopButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.stopAllCars();
+                carController.stopAllCars();
             }
         });
 
@@ -138,7 +155,7 @@ public class CarView extends JFrame{
         brakeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.brake(brakeAmount);
+                carController.brake(brakeAmount);
             }
         });
 
@@ -148,7 +165,7 @@ public class CarView extends JFrame{
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.startAllCars(gasAmount);
+                carController.startAllCars(gasAmount);
             }
         });
 
@@ -158,7 +175,7 @@ public class CarView extends JFrame{
         turboOnButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.toggleTurbo();
+                carController.toggleTurbo();
             }
         });
 
@@ -168,7 +185,7 @@ public class CarView extends JFrame{
         turboOffButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.toggleTurbo();
+                carController.toggleTurbo();
             }
         });
 
@@ -178,7 +195,7 @@ public class CarView extends JFrame{
         liftBedButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.setPlatformAngle(70);
+                carController.setPlatformAngle(70);
             }
         });
 
@@ -188,7 +205,7 @@ public class CarView extends JFrame{
         lowerBedButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.setPlatformAngle(0);
+                carController.setPlatformAngle(0);
             }
         });
 
@@ -200,7 +217,7 @@ public class CarView extends JFrame{
             public void actionPerformed(ActionEvent e) {
 
                 // check if able to add cars
-                if (carC.vehicleListFull()) {
+                if (carController.vehicleListFull()) {
                     JFrame frame = new JFrame();
                     JOptionPane.showMessageDialog(frame,"The vehicle list is full.\nYou can only have up to 10 vehicles.");
                     return;
@@ -223,7 +240,7 @@ public class CarView extends JFrame{
                     options,    // options array
                     options[0]                  // initial state
                 );
-                carC.addVehicle(result);
+                carController.addVehicle(result);
             }
         });
 
@@ -233,9 +250,9 @@ public class CarView extends JFrame{
         removeCarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // remove a random car LMAO
-                Random rand = new Random();
-                carC.removeVehicle(carC.model.getVehicles().get(rand.nextInt(carC.model.getVehicles().size()+1)));
+                List<AbstractVehicle> cars = carController.model.getVehicles();
+                if (!carController.vehicleListEmpty())
+                    carController.removeVehicle(cars.get(cars.size()-1));
             }
         });
 
@@ -254,4 +271,6 @@ public class CarView extends JFrame{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     }
+
+
 }

@@ -13,12 +13,12 @@ public abstract class AbstractMovable implements Movable {
     /**
      * Current x-position
      */
-    protected double xPos;
+    protected int xPos;
 
     /**
      * Current y-position
      */
-    protected double yPos;
+    protected int yPos;
 
     /**
      * The direction the Vehicle is facing
@@ -107,7 +107,7 @@ public abstract class AbstractMovable implements Movable {
      * @return xPos
      */
     @Override
-    public double getXPos() {
+    public int getXPos() {
         return xPos;
     }
 
@@ -116,7 +116,7 @@ public abstract class AbstractMovable implements Movable {
      * @return yPos
      */
     @Override
-    public double getYPos(){
+    public int getYPos(){
         return yPos;
     }
 
@@ -124,7 +124,7 @@ public abstract class AbstractMovable implements Movable {
      * Set X pos
      */
     @Override
-    public void setXPos(double xPos) {
+    public void setXPos(int xPos) {
         this.xPos = xPos;
     }
 
@@ -132,7 +132,7 @@ public abstract class AbstractMovable implements Movable {
      * Set X pos
      */
     @Override
-    public void setYPos(double yPos) {
+    public void setYPos(int yPos) {
         this.yPos = yPos;
     }
 
