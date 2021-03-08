@@ -26,4 +26,10 @@ public class RampRaised implements VehicleState {
     public void brake() {
         System.out.println("Braking. RIP cargo");
     }
+
+    @Override
+    public boolean move() {
+        System.out.println("Moooooving");
+        return true;
+    }
 }

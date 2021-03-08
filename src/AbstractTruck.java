@@ -16,6 +16,7 @@ public abstract class AbstractTruck extends AbstractVehicle {
 
     private VehicleState rampRaised;
     private VehicleState rampLowered;
+    private VehicleState gas;
 
     private VehicleState vehicleState;
 
@@ -43,6 +44,7 @@ public abstract class AbstractTruck extends AbstractVehicle {
     public VehicleState getVehicleState() { return vehicleState; }
     public VehicleState getRampRaisedState() { return rampRaised; }
     public VehicleState getRampLoweredState() { return rampLowered; }
+    public VehicleState getGasState() { return gas; }
 
     /**
      * Check if car is close enough to the transport to be able to be loaded onto it
@@ -59,6 +61,14 @@ public abstract class AbstractTruck extends AbstractVehicle {
         return ramp;
     }
 
+    public void setRampAngle(int degrees) {
+        ramp.setAngle(degrees);
+        if (degrees == 0)
+            vehicleState = rampRaised;
+        else
+            vehicleState = rampLowered;
+    }
+
     /**
      * Increment speed
      * Require that the truck platform is down in order to increment speed
@@ -73,7 +83,7 @@ public abstract class AbstractTruck extends AbstractVehicle {
     }*/
     @Override
     protected void incrementSpeed(double amount){
-        if (ramp.getAngle() == 0)
+        if (vehicleState == rampRaised)
             super.incrementSpeed(amount);
         else
             System.out.println("Can't move unless platform angle is 0");
@@ -131,10 +141,7 @@ public abstract class AbstractTruck extends AbstractVehicle {
      */
     @Override
     public void move() {
-        if (getRamp().getAngle() > 0) {
-            vehicleState = rampLowered;
-        } else {
-            vehicleState = rampRaised;
+        if (vehicleState.move()) {
             super.move();
             moveLoad();
         }

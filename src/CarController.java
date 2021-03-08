@@ -103,7 +103,7 @@ public class CarController {
                 abstractTrucks.add((AbstractTruck) v);
 
         for (AbstractTruck abstractTruck : abstractTrucks)
-            abstractTruck.getRamp().setAngle(angle);
+            abstractTruck.setRampAngle(angle);
     }
 
     public AbstractVehicle addVehicle(String option) {
