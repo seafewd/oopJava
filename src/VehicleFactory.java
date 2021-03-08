@@ -1,5 +1,3 @@
-import java.util.Random;
-
 public class VehicleFactory {
     CarModel model;
 
@@ -15,7 +13,7 @@ public class VehicleFactory {
      * @return AbstractVehicle
      */
     public AbstractVehicle createVehicle(String v) {
-        AbstractVehicle av = createVehicleWithNoPosition(v);
+        AbstractVehicle av = createVehicleWithPosition(v);
         model.getVehicles().add(av);
         return av;
     }
@@ -27,7 +25,7 @@ public class VehicleFactory {
      * @return AbstractVehicle
      */
     public AbstractVehicle createVehicle(String v, int xPos, int yPos) {
-        AbstractVehicle av = createVehicleWithNoPosition(v, xPos, yPos);
+        AbstractVehicle av = createVehicleWithPosition(v, xPos, yPos);
         model.getVehicles().add(av);
         return av;
     }
@@ -37,15 +35,15 @@ public class VehicleFactory {
      * @param v vehicle type
      * @return AbstractVehicle
      */
-    public AbstractVehicle createVehicleWithNoPosition(String v) {
+    public AbstractVehicle createVehicleWithPosition(String v) {
         AbstractVehicle av = null;
 
         switch (v) {
-            case "Saab":
+            case "Saab 95":
                 av = new Saab95();
                 System.out.println("created a Saab 95");
                 break;
-            case "Volvo":
+            case "Volvo 240":
                 av = new Volvo240();
                 System.out.println("created a Volvo 240");
                 break;
@@ -53,7 +51,7 @@ public class VehicleFactory {
                 av = new Scania();
                 System.out.println("created a Scania");
                 break;
-            case "VolvoTruck":
+            case "Volvo Truck":
                 av = new VolvoTruck();
                 System.out.println("created a Volvo Truck");
                 break;
@@ -71,21 +69,21 @@ public class VehicleFactory {
      * @param v vehicle type
      * @return AbstractVehicle
      */
-    public AbstractVehicle createVehicleWithNoPosition(String v, int xPos, int yPos) {
+    public AbstractVehicle createVehicleWithPosition(String v, int xPos, int yPos) {
         AbstractVehicle av = null;
 
         switch (v) {
-            case "Saab":
+            case "Saab 95":
                 av = new Saab95(xPos, yPos);
                 break;
-            case "Volvo":
+            case "Volvo 240":
                 av = new Volvo240(xPos, yPos);
                 System.out.println("created a Volvo 240");
                 break;
             case "Scania":
                 av = new Scania(xPos, yPos);
                 break;
-            case "VolvoTruck":
+            case "Volvo Truck":
                 av = new VolvoTruck(xPos, yPos);
                 break;
             case "Ferry":
