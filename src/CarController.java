@@ -26,10 +26,13 @@ public class CarController {
     public final int VEHICLE_SPACING = 65;
 
 
-    public CarController(CarModel model, CarView view){
+    public CarController(CarModel model){
         this.model = model;
-        this.view = view;
+        this.view = new CarView("Totally amazing and fun car simulation", model);
         vehicles = model.getVehicles();
+
+
+        // Listeners ****************************************************
 
         view.addGasButtonListener(new ActionListener() {
             @Override
@@ -127,7 +130,9 @@ public class CarController {
                     removeVehicle(cars.get(cars.size()-1));
             }
         });
-}
+
+        // End listeners ****************************************************
+    }
 
 
     // Calls the gas method for each car once

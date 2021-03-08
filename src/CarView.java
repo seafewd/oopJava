@@ -136,12 +136,6 @@ public class CarView extends JFrame implements IObserver {
         stopButton.setPreferredSize(new Dimension(X/5-15,200));
         this.add(stopButton);
 
-
-        // Listeners ****************************************************
-
-
-        // End listeners ****************************************************
-
         // Make the frame pack all it's components by respecting the sizes if possible.
         this.pack();
 
