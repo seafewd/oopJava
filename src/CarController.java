@@ -14,13 +14,12 @@ import java.util.List;
 
 public class CarController {
 
-    private int GAS_AMOUNT = 100;
-    private int BRAKE_AMOUNT = 100;
+    private final int GAS_AMOUNT = 100;
+    private final int BRAKE_AMOUNT = 100;
 
     // View, Model and Vehicle Factory
     CarModel model;
     CarView view;
-    VehicleFactory vFactory;
     List<AbstractVehicle> vehicles;
 
 
@@ -120,7 +119,7 @@ public class CarController {
             }
         });
 
-        view.addStopButtonListener(new ActionListener() {
+        view.addRemoveCarButtonListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 List<AbstractVehicle> cars = model.getVehicles();
@@ -128,7 +127,7 @@ public class CarController {
                     removeVehicle(cars.get(cars.size()-1));
             }
         });
-    }
+}
 
 
     // Calls the gas method for each car once

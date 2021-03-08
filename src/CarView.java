@@ -14,7 +14,7 @@ import java.util.List;
  * TODO: Write more actionListeners and wire the rest of the buttons
  **/
 
-public class CarView extends JFrame {
+public class CarView extends JFrame implements IObserver {
     private static final int X = 1200;
     private static final int Y = 700;
 
@@ -55,12 +55,18 @@ public class CarView extends JFrame {
     public CarView(String framename, CarModel carModel){
         this.carModel = carModel;
         this.drawPanel = new DrawPanel(X, Y-240, carModel);
+        carModel.register(this);
         initComponents(framename);
         timer.start();
     }
 
     public DrawPanel getDrawPanel() {
         return drawPanel;
+    }
+
+    @Override
+    public void update() {
+        System.out.println("Im updated");
     }
 
     /* Each step the TimerListener moves all the cars in the list and tells the
