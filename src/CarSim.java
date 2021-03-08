@@ -9,8 +9,11 @@ public class CarSim {
     public static void main(String[] args) {
 
         CarModel carModel = new CarModel();
-        CarController carController = new CarController(carModel);
-        CarView carView = new CarView("Totally amazing and fun car simulation", carController, carModel);
+        CarView carView = new CarView("Totally amazing and fun car simulation", carModel);
+        CarController carController = new CarController(carModel, carView);
+
+
+
 
 
 /*

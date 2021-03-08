@@ -52,12 +52,15 @@ public class CarView extends JFrame {
 
 
     // Constructor
-    public CarView(String framename, CarController carController, CarModel carModel){
-        this.carController = carController;
+    public CarView(String framename, CarModel carModel){
         this.carModel = carModel;
         this.drawPanel = new DrawPanel(X, Y-240, carModel);
         initComponents(framename);
         timer.start();
+    }
+
+    public DrawPanel getDrawPanel() {
+        return drawPanel;
     }
 
     /* Each step the TimerListener moves all the cars in the list and tells the
@@ -130,132 +133,6 @@ public class CarView extends JFrame {
 
         // Listeners ****************************************************
 
-        /**
-         * Gas button
-         */
-        gasButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                carController.gas(gasAmount);
-            }
-        });
-
-        /**
-         * Stop cars button
-         */
-        stopButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                carController.stopAllCars();
-            }
-        });
-
-        /**
-         * Brake button
-         */
-        brakeButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                carController.brake(brakeAmount);
-            }
-        });
-
-        /**
-         * Start cars button
-         */
-        startButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                carController.startAllCars(gasAmount);
-            }
-        });
-
-        /**
-         * Turbo on button
-         */
-        turboOnButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                carController.toggleTurbo();
-            }
-        });
-
-        /**
-         * Turbo off button
-         */
-        turboOffButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                carController.toggleTurbo();
-            }
-        });
-
-        /**
-         * Raise platform button
-         */
-        liftBedButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                carController.setPlatformAngle(0);
-            }
-        });
-
-        /**
-         * Lower platform
-         */
-        lowerBedButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                carController.setPlatformAngle(70);
-            }
-        });
-
-        /**
-         * Add car button
-         */
-        addCarButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                // check if able to add cars
-                if (carController.vehicleListFull()) {
-                    JFrame frame = new JFrame();
-                    JOptionPane.showMessageDialog(frame,"The vehicle list is full.\nYou can only have up to 10 vehicles.");
-                    return;
-                }
-
-                String[] options = {"Volvo 240", "Saab 95", "Scania", "Volvo Truck", "Random vehicle"};
-                /* Scuffed...
-                Map<String, Integer> map = new HashMap<>();
-                map.put("Volvo 240", 0);
-                map.put("Saab 95", 1);
-                map.put("Scania", 2);
-                map.put("Volvo Truck", 3);
-                */
-                String result = (String) JOptionPane.showInputDialog(
-                    drawPanel,
-                    "Which vehicle would you like to add?",
-                    "Add vehicle",
-                    JOptionPane.QUESTION_MESSAGE,
-                    null,
-                    options,    // options array
-                    options[0]                  // initial state
-                );
-                carController.addVehicle(result);
-            }
-        });
-
-        /**
-         * Remove car button
-         */
-        removeCarButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                List<AbstractVehicle> cars = carController.model.getVehicles();
-                if (!carController.vehicleListEmpty())
-                    carController.removeVehicle(cars.get(cars.size()-1));
-            }
-        });
 
         // End listeners ****************************************************
 
@@ -273,5 +150,44 @@ public class CarView extends JFrame {
 
     }
 
+    void addGasButtonListener(ActionListener listener){
+        gasButton.addActionListener(listener);
+    }
+
+    void addBrakeButtonListener(ActionListener listener){
+        brakeButton.addActionListener(listener);
+    }
+
+    void addStartButtonListener(ActionListener listener){
+        startButton.addActionListener(listener);
+    }
+
+    void addStopButtonListener(ActionListener listener){
+        stopButton.addActionListener(listener);
+    }
+
+    void addTurboOnButtonListener(ActionListener listener){
+        turboOnButton.addActionListener(listener);
+    }
+
+    void addTurboOffButtonListener(ActionListener listener){
+        turboOffButton.addActionListener(listener);
+    }
+
+    void addLiftBedButtonListener(ActionListener listener){
+        liftBedButton.addActionListener(listener);
+    }
+
+    void addLowerBedButtonListener(ActionListener listener){
+        lowerBedButton.addActionListener(listener);
+    }
+
+    void addAddCarButtonListener(ActionListener listener){
+        addCarButton.addActionListener(listener);
+    }
+
+    void addRemoveCarButtonListener(ActionListener listener){
+        removeCarButton.addActionListener(listener);
+    }
 
 }

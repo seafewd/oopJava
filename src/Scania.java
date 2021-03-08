@@ -11,7 +11,7 @@ public class Scania extends AbstractTruck {
      * Default constructor
      */
     public Scania() {
-        super(2, 300, 0, Color.WHITE, "Scania", 3900, 2);
+        super(2, 120, 0, Color.WHITE, "Scania", 3900, 2);
     }
 
     /**

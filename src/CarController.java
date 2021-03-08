@@ -1,4 +1,6 @@
 import javax.swing.*;
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.GapContent;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -12,18 +14,122 @@ import java.util.List;
 
 public class CarController {
 
+    private int GAS_AMOUNT = 100;
+    private int BRAKE_AMOUNT = 100;
+
     // View, Model and Vehicle Factory
     CarModel model;
+    CarView view;
     VehicleFactory vFactory;
     List<AbstractVehicle> vehicles;
+
 
     public final int VEHICLE_SPACING = 65;
 
 
-    public CarController(CarModel model){
+    public CarController(CarModel model, CarView view){
         this.model = model;
+        this.view = view;
         vehicles = model.getVehicles();
+
+        view.addGasButtonListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                gas(GAS_AMOUNT);
+            }
+        });
+
+        view.addBrakeButtonListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                brake(BRAKE_AMOUNT);
+            }
+        });
+
+        view.addStartButtonListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                startAllCars(GAS_AMOUNT);
+            }
+        });
+
+        view.addStopButtonListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                stopAllCars();
+            }
+        });
+
+        view.addTurboOnButtonListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                toggleTurbo();
+            }
+        });
+
+        view.addTurboOffButtonListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                toggleTurbo();
+            }
+        });
+
+        view.addLiftBedButtonListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setPlatformAngle(0);
+            }
+        });
+
+        view.addLowerBedButtonListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setPlatformAngle(70);
+            }
+        });
+
+        view.addAddCarButtonListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                // check if able to add cars
+                if (vehicleListFull()) {
+                    JFrame frame = new JFrame();
+                    JOptionPane.showMessageDialog(frame,"The vehicle list is full.\nYou can only have up to 10 vehicles.");
+                    return;
+                }
+
+                String[] options = {"Volvo 240", "Saab 95", "Scania", "Volvo Truck", "Random vehicle"};
+                /* Scuffed...
+                Map<String, Integer> map = new HashMap<>();
+                map.put("Volvo 240", 0);
+                map.put("Saab 95", 1);
+                map.put("Scania", 2);
+                map.put("Volvo Truck", 3);
+                */
+                String result = (String) JOptionPane.showInputDialog(
+                        view.getDrawPanel(),
+                        "Which vehicle would you like to add?",
+                        "Add vehicle",
+                        JOptionPane.QUESTION_MESSAGE,
+                        null,
+                        options,    // options array
+                        options[0]                  // initial state
+                );
+                addVehicle(result);
+            }
+        });
+
+        view.addStopButtonListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                List<AbstractVehicle> cars = model.getVehicles();
+                if (!vehicleListEmpty())
+                    removeVehicle(cars.get(cars.size()-1));
+            }
+        });
     }
+
 
     // Calls the gas method for each car once
     void gas(int amount) {
@@ -33,34 +139,12 @@ public class CarController {
         }
     }
 
-    void setTurboOn(){
-        for (AbstractVehicle av : model.getVehicles()) {
-            ((Saab95) av).toggleTurbo();
-        }
-    }
-
-    void setTurboOff(){
-        for (AbstractVehicle av : model.getVehicles()) {
-            ((Saab95) av).toggleTurbo();
-        }
-    }
-
     // brake car
     void brake(int amount) {
         double brake = ((double) amount) / 100;
         for (AbstractVehicle abstractVehicle : model.getVehicles()) {
             abstractVehicle.brake(brake);
         }
-    }
-
-    void flipXDirection(AbstractVehicle v) {
-        double[] currentDirection = v.getDirection();
-        v.setDirection(new double[]{currentDirection[0] * -1, currentDirection[1]});
-    }
-
-    void flipYDirection(AbstractVehicle v) {
-        double[] currentDirection = v.getDirection();
-        v.setDirection(new double[]{currentDirection[0], currentDirection[1] * -1});
     }
 
     void stopAllCars() {
@@ -117,6 +201,8 @@ public class CarController {
         av = model.getVehicleFactory().createVehicle(option, 0, lastVehicleYPosition);
         return av;
     }
+
+
 
     public boolean removeVehicle(AbstractVehicle av) {
         return model.getVehicles().remove(av);
