@@ -19,11 +19,17 @@ public class RampRaised implements VehicleState {
 
     @Override
     public void gas() {
-        System.out.println("Can't drive while ramp is raised!");
+        System.out.println("Drive mf drive!");
     }
 
     @Override
     public void brake() {
         System.out.println("Braking. RIP cargo");
+    }
+
+    @Override
+    public boolean move() {
+        System.out.println("Moooooving");
+        return true;
     }
 }

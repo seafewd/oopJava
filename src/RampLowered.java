@@ -13,16 +13,22 @@ public class RampLowered implements VehicleState {
 
     @Override
     public void lowerRamp() {
-        System.out.println("Ramp is already raised");
+        System.out.println("Ramp is already lowered");
     }
 
     @Override
     public void gas() {
-        System.out.println("Vroom");
+        System.out.println("Can't move while ramp is lowered.");
     }
 
     @Override
     public void brake() {
         System.out.println("Eeeek.");
+    }
+
+    @Override
+    public boolean move() {
+        System.out.println("Can't move while ramp is lowered.");
+        return false;
     }
 }

@@ -196,7 +196,7 @@ public class CarView extends JFrame {
         liftBedButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carController.setPlatformAngle(70);
+                carController.setPlatformAngle(0);
             }
         });
 
@@ -206,7 +206,7 @@ public class CarView extends JFrame {
         lowerBedButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carController.setPlatformAngle(0);
+                carController.setPlatformAngle(70);
             }
         });
 

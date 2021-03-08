@@ -3,4 +3,5 @@ public interface VehicleState {
     public void lowerRamp();
     public void gas();
     public void brake();
+    public boolean move();
 }

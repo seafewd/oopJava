@@ -19,10 +19,8 @@ public class CarModel {
     }
 
     public void update(){
-        for (AbstractVehicle vehicle : vehicles
-             ) {
+        for (AbstractVehicle vehicle : vehicles)
             vehicle.move();
-        }
     }
 
     public List<AbstractVehicle> getVehicles() {

@@ -103,7 +103,7 @@ public class CarController {
                 abstractTrucks.add((AbstractTruck) v);
 
         for (AbstractTruck abstractTruck : abstractTrucks)
-            abstractTruck.getRamp().setAngle(angle);
+            abstractTruck.setRampAngle(angle);
     }
 
     public AbstractVehicle addVehicle(String option) {
@@ -114,14 +114,7 @@ public class CarController {
             lastVehicleYPosition = vs.get(vs.size()-1).getYPos() + VEHICLE_SPACING;
         else
             lastVehicleYPosition = 0;
-        switch (option) {
-            case "Volvo 240" -> av = model.getVehicleFactory().createVehicle("Volvo", 0, lastVehicleYPosition);
-            case "Saab 95" -> av = model.getVehicleFactory().createVehicle("Saab", 0, lastVehicleYPosition);
-            case "Scania" -> av = model.getVehicleFactory().createVehicle("Scania", 0, lastVehicleYPosition);
-            case "Volvo Truck" -> av = model.getVehicleFactory().createVehicle("VolvoTruck", 0, lastVehicleYPosition);
-            case "Random vehicle" -> av = model.getVehicleFactory().createVehicle("Volvo", 0, lastVehicleYPosition);
-            default -> throw new IllegalArgumentException("Couldn't create car!");
-        }
+        av = model.getVehicleFactory().createVehicle(option, 0, lastVehicleYPosition);
         return av;
     }
 
