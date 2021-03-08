@@ -1,7 +1,10 @@
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CarModel implements ISubject {
+public class CarModel implements IObservable {
 
     private ArrayList<IObserver> observers;
 
@@ -12,19 +15,21 @@ public class CarModel implements ISubject {
 
     private final VehicleFactory vehicleFactory;
 
+    // The timer is started with an listener (see below) that executes the statements
+    // each step between delays.
+    // The delay (ms) corresponds to 20 updates a sec (hz)
+    private final int delay = 10;
+    private Timer timer = new Timer(delay, new TimerListener());
+
     public CarModel() {
         this.vehicleFactory = new VehicleFactory(this);
         this.vehicles = new ArrayList<>();
-        observers = new ArrayList<>();
+        this.observers = new ArrayList<>();
+        timer.start();
     }
 
     public int getCAR_WIDTH() {
         return CAR_WIDTH;
-    }
-
-    public void update(){
-        for (AbstractVehicle vehicle : vehicles)
-            vehicle.move();
     }
 
     public List<AbstractVehicle> getVehicles() {
@@ -66,4 +71,23 @@ public class CarModel implements ISubject {
         }
         System.out.println("observers notified");
     }
+
+    /* Each step the TimerListener moves all the cars in the list and tells the
+     * view to update its images. Change this method to your needs.
+     * */
+    private class TimerListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            update();
+        }
+    }
+
+    public void update(){
+        for (AbstractVehicle vehicle : vehicles)
+            vehicle.move();
+        for (IObserver observer : observers) {
+            ((CarView) observer).repaint();
+            checkIfOutOfBounds(1200);
+        }
+    }
+
 }

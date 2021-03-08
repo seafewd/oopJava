@@ -26,9 +26,9 @@ public class CarController {
     public final int VEHICLE_SPACING = 65;
 
 
-    public CarController(CarModel model){
+    public CarController(CarModel model, CarView view){
         this.model = model;
-        this.view = new CarView("Totally amazing and fun car simulation", model);
+        this.view = view;
         vehicles = model.getVehicles();
 
 

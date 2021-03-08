@@ -19,7 +19,6 @@ public class CarView extends JFrame implements IObserver {
     private static final int Y = 700;
 
     // The controller member
-    CarController carController;
     CarModel carModel;
     DrawPanel drawPanel;
 
@@ -44,11 +43,7 @@ public class CarView extends JFrame implements IObserver {
     JButton startButton = new JButton("Start all cars");
     JButton stopButton = new JButton("Stop all cars");
 
-    // The timer is started with an listener (see below) that executes the statements
-    // each step between delays.
-    // The delay (ms) corresponds to 20 updates a sec (hz)
-    private final int delay = 10;
-    private Timer timer = new Timer(delay, new TimerListener());
+
 
 
     // Constructor
@@ -57,7 +52,6 @@ public class CarView extends JFrame implements IObserver {
         this.drawPanel = new DrawPanel(X, Y-240, carModel);
         carModel.register(this);
         initComponents(framename);
-        timer.start();
     }
 
     public DrawPanel getDrawPanel() {
@@ -67,17 +61,6 @@ public class CarView extends JFrame implements IObserver {
     @Override
     public void update() {
         System.out.println("Im updated");
-    }
-
-    /* Each step the TimerListener moves all the cars in the list and tells the
-     * view to update its images. Change this method to your needs.
-     * */
-    private class TimerListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            carModel.update();
-            drawPanel.repaint();
-            carModel.checkIfOutOfBounds(CarView.X);
-        }
     }
 
     // Sets everything in place and fits everything
