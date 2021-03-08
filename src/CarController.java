@@ -14,7 +14,6 @@ public class CarController {
 
     // View, Model and Vehicle Factory
     CarModel model;
-    VehicleFactory vFactory;
     List<AbstractVehicle> vehicles;
 
     public final int VEHICLE_SPACING = 65;
